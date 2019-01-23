@@ -1,4 +1,4 @@
-function P = rs_2Dv(b, f, c, e, x, z, varargin)
+function p = rs_2Dv(b, f, c, e, x, z, varargin)
 % p = rs_2Dv(b, f, c, e, x, z, Nopt) computes the normalized pressure, p,
 % at a location (x, z) (in mm) in a fluid for a 1-D element of length 2b
 % (in mm) along the x-axis at a frequency, f, (in MHz). And for a wave
@@ -41,14 +41,13 @@ end
 % approximation of the Rayleigh-Somerfeld type of integral
 
 p = 0;
-P = zeros(1, N);
+%P = zeros(1, N);
 for kk = 1:N
     rb = sqrt((xb - xc(kk) - eb).^2 + zb.^2);
     p  = p + besselh(0, 1, kb.*rb);
-    P(kk) = max(abs(p));
 end
 
-P = P.*(kb./N); % Include external factor
+p = p.*(kb./N); % Include external factor
 
 % Reference
 % Jr, Lester W. Schmerr. Fundamentals of Ultrasonic Phased Arrays. Solid Mechanics and Its Applications. Springer International Publishing, 2015. //www.springer.com/us/book/9783319072715.
