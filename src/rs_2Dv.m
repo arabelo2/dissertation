@@ -12,7 +12,7 @@ function p = rs_2Dv(b, f, c, e, x, z, varargin)
 % input frequency, f, which must be a scalar when Nopt is not given.
 
 % Compute wave number
-kb = 2e3*pi.*b.*f./c;
+kb = 2000*pi.*b.*f/c;
 
 % If a number of segments is specified, use
 if nargin == 7
@@ -20,7 +20,7 @@ if nargin == 7
 else
     % Else choose number of segments so that the size of each segment is
     % one-tenth a wavelength.
-    N = round(20e3*f*b/c);
+    N = round(20000*f*b/c);
     if N <= 1
         N = 1;
     end
