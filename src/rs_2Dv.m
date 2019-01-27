@@ -31,9 +31,11 @@ p = 0;
 for kk = 1:N
     rb = sqrt((xb - xc(kk) - eb).^2 + zb.^2);
     p  = p + besselh(0, 1, kb.*rb);
-    plot(rad2deg(asin(x/z)), abs(p).*(kb./N))
-    hold off
-    pause(.1)
+    % plot(rad2deg(asin(x./z)), abs(p).*kb./N)
+    % plot(abs(p).*kb./N)
+        % plot(z, abs(p).*kb./N)
+    %hold off
+    %pause(.1)
 end
 
 p = p.*(kb./N); % Include external factor
