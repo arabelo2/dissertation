@@ -3,7 +3,7 @@ function p = ls_2Dv(b, f, c, e, x, z, varargin)
 % Compute wave number
 kb = 2*pi.*b.*f/c;
 
-% If number of segments is specified, use
+% If number of segments is specified, use:
 if nargin == 7
     N = varargin{1};
 else
