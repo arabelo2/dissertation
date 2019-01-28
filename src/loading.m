@@ -79,6 +79,7 @@ for xx = 1:length(x)
     end
 end
 
+% 2D
 figure(3)
 pcolor(z, x, cellfun(@abs, P2))
 shading interp
@@ -89,6 +90,7 @@ grid minor
 set(gca,'FontSize',20);
 camroll(-90)
 
+% 3D
 figure(4)
 mesh(z, x, cellfun(@abs, P2))
 shading interp
