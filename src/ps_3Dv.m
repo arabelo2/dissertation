@@ -48,3 +48,6 @@ for pp = 1:P
     end
 end
 p = p.*(-1i*k*lx/P*ly/Q)/(2*pi); % Include external factor
+
+% Reference
+% Jr, Lester W. Schmerr. Fundamentals of Ultrasonic Phased Arrays. Solid Mechanics and Its Applications. Springer International Publishing, 2015. //www.springer.com/us/book/9783319072715.
