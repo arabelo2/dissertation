@@ -1,7 +1,7 @@
 f0 = 5e6;
 c1 = 1500;
 b = 12e-3/2;
-elements_x = 1;
+elements_x = 32;
 height = 2*b;
 elements_y = 1;
 e = 4e-4;
@@ -27,6 +27,16 @@ z = zmin:dz:zmax;
 
 x = 0;
 % z  = 90e-3;
+
+M = elements_x;
+s = 0.5e-3;
+angt = 0;
+ang20 = 75;
+DT0 = 10e-3;
+DF = 10e-3;
+c2 = 5900;
+plt = 'n';
+td = delay_laws2D_int(elements_x, s, angt, ang20, DT0, DF, c1, c2, plt)
 
 p = fresnel_2D (b, f0, c1, x, z)
 plot(z, abs(p), 'b')
