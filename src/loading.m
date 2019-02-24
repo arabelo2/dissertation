@@ -125,3 +125,5 @@ P3 = cell(length(z), length(x));
 % grid minor
 % set(gca,'FontSize',20);
 
+% Reference
+% Jr, Lester W. Schmerr. Fundamentals of Ultrasonic Phased Arrays. Solid Mechanics and Its Applications. Springer International Publishing, 2015. //www.springer.com/us/book/9783319072715.

@@ -16,3 +16,6 @@ switch type
     otherwise
         disp('Wrong type. Choices are ''cos'', ''Han'', ''Ham'', ''Blk'', ''tri'', ''rect''')
 end
+
+% Reference
+% Jr, Lester W. Schmerr. Fundamentals of Ultrasonic Phased Arrays. Solid Mechanics and Its Applications. Springer International Publishing, 2015. //www.springer.com/us/book/9783319072715.

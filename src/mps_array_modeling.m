@@ -11,7 +11,7 @@ gx = .1e-3; % Gap length in x-direction
 gy = .1e-3; % Gap length in y-direction
 f = 2.25e6; % Frequency (Hz)
 c = 1500; % Wave speed (m/s)
-L1 = 32; % Number of elements in x-direction
+L1 = 16; % Number of elements in x-direction
 L2 = 1; % Nuber of elements in y-direction
 theta = 0; % Steering angle in theta direction (deg)
 phi = 0; % Steering angle in phi direction (deg)
@@ -71,3 +71,5 @@ colormap(jet)
 colorbar
 axis vis3d
 
+% Reference
+% Jr, Lester W. Schmerr. Fundamentals of Ultrasonic Phased Arrays. Solid Mechanics and Its Applications. Springer International Publishing, 2015. //www.springer.com/us/book/9783319072715.
