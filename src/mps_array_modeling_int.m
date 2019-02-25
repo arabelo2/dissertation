@@ -75,7 +75,7 @@ for nn = 1:L1
         [vxe, vye, vze] = ps_3Dint(lx, ly, f, mat, ex(nn), ey(ll), angt, Dt0, x, y, z, 1, 1);
         vx = vx + Cx(nn)*Cy(ll)*delay(nn, ll)*vxe;
         vy = vy + Cx(nn)*Cy(ll)*delay(nn, ll)*vye;
-        vz = vz + Cx(nn)*Cy(ll)*delay(nn, ll)*vze;
+        vz = vz + Cx(nn)*Cy(ll)*delay(nn, ll)*vze
     end
 end
 %--- Output ---
