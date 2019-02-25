@@ -1,4 +1,4 @@
-function td = delay_laws3D_int(Mx, My, sx, sy, thetat, phi, theta2, DT0 DF, c1, c2, plt)
+function td = delay_laws3D_int(Mx, My, sx, sy, thetat, phi, theta2, DT0, DF, c1, c2, plt)
 % Compute wave speed ratio
 cr = c1/c2;
 % Compute element centroid locations
@@ -65,7 +65,13 @@ switch(DF)
                 zp(1, 1) = DT0 + ex(m)*sind(thetat);
                 yp(1, 1) = ey(n);
                 xp(2, 1) = ex(m)*cosd(thetat) + xi(m, n)*(x - ex(m)*cosd(thetat))/Db(m, n);
-                yp(2, 1) = ...
+                yp(2, 1) = ey(n) + xi(m, n)*(y - ey(n))/Db(m, n);
+                zp(2, 1) = 0;
+                xp(3, 1) = x;
+                yp(3, 1) = y;
+                zp(3, 1) = -DF;
+                plot3(xp, yp, zp)
+                hold on
                 end
             end
             hold off

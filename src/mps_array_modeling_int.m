@@ -62,7 +62,7 @@ Ny = 1:L2;
 ex = (2*Nx - 1 - L1)*sx/2;
 ey = (2*Ny - 1 - L2)*sy/2;
 % Generate time delays, put in exponential and calculate amplitude weights
-td = delay_laws3D_int(L1, L2, sx, sy, angt, phi, theta2, Dt0, DF, c1, c2, 'n');
+td = delay_laws3D_int(L1, L2, sx, sy, angt, phi, theta2, Dt0, DF, c1, c2, 'y');
 delay = exp(1i.*2.*pi.*f.*td);
 Cx = discrete_windows(L1, ampx_type);
 Cy = discrete_windows(L2, ampy_type);
