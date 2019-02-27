@@ -18,8 +18,8 @@ cp2 = 5900; % Compressional wave speed, medium two (m/s)
 cs2 = 3200; % Shear wave speed, medium two (m/s)
 type = 'p'; % Wave type, medium two
 mat = {d1, cp1, d2, cp2, cs2, type};    % Form material vector
-L1 = 11;    % Number of elements in x-direction
-L2 = 11; % Nuber of elements in y-direction
+L1 = 32;    % Number of elements in x-direction
+L2 = 1; % Nuber of elements in y-direction
 angt = 10.217;  % Angle of the array (deg)
 Dt0 = 50.8e-3; % Height of array center from interface (m)
 theta2 = 0;  % Steering angle in theta direction (deg)
@@ -32,13 +32,13 @@ ampy_type = 'rect'; % Weighting coefficients in y-direction
 
 % Field points (x, y, z) to evaluate
 N = 10;
-xmin = -5e-3;
-xmax = 20e-3;
+xmin = -30e-3;
+xmax = 30e-3;
 xnpoints = N*ceil(abs(xmax - xmin)/lambda);
 xs = linspace(xmin, xmax, xnpoints);
 
 zmin = 1e-3;
-zmax = 20e-3;
+zmax = 100e-3;
 znpoints = N*ceil(abs(zmax - zmin)/lambda);
 zs = linspace(zmin, zmax, znpoints);
 
