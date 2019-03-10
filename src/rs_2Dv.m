@@ -1,9 +1,7 @@
 function p = rs_2Dv(b, f, c, e, x, z, varargin)
-
 % Compute wave number
 kb = 2*pi.*b.*f/c;
-
-% If a number of segments is specified, use
+% If a number of segments is specified, use:
 if nargin == 7
     N = varargin{1};
 else
@@ -12,32 +10,22 @@ else
         N = 1;
     end
 end
-
-% Use normalized positions in the fluid
+% Use normalized positions in the fluid.
 xb = x./b;
 zb = z./b;
 eb = e./b;
-
-% Compute normalized centroid locations for the segments
+% Compute normalized centroid locations for the segments.
 xc = zeros(1, N);
 for jj = 1:N
     xc(jj) = -1 + 2*(jj - 0.5)/N;
 end
-
 % Calculate normalized pressure as a sum over all the segments as an
-% approximation of the Rayleigh-Somerfeld type of integral
-
+% approximation of the Rayleigh-Somerfeld type of integral.
 p = 0;
 for kk = 1:N
     rb = sqrt((xb - xc(kk) - eb).^2 + zb.^2);
     p  = p + besselh(0, 1, kb.*rb);
-    % plot(rad2deg(asin(x./z)), abs(p).*kb./N)
-    % plot(abs(p).*kb./N)
-        % plot(z, abs(p).*kb./N)
-    %hold off
-    %pause(.1)
 end
-
 p = p.*(kb./N); % Include external factor
 
 % Reference
