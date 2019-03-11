@@ -1,13 +1,13 @@
 f0 = 5e6;
 c = 1480;
-b = 12e-3/2;
+b = 24e-3/2;
 e = .20*b;
 lambda = c/f0;
 
 % Field points (x, y, z) to evaluate
 N = 10;
-xmin = -100e-3;
-xmax = 100e-3;
+xmin = -25e-3;
+xmax = 25e-3;
 xnpoints = N*ceil(abs(xmax - xmin)/lambda);
 xs = linspace(xmin, xmax, xnpoints);
 zmin = 0e-3;
@@ -25,10 +25,27 @@ end
 
 % ----------------------------------------------------------------------
 
-p = rs_2Dv(b, f0, c, e, x, z, Nopt);
-imagesc(1000*xs, 1000*zs, abs(p))
+figure(1)
+p_rs = rs_2Dv(b, f0, c, e, x, z, Nopt);
+imagesc(1000*xs, 1000*zs, abs(p_rs))
 shading interp
-colormap(jet)
+colormap(gray)
+colorbar
+axis vis3d
+xlabel('x, mm', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+ylabel('z, mm', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+title('Pressao normalizada',  'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+grid on
+grid minor
+set(gca,'FontSize',20);
+
+% ----------------------------------------------------------------------
+
+figure(2)
+p_ls = ls_2Dv(b, f0, c, e, x, z, Nopt);
+imagesc(1000*xs, 1000*zs, abs(p_ls))
+shading interp
+colormap(gray)
 colorbar
 axis vis3d
 xlabel('x, mm', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
