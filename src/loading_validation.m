@@ -1,3 +1,4 @@
+tic
 f0 = 5e6;
 c = 1480;
 b = 24e-3/2;
@@ -34,7 +35,7 @@ colorbar
 axis vis3d
 xlabel('x, mm', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
 ylabel('z, mm', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-title('Pressao normalizada',  'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+title('Pressao normalizada (rs)',  'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
 grid on
 grid minor
 set(gca,'FontSize',20);
@@ -50,7 +51,7 @@ colorbar
 axis vis3d
 xlabel('x, mm', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
 ylabel('z, mm', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-title('Pressao normalizada',  'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+title('Pressao normalizada (ls)',  'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
 grid on
 grid minor
 set(gca,'FontSize',20);
@@ -87,3 +88,5 @@ set(gca,'FontSize',20);
 % grid on
 % grid minor
 % set(gca,'FontSize',20);
+
+toc
