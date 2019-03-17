@@ -8,13 +8,13 @@ rho2  = 1000;
 b = 6e-3/2;
 e = 0*b;
 lambda = c/f0;
-Dt0 = 0e-3;
-angt = 0;
+Dt0 = 50.8e-3;
+angt = 10.217;
 
 d1 = 1000;   % Density, medium one (arbitrary units)
 cp1 = 1480; % Compressional wave speed, medium one (m/s)
-d2 = 1000;   % Density, medium two (arbitrary units)
-cp2 = 1480; % Compressional wave speed, medium two (m/s)
+d2 = 7900;   % Density, medium two (arbitrary units)
+cp2 = 5900; % Compressional wave speed, medium two (m/s)
 cs2 = 3200; % Shear wave speed, medium two (m/s)
 type = 'p'; % Wave type, medium two
 mat = {d1, cp1, d2, cp2, cs2, type};    % Form material vector
@@ -22,12 +22,12 @@ mat = {d1, cp1, d2, cp2, cs2, type};    % Form material vector
 % Field points (x, y, z) to evaluate
 N = 10;
 xmin = -10e-3;
-xmax = 10e-3;
-xnpoints = N*ceil(abs(xmax - xmin)/lambda);
+xmax = 60e-3;
+xnpoints = 300; % xnpoints = N*ceil(abs(xmax - xmin)/lambda);
 xs = linspace(xmin, xmax, xnpoints);
-zmin = 0e-3;
-zmax = 50e-3;
-znpoints = N*ceil(abs(zmax - zmin)/lambda);
+zmin = 1e-3;
+zmax = 100e-3;
+znpoints = 300; % znpoints = N*ceil(abs(zmax - zmin)/lambda);
 zs = linspace(zmin, zmax, znpoints);
 y = 0;
 [x, z] = meshgrid(xs, zs);
@@ -38,7 +38,19 @@ else
     Nopt = 1;
 end
 
-p = ls_2Dint(b, f0, mat, e, angt, Dt0, x, z, Nopt);
+figure(1)
+p_ls_2Dint = ls_2Dint(b, f0, mat, e, angt, Dt0, x, z, Nopt);
+imagesc(1000*xs, 1000*zs, abs(p_ls_2Dint))
+shading interp
+colormap(gray)
+colorbar
+axis vis3d
+xlabel('x, mm', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+ylabel('z, mm', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+title('Pressao normalizada (ls_2Dint)',  'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+grid on
+grid minor
+set(gca,'FontSize',20);
 
 % ----------------------------------------------------------------------
 

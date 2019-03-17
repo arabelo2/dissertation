@@ -8,10 +8,10 @@ else
     cri = 1/cr; % cri = c2/c1;
     % Define coefficients of quartics Ax^4 + Bx^3 + Cx^2 + Dx + E = 0
     A = 1 - cri^2;
-    B = 2*DX*(cri^2 - 1)/DT;
+    B = (2*DX*cri^2 - 2*DX)/DT;
     C = (DX^2 + DT^2 - cri^2*(DX^2 + DF^2))/DT^2;
-    D = -2*DX/DT;
-    E = DX^2/DT^2;
+    D = -2*DX*DT^2/DT^3;
+    E = DX^2*DT^2/DT^4;
     % Begin Ferrari's solution
     alpha = -3*B^2/(8*A^2) + C/A;
     beta = B^3/(8*A^3) - B*C/(2*A^2) + D/A;
@@ -29,7 +29,7 @@ else
         %
         Rm = Q/2 - sqrt(Q^2/4 + P^3/27);
         %
-        U = Rm^-3;
+        U = Rm^(1/3);
         %
         if (U == 0)
             y = -5/6*alpha - U;
