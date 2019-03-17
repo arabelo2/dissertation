@@ -1,15 +1,12 @@
 function p = ls_2Dint(b, f, mat, e, angt, Dt0, x, z, varargin)
-
 % Extract material parameters
-d1 = mat(1); % Density in the first medium kg/m^3
-c1 = mat(2); % Wave speed in the first medium m/s
-d2 = mat(3); % Density in the second medium kg/m^3
-c2 = mat(4); % Wave speed in the second medium m/s
-
+d1 = mat{1}; % Density in the first medium kg/m^3
+c1 = mat{2}; % Wave speed in the first medium m/s
+d2 = mat{3}; % Density in the second medium kg/m^3
+c2 = mat{4}; % Wave speed in the second medium m/s
 % Compute wave numbers
 k1b = 2*pi.*b.*f/c1;
 k2b = 2*pi.*b.*f/c2;
-
 % If number of segments is specified, use:
 if nargin == 9
     N = varargin{1};
@@ -24,7 +21,6 @@ xc = zeros (1, N);
 for jj = 1:N
     xc(jj) = b*(-1 + 2*(jj - 0.5)/N);
 end
-
 % Calculate normalized pressure as a sum over all the segments
 p = 0;
 for nn = 1:N

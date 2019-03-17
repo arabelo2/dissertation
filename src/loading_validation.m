@@ -1,9 +1,23 @@
 tic
 f0 = 5e6;
 c = 1480;
-b = 24e-3/2;
-e = .20*b;
+c1 = c;
+rho1  = 1000;
+c2 = 1480;
+rho2  = 1000;
+b = 6e-3/2;
+e = 0*b;
 lambda = c/f0;
+Dt0 = 0e-3;
+angt = 0;
+
+d1 = 1000;   % Density, medium one (arbitrary units)
+cp1 = 1480; % Compressional wave speed, medium one (m/s)
+d2 = 1000;   % Density, medium two (arbitrary units)
+cp2 = 1480; % Compressional wave speed, medium two (m/s)
+cs2 = 3200; % Shear wave speed, medium two (m/s)
+type = 'p'; % Wave type, medium two
+mat = {d1, cp1, d2, cp2, cs2, type};    % Form material vector
 
 % Field points (x, y, z) to evaluate
 N = 10;
@@ -12,7 +26,7 @@ xmax = 25e-3;
 xnpoints = N*ceil(abs(xmax - xmin)/lambda);
 xs = linspace(xmin, xmax, xnpoints);
 zmin = 0e-3;
-zmax = 100e-3;
+zmax = 500e-3;
 znpoints = N*ceil(abs(zmax - zmin)/lambda);
 zs = linspace(zmin, zmax, znpoints);
 y = 0;
@@ -24,37 +38,39 @@ else
     Nopt = 1;
 end
 
-% ----------------------------------------------------------------------
-
-figure(1)
-p_rs = rs_2Dv(b, f0, c, e, x, z, Nopt);
-imagesc(1000*xs, 1000*zs, abs(p_rs))
-shading interp
-colormap(gray)
-colorbar
-axis vis3d
-xlabel('x, mm', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-ylabel('z, mm', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-title('Pressao normalizada (rs)',  'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-grid on
-grid minor
-set(gca,'FontSize',20);
+p = ls_2Dint(b, f0, mat, e, angt, Dt0, x, z, Nopt);
 
 % ----------------------------------------------------------------------
 
-figure(2)
-p_ls = ls_2Dv(b, f0, c, e, x, z, Nopt);
-imagesc(1000*xs, 1000*zs, abs(p_ls))
-shading interp
-colormap(gray)
-colorbar
-axis vis3d
-xlabel('x, mm', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-ylabel('z, mm', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-title('Pressao normalizada (ls)',  'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-grid on
-grid minor
-set(gca,'FontSize',20);
+% figure(1)
+% p_rs = rs_2Dv(b, f0, c, e, x, z, Nopt);
+% imagesc(1000*xs, 1000*zs, abs(p_rs))
+% shading interp
+% colormap(gray)
+% colorbar
+% axis vis3d
+% xlabel('x, mm', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+% ylabel('z, mm', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+% title('Pressao normalizada (rs)',  'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+% grid on
+% grid minor
+% set(gca,'FontSize',20);
+
+% ----------------------------------------------------------------------
+
+% figure(2)
+% p_ls = ls_2Dv(b, f0, c, e, x, z, Nopt);
+% imagesc(1000*xs, 1000*zs, abs(p_ls))
+% shading interp
+% colormap(gray)
+% colorbar
+% axis vis3d
+% xlabel('x, mm', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+% ylabel('z, mm', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+% title('Pressao normalizada (ls)',  'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+% grid on
+% grid minor
+% set(gca,'FontSize',20);
 
 % ----------------------------------------------------------------------
 
