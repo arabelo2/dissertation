@@ -21,12 +21,12 @@ mat = {d1, cp1, d2, cp2, cs2, type};    % Form material vector
 
 % Field points (x, y, z) to evaluate
 N = 10;
-xmin = -25e-3;
-xmax = 25e-3;
+xmin = -10e-3;
+xmax = 10e-3;
 xnpoints = N*ceil(abs(xmax - xmin)/lambda);
 xs = linspace(xmin, xmax, xnpoints);
 zmin = 0e-3;
-zmax = 500e-3;
+zmax = 50e-3;
 znpoints = N*ceil(abs(zmax - zmin)/lambda);
 zs = linspace(zmin, zmax, znpoints);
 y = 0;
