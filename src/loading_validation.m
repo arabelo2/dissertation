@@ -21,13 +21,13 @@ mat = {d1, cp1, d2, cp2, cs2, type};    % Form material vector
 
 % Field points (x, y, z) to evaluate
 N = 10;
-xmin = -10e-3;
-xmax = 60e-3;
-xnpoints = 300; % xnpoints = N*ceil(abs(xmax - xmin)/lambda);
+xmin = 0e-3;
+xmax = 25e-3;
+xnpoints = N*ceil(abs(xmax - xmin)/lambda);
 xs = linspace(xmin, xmax, xnpoints);
 zmin = 1e-3;
-zmax = 100e-3;
-znpoints = 300; % znpoints = N*ceil(abs(zmax - zmin)/lambda);
+zmax = 25e-3;
+znpoints = N*ceil(abs(zmax - zmin)/lambda);
 zs = linspace(zmin, zmax, znpoints);
 y = 0;
 [x, z] = meshgrid(xs, zs);
