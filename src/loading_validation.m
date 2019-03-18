@@ -40,7 +40,7 @@ end
 
 p_ls_2Dint = ls_2Dint(b, f0, mat, e, angt, Dt0, x, z, Nopt);
 figure(1)
-subplot(1,2,2);
+%subplot(1,2,2);
 imagesc(1000*xs, 1000*zs, abs(p_ls_2Dint))
 shading interp
 colormap(jet)
