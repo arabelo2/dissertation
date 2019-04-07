@@ -9,7 +9,7 @@ b = 6e-3/2;
 e = 0*b;
 lambda = c/f0;
 Dt0 = 50.8e-3;
-angt = 0;
+angt = 5.1085;
 
 d1 = 1000;   % Density, medium one (arbitrary units)
 cp1 = 1480; % Compressional wave speed, medium one (m/s)
@@ -21,13 +21,13 @@ mat = {d1, cp1, d2, cp2, cs2, type};    % Form material vector
 
 % Field points (x, y, z) to evaluate
 N = 10;
-xmin = -30e-3;
-xmax = 30e-3;
-xnpoints = 150; % xnpoints = N*ceil(abs(xmax - xmin)/lambda);
+xmin = -45e-3;
+xmax = 45e-3;
+xnpoints = N*ceil(abs(xmax - xmin)/lambda);
 xs = linspace(xmin, xmax, xnpoints);
 zmin = 1e-3;
-zmax = 75e-3;
-znpoints = 150; % znpoints = N*ceil(abs(zmax - zmin)/lambda);
+zmax = 100e-3;
+znpoints = N*ceil(abs(zmax - zmin)/lambda);
 zs = linspace(zmin, zmax, znpoints);
 y = 0;
 [x, z] = meshgrid(xs, zs);
@@ -48,7 +48,7 @@ colorbar
 axis vis3d
 xlabel('x, mm', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
 ylabel('z, mm', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-title('Pressao normalizada water-steel | angt = 0',  'FontSize', 16, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+title('Pressao normalizada water-steel | angt = 5.1085 graus',  'FontSize', 16, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
 grid on
 grid minor
 set(gca,'FontSize',20);
