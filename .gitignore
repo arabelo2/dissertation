@@ -1,2 +1,3 @@
 # Ignore all logs
 *.asv
+*.fig
