@@ -6,8 +6,8 @@ clear all;
 format longG;
 % --- Give input parameters ---
 tic     % Time the calculation
-lx = .15e-3;    % Element length in x-direction
-ly = .15e-3;    % Element length in y-direction
+lx = .25e-3/2;    % Element length in x-direction
+ly = 12e-3;    % Element length in y-direction
 gx = .05e-3;    % Gap length in x-direction
 gy = .05e-3;    % Gap length in y-direction
 f = 5e6;    % Frequency (Hz)
@@ -20,11 +20,11 @@ type = 'p'; % Wave type, medium two
 mat = {d1, cp1, d2, cp2, cs2, type};    % Form material vector
 L1 = 16;    % Number of elements in x-direction
 L2 = 1; % Nuber of elements in y-direction
-angt = 10.217;  % Angle of the array (deg)
-Dt0 = 50.8e-3; % Height of array center from interface (m)
+angt = 0;  % Angle of the array (deg)
+Dt0 = 10e-3; % Height of array center from interface (m)
 theta2 = 0;  % Steering angle in theta direction (deg)
 phi = 0;    % Steering angle in phi direction (deg)
-DF = 7e-3;   % Focal distance (m)
+DF = 10e-3;   % Focal distance (m)
 lambda = mat{2}/f;
 % Weighting choices are 'rect', 'cos', 'Han', 'Ham', 'Blk', 'tri'.
 ampx_type = 'rect'; % Weighting coefficients in x-direction
@@ -80,6 +80,7 @@ for nn = 1:L1
 end
 %--- Output ---
 % Plot results
+figure(2)
 vmag = sqrt(abs(vx).^2 + abs(vy).^2 + abs(vz).^2);
 imagesc(xs, zs, vmag)
 shading interp

@@ -8,8 +8,8 @@ rho2  = 1000;
 b = 6e-3/2;
 e = 0*b;
 lambda = c/f0;
-Dt0 = 50.8e-3;
-angt = 5.1085;
+Dt0 = 10e-3;
+angt = 0;
 
 d1 = 1000;   % Density, medium one (arbitrary units)
 cp1 = 1480; % Compressional wave speed, medium one (m/s)
@@ -21,13 +21,13 @@ mat = {d1, cp1, d2, cp2, cs2, type};    % Form material vector
 
 % Field points (x, y, z) to evaluate
 N = 10;
-xmin = -45e-3;
-xmax = 45e-3;
-xnpoints = N*ceil(abs(xmax - xmin)/lambda);
+xmin = -25e-3;
+xmax = 25e-3;
+xnpoints = 300 ; % xnpoints = N*ceil(abs(xmax - xmin)/lambda);
 xs = linspace(xmin, xmax, xnpoints);
 zmin = 1e-3;
-zmax = 100e-3;
-znpoints = N*ceil(abs(zmax - zmin)/lambda);
+zmax = 51e-3;
+znpoints = 300; % znpoints = N*ceil(abs(zmax - zmin)/lambda);
 zs = linspace(zmin, zmax, znpoints);
 y = 0;
 [x, z] = meshgrid(xs, zs);
