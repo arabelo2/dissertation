@@ -5,11 +5,11 @@ c = 1480;
 c1= c;
 rho = 1000;
 f = 2.25e6;
-N = 256;
+N = 128;
 sample = N;
 lambda = c / f;
-x = [.001:lambda/8:.150];
-y = [-.025:lambda/8:.025];
+x = [.001:lambda/3:.150];
+y = [-.025:lambda/3:.025];
 
 % Velocity potential impulse response of rectangular pistonlike transducers
 h = cell(length(y), length(x));
