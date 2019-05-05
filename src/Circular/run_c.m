@@ -31,32 +31,33 @@ for xx = 1:length(x)
         v_temp = C*v_temp;   
         
         %%%% texcitation{xx, yy, zz} = texcitation_temp;
-        v{yy, xx} = v_temp;
+        v_c{yy, xx} = v_temp;
             
         % Pressure distribution
         Pi_temp = rho*diff(h_temp)/(t_temp(2) - t_temp(1)); 
-        Pi{yy, xx} = Pi_temp;
+        Pi_c{yy, xx} = Pi_temp;
             
         % Transient pressure
         p_temp = rho*conv(h_temp, diff(v_temp)/(t_temp(2) - t_temp(1)));
+        
         % p_temp = conv(v_temp, Pi_temp);
-        P{yy, xx} = p_temp;
+        P_c{yy, xx} = p_temp;
         t_conv_temp = t_temp(1) + (t_temp(2) - t_temp(1))*(0:1:length(p_temp)-1);
-        t_conv{yy, xx} = t_conv_temp;
+        t_conv_c{yy, xx} = t_conv_temp;
             
         % Peak amplitude
-        Pp(yy, xx) = max(p_temp);
+        Pp_c(yy, xx) = max(p_temp);
             
         % Peak-to-peak amplitude
-        Ppp(yy, xx) = max(p_temp) - min(p_temp); 
+        Ppp_c(yy, xx) = max(p_temp) - min(p_temp); 
             
         % Root mean square amplitude
-        Prms(yy, xx) = (max(p_temp) - min(p_temp))/(2*sqrt(2));
+        Prms_c(yy, xx) = (max(p_temp) - min(p_temp))/(2*sqrt(2));
     end
 end
 
 figure()
-pcolor(x, y, Ppp)
+pcolor(x, y, Ppp_c)
 shading interp
 colormap(jet)
 colorbar
@@ -69,7 +70,7 @@ grid minor
 set(gca,'Ydir','reverse');
 
 figure()
-mesh(x, y, Ppp)
+mesh(x, y, Ppp_c)
 shading interp
 colormap(jet)
 colorbar

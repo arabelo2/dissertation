@@ -17,13 +17,13 @@ z = [0:STEP:3*NF];
 h_r = cell(length(y), length(x), length(z));
 t_r = cell(length(y), length(x), length(z));
 %%%%%texcitation = cell(length(x), length(y), length(z));
-v = cell(length(y), length(x), length(z));
-Pi = cell(length(y), length(x), length(z));
-P = cell(length(y), length(x), length(z));
-t_conv = cell(length(y), length(x), length(z));
-Pp = zeros(length(y), length(x));
-Ppp = zeros(length(y), length(x));
-Prms = zeros(length(y), length(x));
+v_r = cell(length(y), length(x), length(z));
+Pi_r = cell(length(y), length(x), length(z));
+P_r = cell(length(y), length(x), length(z));
+t_conv_r = cell(length(y), length(x), length(z));
+Pp_r = zeros(length(y), length(x));
+Ppp_r = zeros(length(y), length(x));
+Prms_r = zeros(length(y), length(x));
 
 for zz = 1:length(z)
     for yy = 1:length(y)      
@@ -42,33 +42,34 @@ for zz = 1:length(z)
         v_temp = C*v_temp;   
         
         %%%% texcitation{xx, yy, zz} = texcitation_temp;
-        v{yy, xx, zz} = v_temp;
+        v_r{yy, xx, zz} = v_temp;
             
         % Pressure distribution
         Pi_temp = rho*diff(h_temp)/(t_temp(2) - t_temp(1)); 
-        Pi{yy, xx, zz} = Pi_temp;
+        Pi_r{yy, xx, zz} = Pi_temp;
             
         % Transient pressure
         p_temp = rho*conv(h_temp, diff(v_temp)/(t_temp(2) - t_temp(1)));
+        
         % p_temp = conv(v_temp, Pi_temp);
-        P{yy, xx, zz} = p_temp;
+        P_r{yy, xx, zz} = p_temp;
         t_conv_temp = t_temp(1) + (t_temp(2) - t_temp(1))*(0:1:length(p_temp)-1);
-        t_conv{yy, xx, zz} = t_conv_temp;
+        t_conv_r{yy, xx, zz} = t_conv_temp;
             
         % Peak amplitude
-        Pp(xx, zz) = max(p_temp);
+        Pp_r(xx, zz) = max(p_temp);
             
         % Peak-to-peak amplitude
-        Ppp(xx, zz) = max(p_temp) - min(p_temp); 
+        Ppp_r(xx, zz) = max(p_temp) - min(p_temp); 
             
         % Root mean square amplitude
-        Prms(xx, zz) = (max(p_temp) - min(p_temp))/(2*sqrt(2));
+        Prms_r(xx, zz) = (max(p_temp) - min(p_temp))/(2*sqrt(2));
         end
     end
 end
 
 figure()
-pcolor(z, x, Ppp)
+pcolor(z, x, Ppp_r)
 shading interp
 colormap(jet)
 colorbar
@@ -81,7 +82,7 @@ grid minor
 set(gca,'Ydir','reverse');
 
 figure()
-mesh(z, x, Ppp)
+mesh(z, x, Ppp_r)
 shading interp
 colormap(jet)
 colorbar
