@@ -8,8 +8,11 @@ f0 = 2.25e6; % Transducer center frequency [Hz]
 fs=100e6; % Sampling frequency [Hz]
 lambda = c / f0;
 STEP = lambda/3;
-x = [0:STEP:.250];
+NF = D^2/4/lambda;% Near Field Length or Transition from Near Field to Far Field
+x = [0:STEP:3*NF];
 y = [-.015:STEP:.015];
+
+
 
 % Velocity potential impulse response of rectangular pistonlike transducers
 h = cell(length(y), length(x));
