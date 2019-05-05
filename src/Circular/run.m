@@ -8,7 +8,7 @@ f0 = 2.25e6; % Transducer center frequency [Hz]
 fs=100e6; % Sampling frequency [Hz]
 lambda = c / f0;
 STEP = lambda/3;
-x = [0:STEP:.075];
+x = [0:STEP:.250];
 y = [-.015:STEP:.015];
 
 % Velocity potential impulse response of rectangular pistonlike transducers
