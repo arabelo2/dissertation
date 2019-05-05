@@ -1,11 +1,10 @@
 tic;
-clear all;
 D = 19/1000;
 c = 1480;
 c1= c;
 rho = 1000;
 f0 = 2.25e6; % Transducer center frequency [Hz]
-fs=100e6; % Sampling frequency [Hz]
+fs = 100e6; % Sampling frequency [Hz]
 lambda = c / f0;
 STEP = lambda/3;
 NF = D^2/4/lambda;% Near Field Length or Transition from Near Field to Far Field
@@ -13,39 +12,16 @@ x = [0:STEP:3*NF];
 y = [-.015:STEP:.015];
 
 % Velocity potential impulse response of rectangular pistonlike transducers
-h = cell(length(y), length(x));
-t = cell(length(y), length(x));
+h_c = cell(length(y), length(x));
+t_c = cell(length(y), length(x));
 
 for xx = 1:length(x)
     for yy = 1:length(y)
         [t_temp, h_temp] = vpirOfCircularPistonlikeTransducers(x(xx), y(yy), D, c, fs);
-        h{yy, xx} = h_temp;
-        t{yy, xx} = t_temp;
+        h_c{yy, xx} = h_temp;
+        t_c{yy, xx} = t_temp;
         
         % Piston velocity excitation pulses
-        % Wideband, type I pulse.
-%         K = 3.833;
-%         texcitation_temp = 0;
-%         count = 0;
-%         while c1*texcitation_temp(end) < 0.00400
-%             texcitation_temp(count + 1) = count*(t_temp(2) - t_temp(1));
-%             count = count + 1; 
-%         end
-            
-        % Narrow-band, type II pulse.
-%         K = 1.437;
-%         texcitation_temp = 0;
-%         count = 0;
-%         while c1*texcitation_temp(end) < 0.00500
-%             texcitation_temp(count + 1) = count*(t_temp(2) - t_temp(1));
-%             count = count + 1;
-%         end
-          
-        % Building v_temp
-%          v_temp = texcitation_temp.^3.*exp(-K*f0*texcitation_temp).*cos(2*pi*f0*texcitation_temp); 
-%          C = 1/max(abs(v_temp));
-%          v_temp = C*texcitation_temp.^3.*exp(-K*f0*texcitation_temp).*cos(2*pi*f0*texcitation_temp);
-
         % Excitation - Sitau + array of 5MHz - Format: HDF5
         v_temp = resample(hdf5read('ref_pulse-40MHz.h5', 'ascan'), fs*1e-6, 40);
         
@@ -84,7 +60,7 @@ pcolor(x, y, Ppp)
 shading interp
 colormap(jet)
 colorbar
-axis equal
+axis normal
 ylabel('x(mm)', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
 xlabel('y(mm)', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
 title('Pressure field',  'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')

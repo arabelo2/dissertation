@@ -56,16 +56,9 @@ function [r, R, t0, t1, t2, t] = calculating(x, y, D, c, fs)
     t1 = c^-1 * sqrt((R-y)^2 + x^2); % [s]
     t2 = c^-1 * sqrt((R+y)^2 + x^2); % [s]
     
-    % %% Frequency sample
+    % Frequency sample
     % Nyquist rate -- The sampling frequency should be at least twice the
     % highest frequency contained in the signal (fs >= 2*fc).
-    
-    % fs = 2*f; % [Hz]
-        
-    % Sample period
-    % T = 1/fs; % [s]
-    
-    % STEP = T/N;
     
     STEP = 1/fs;
  
