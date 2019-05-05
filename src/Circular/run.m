@@ -23,13 +23,13 @@ for xx = 1:length(x)
         
         % Piston velocity excitation pulses
         % Wideband, type I pulse.
-        K = 3.833;
-        texcitation_temp = 0;
-        count = 0;
-        while c1*texcitation_temp(end) < 0.00400
-            texcitation_temp(count + 1) = count*(t_temp(2) - t_temp(1));
-            count = count + 1; 
-        end
+%         K = 3.833;
+%         texcitation_temp = 0;
+%         count = 0;
+%         while c1*texcitation_temp(end) < 0.00400
+%             texcitation_temp(count + 1) = count*(t_temp(2) - t_temp(1));
+%             count = count + 1; 
+%         end
             
         % Narrow-band, type II pulse.
 %         K = 1.437;
@@ -41,12 +41,15 @@ for xx = 1:length(x)
 %         end
           
         % Building v_temp
-         v_temp = texcitation_temp.^3.*exp(-K*f0*texcitation_temp).*cos(2*pi*f0*texcitation_temp); 
-         C = 1/max(abs(v_temp));
-         v_temp = C*texcitation_temp.^3.*exp(-K*f0*texcitation_temp).*cos(2*pi*f0*texcitation_temp);
+%          v_temp = texcitation_temp.^3.*exp(-K*f0*texcitation_temp).*cos(2*pi*f0*texcitation_temp); 
+%          C = 1/max(abs(v_temp));
+%          v_temp = C*texcitation_temp.^3.*exp(-K*f0*texcitation_temp).*cos(2*pi*f0*texcitation_temp);
+
+        % Excitation - Sitau + array of 5MHz - Format: HDF5
+        v_temp = resample(hdf5read('ref_pulse-40MHz.h5', 'ascan'), fs*1e-6, 40);
         
-        % FILTER            
-        v_temp = v_temp.*hanning(max(size(v_temp)))';
+        % FILTER
+        v_temp = v_temp.*hanning(max(size(v_temp)));
         
         %%%% texcitation{xx, yy, zz} = texcitation_temp;
         v{yy, xx} = v_temp;
