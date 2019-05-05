@@ -15,6 +15,7 @@
 % Date:				Name:					Description:
 % 2016/08/24 		Alexandre Rabelo		1.0 - Initial Version
 % 2016/08/26 		Flávio Buiochi          1.0 - Reviewed, Tested and Approved
+% 2019/05/05        Alexandre Rabelo        1.1 - Changed the variable N to fs
 %
 % To invoke this function, firstly run the script:
 % 'loadingDataOfCircularPiston.m'
@@ -27,17 +28,17 @@
 % D -- > Diameter of US-transducer [m].
 % c -- > The velocity of sound in the propagating medium [m/s].
 % f -- > The operating frequency of US-transducer [Hz].
-% N -- > Number of samples per period.
+% fs -- > The sampling frequency or sampling rate, fs, is the average number of samples obtained in one second (samples per second), thus fs = 1/T;
 %
 % The velocity potential impulse response at a point Q in the field of an idealized piston source undergoing uniform motion and radiating into a lossless fluid medium.
 %
-function [t, h] = vpirOfCircularPistonlikeTransducers(x, y, D, c, f, N) % Main function
+function [t, h] = vpirOfCircularPistonlikeTransducers(x, y, D, c, fs) % Main function
     
     x = abs(x); % Output absolute value of input
     y = abs(y); % Output absolute value of input
     D = abs(D); % Output absolute value of input
     
-    [r, R, t0, t1, t2, t] = calculating(x, y, D, c, f, N);
+    [r, R, t0, t1, t2, t] = calculating(x, y, D, c, fs);
     
     % The big omega is the angle of equidistant arc included on the surface.
     OMEGA = angleOfEquidistantArc(r, x, y, R, t0, t1, t2, t);
@@ -49,7 +50,7 @@ function [t, h] = vpirOfCircularPistonlikeTransducers(x, y, D, c, f, N) % Main f
     % h = real(h/c);    
 end
 
-function [r, R, t0, t1, t2, t] = calculating(x, y, D, c, f, N)
+function [r, R, t0, t1, t2, t] = calculating(x, y, D, c, fs)
     t0 = x/c; % [s]
     R = D/2; % [m]
     t1 = c^-1 * sqrt((R-y)^2 + x^2); % [s]
@@ -59,16 +60,18 @@ function [r, R, t0, t1, t2, t] = calculating(x, y, D, c, f, N)
     % Nyquist rate -- The sampling frequency should be at least twice the
     % highest frequency contained in the signal (fs >= 2*fc).
     
-    fs = 2*f; % [Hz]
+    % fs = 2*f; % [Hz]
         
     % Sample period
-    T = 1/fs; % [s]
+    % T = 1/fs; % [s]
     
-    step = T/N;
+    % STEP = T/N;
+    
+    STEP = 1/fs;
  
 	Nn = min([t0 t1 t2]);
 	Nx = max([t0 t1 t2]);
-	t = Nn - 10*step : step : Nx + 10*step; % [s]	
+	t = Nn - 10*STEP : STEP : Nx + 10*STEP; % [s]	
 	r = c*t; % [m]  
 end
 

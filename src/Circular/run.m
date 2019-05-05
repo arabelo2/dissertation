@@ -4,12 +4,12 @@ D = 19/1000;
 c = 1480;
 c1= c;
 rho = 1000;
-f = 2.25e6;
-N = 128;
-sample = N;
-lambda = c / f;
-x = [.001:lambda/3:.150];
-y = [-.025:lambda/3:.025];
+f0 = 1e6; % Transducer center frequency [Hz]
+fs=10e6; % Sampling frequency [Hz]
+lambda = c / f0;
+STEP = lambda/3;
+x = [.001:STEP:.100];
+y = [-.12:STEP:.012];
 
 % Velocity potential impulse response of rectangular pistonlike transducers
 h = cell(length(y), length(x));
@@ -17,7 +17,7 @@ t = cell(length(y), length(x));
 
 for xx = 1:length(x)
     for yy = 1:length(y)
-        [t_temp, h_temp] = vpirOfCircularPistonlikeTransducers(x(xx), y(yy), D, c, f, N);
+        [t_temp, h_temp] = vpirOfCircularPistonlikeTransducers(x(xx), y(yy), D, c, fs);
         h{yy, xx} = h_temp;
         t{yy, xx} = t_temp;
         
@@ -41,9 +41,9 @@ for xx = 1:length(x)
 %         end
           
         % Building v_temp
-         v_temp = texcitation_temp.^3.*exp(-K*f*texcitation_temp).*cos(2*pi*f*texcitation_temp); 
+         v_temp = texcitation_temp.^3.*exp(-K*f0*texcitation_temp).*cos(2*pi*f0*texcitation_temp); 
          C = 1/max(abs(v_temp));
-         v_temp = C*texcitation_temp.^3.*exp(-K*f*texcitation_temp).*cos(2*pi*f*texcitation_temp);
+         v_temp = C*texcitation_temp.^3.*exp(-K*f0*texcitation_temp).*cos(2*pi*f0*texcitation_temp);
         
         % FILTER            
         v_temp = v_temp.*hanning(max(size(v_temp)))';
