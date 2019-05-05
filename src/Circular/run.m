@@ -12,8 +12,6 @@ NF = D^2/4/lambda;% Near Field Length or Transition from Near Field to Far Field
 x = [0:STEP:3*NF];
 y = [-.015:STEP:.015];
 
-
-
 % Velocity potential impulse response of rectangular pistonlike transducers
 h = cell(length(y), length(x));
 t = cell(length(y), length(x));
@@ -53,6 +51,8 @@ for xx = 1:length(x)
         
         % FILTER
         v_temp = v_temp.*hanning(max(size(v_temp)));
+        C = 1/max(v_temp);
+        v_temp = C*v_temp;   
         
         %%%% texcitation{xx, yy, zz} = texcitation_temp;
         v{yy, xx} = v_temp;
