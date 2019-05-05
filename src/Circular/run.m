@@ -4,12 +4,12 @@ D = 19/1000;
 c = 1480;
 c1= c;
 rho = 1000;
-f0 = 1e6; % Transducer center frequency [Hz]
-fs=10e6; % Sampling frequency [Hz]
+f0 = 2.25e6; % Transducer center frequency [Hz]
+fs=100e6; % Sampling frequency [Hz]
 lambda = c / f0;
 STEP = lambda/3;
-x = [.001:STEP:.100];
-y = [-.12:STEP:.012];
+x = [0:STEP:.075];
+y = [-.015:STEP:.015];
 
 % Velocity potential impulse response of rectangular pistonlike transducers
 h = cell(length(y), length(x));
