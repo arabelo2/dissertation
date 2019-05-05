@@ -71,6 +71,8 @@ switch(DF)
                 yp(3, 1) = y;
                 zp(3, 1) = -DF;
                 plot3(xp, yp, zp)
+                [xp yp zp]
+                pause(5)
                 hold on
                 end
             end

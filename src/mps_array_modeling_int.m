@@ -6,25 +6,25 @@ clear all;
 format longG;
 % --- Give input parameters ---
 tic     % Time the calculation
-lx = .25e-3;    % Element length in x-direction
-ly = 12e-3;    % Element length in y-direction
+lx = 3e-3;    % Element length in x-direction
+ly = 6e-3;    % Element length in y-direction
 gx = .05e-3;    % Gap length in x-direction
 gy = .05e-3;    % Gap length in y-direction
 f = 5e6;    % Frequency (Hz)
 d1 = 1.0;   % Density, medium one (arbitrary units)
 cp1 = 1480; % Compressional wave speed, medium one (m/s)
-d2 = 7.9;   % Density, medium two (arbitrary units)
-cp2 = 5900; % Compressional wave speed, medium two (m/s)
-cs2 = 3200; % Shear wave speed, medium two (m/s)
+d2 = 1.0;   % Density, medium two (arbitrary units)
+cp2 = 1480; % Compressional wave speed, medium two (m/s)
+cs2 = 0; % Shear wave speed, medium two (m/s)
 type = 'p'; % Wave type, medium two
 mat = {d1, cp1, d2, cp2, cs2, type};    % Form material vector
-L1 = 32;    % Number of elements in x-direction
+L1 = 1;    % Number of elements in x-direction
 L2 = 1; % Nuber of elements in y-direction
 angt = 0;  % Angle of the array (deg)
-Dt0 = 50e-3; % Height of array center from interface (m)
-theta2 = 10;  % Steering angle in theta direction (deg)
+Dt0 = 25e-3; % Height of array center from interface (m)
+theta2 = -5;  % Steering angle in theta direction (deg)
 phi = 0;    % Steering angle in phi direction (deg)
-DF = 100e-3;   % Focal distance (m)
+DF = 50e-3;   % Focal distance (m)
 lambda = mat{2}/f;
 % Weighting choices are 'rect', 'cos', 'Han', 'Ham', 'Blk', 'tri'.
 ampx_type = 'rect'; % Weighting coefficients in x-direction
@@ -32,14 +32,14 @@ ampy_type = 'rect'; % Weighting coefficients in y-direction
 
 % Field points (x, y, z) to evaluate
 N = 10;
-xmin = -50e-3;
-xmax = 50e-3;
-xnpoints = 300; % xnpoints = N*ceil(abs(xmax - xmin)/lambda);
+xmin = -16e-3;
+xmax = 16e-3;
+xnpoints = 32; % xnpoints = N*ceil(abs(xmax - xmin)/lambda);
 xs = linspace(xmin, xmax, xnpoints);
 
 zmin = 1e-3;
-zmax = 200e-3;
-znpoints = 200; %znpoints = N*ceil(abs(zmax - zmin)/lambda);
+zmax = 32e-3;
+znpoints = 32; %znpoints = N*ceil(abs(zmax - zmin)/lambda);
 zs = linspace(zmin, zmax, znpoints);
 
 y = 0;
