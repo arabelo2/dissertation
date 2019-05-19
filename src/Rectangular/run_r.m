@@ -69,27 +69,27 @@ for zz = 1:length(z)
 end
 
 figure()
-pcolor(z, x, Ppp_r)
+pcolor(z, x, Ppp_r/max(max(Ppp_r)))
 shading interp
 colormap(jet)
 colorbar
 axis normal
 ylabel('x(mm)', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
 xlabel('z(mm)', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-title('Pressure field',  'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+title('Pressure field - Rectangular',  'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
 grid on
 grid minor
 set(gca,'Ydir','reverse');
 
 figure()
-mesh(z, x, Ppp_r)
+mesh(z, x, Ppp_r/max(max(Ppp_r)))
 shading interp
 colormap(jet)
 colorbar
 axis normal
 ylabel('x(mm)', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
 xlabel('z(mm)', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-title('Pressure field',  'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+title('Pressure field - Rectangular',  'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
 grid on
 grid minor
 set(gca,'FontSize',20);
