@@ -23,9 +23,9 @@ for index = (0)/1000
    %pause(wait)
    plot(z*1000, Ppp_r(xp, :)/ max_Ppp_r)
    pause(wait)
-   %plot(z, Ppp_r(xp, :)/ max_Ppp_c, 'o')
+   %plot(z, Ppp_c(xp, :)/ max_Ppp_c, 'o')
    %pause(wait)
-   plot(z*1000, Ppp_r(xp, :)/ max_Ppp_c)
+   plot(z*1000, Ppp_c(xp, :)/ max_Ppp_c)
    pause(wait)
 end
 hold off
