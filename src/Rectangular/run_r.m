@@ -1,12 +1,13 @@
 tic;
 a = 9.5/1000;
 b = 9.5/1000;
-c = 1480;
+c = 1500;
 c1= c;
 rho = 1000;
 f0 = 2.25e6; % Transducer center frequency [Hz]
 fs=100e6; % Sampling frequency [Hz]
 lambda = c / f0;
+kerf = 4e-4;
 STEP = lambda/3;
 NF = a^2/lambda;% Near Field Length or Transition from Near Field to Far Field
 x = [-.015:STEP:.015];
