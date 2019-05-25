@@ -1,3 +1,10 @@
 # Ignore all logs
 *.asv
 *.fig
+*.jpg
+Figuras
+*.mat
+*old*.m
+*Copia*.m
+*2018_03_19*.m
+*2018_03_17*.m
