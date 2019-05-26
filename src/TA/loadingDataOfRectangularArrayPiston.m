@@ -106,44 +106,13 @@ for zz = 1:length(z(1, :))
             t{yy, xx, zz} = t_temp;
             
             % Piston velocity excitation pulses
-            % Wideband, type I pulse.
-%             K = 3.833;
-%             texcitation_temp = 0;
-%             count = 0;
-%             while c1*texcitation_temp(end) < 0.00150
-%                 texcitation_temp(count + 1) = count*(t_temp(2) - t_temp(1));
-%                 count = count + 1; 
-%             end
-            
-            % Narrow-band, type II pulse.
-%             K = 1.437;
-%             texcitation_temp = 0;
-%             count = 0;
-%             while c1*texcitation_temp(end) < 0.00400
-%                 texcitation_temp(count + 1) = count*(t_temp(2) - t_temp(1)); 
-%                 count = count + 1;
-%             end
-%           
-            % Building v_temp
-%               v_temp = texcitation_temp.^3.*exp(-K*f*texcitation_temp).*cos(2*pi*f*texcitation_temp); 
-%               C = 1/max(abs(v_temp));
-%               v_temp = C*texcitation_temp.^3.*exp(-K*f*texcitation_temp).*cos(2*pi*f*texcitation_temp);
-            
             % Excitation - Sitau + array of 5MHz - Format: HDF5
-            v_temp = resample(hdf5read('ref_pulse-40MHz.h5', 'ascan'), fs*1e-6, 40);            
-            v_temp = load('sinalvn0h80.mat'); v_temp = v_temp.vn;
-            v_temp = load('sinalvn0h0.mat'); v_temp = v_temp.vn;
-            
-            % FILTER            
-            % butter(n,Wn) returns the transfer function coefficients of an nth-order lowpass digital Butterworth filter with normalized cutoff frequency Wn.
-%               nth = 6;
-%               Wn = f/(2*f*sample/2);
-%               [bc, ac] = butter(nth, Wn);
-            % filter(bc,ac,signal) filters the input data signal using a rational transfer function defined by the numerator and denominator coefficients bc and ac.
-%              v_temp = filter(bc, ac, v_temp); 
+            v_temp = resample(hdf5read('ref_pulse-40MHz.h5', 'ascan'), fs*1e-6, 40);
 
-%             mov_avg_len = round(.6e-3/(.3e-3/4));
-%             v_temp = filter(ones(mov_avg_len, 1), 1, v_temp, [], 2);
+            % FILTER
+            v_temp = v_temp.*hanning(max(size(v_temp)));
+            C = 1/max(v_temp);
+            v_temp = C*v_temp; 
           
             %%%% texcitation{xx, yy, zz} = texcitation_temp;
             v{yy, xx, zz} = v_temp;
