@@ -9,8 +9,8 @@
 % x -- > Abscissa (X-axis) [m].
 % y -- > Ordinate (Y-axis) [m].
 % z -- > Applicate (Z-axis) [m] -- > The Z-axis is perpendicular to the plane XY.
-% f -- > The operating frequency of US-transducer [Hz]
-% N -- > Number of samples per period
+% f0 -- > The operating frequency of US-transducer [Hz]
+% fs -- > The sample frequency [Hz]
 
 % Start stopwatch timer
 tic;
@@ -19,6 +19,7 @@ tic;
 % clear all;
 % Delete all figures
 % close all;
+
 format longG;
 %format compact;
 
@@ -44,34 +45,24 @@ b = 10e-3/2; % m
 % Delay law 
 delayLawEnabled = 1; % 0 --> OFF and 1 --> ON
 
-% Percentage of "a" and "b" regarding the X- and Y- axes respectively over
-% the constant spacing distance.
-% percentagex = 100*(19e-3 - M*2*a)/(M - 1)/a; % [%]
-percentagex = kerf;
-% percentagey = 100*(12e-3 - N*2*b)/(N - 1)/b; % [%]
-percentagey = kerf;
-
-%y = (0)*1e-3; % m
-%x = (-25:lambda:25+lambda)*1e-3; % m
-% z = 40*1e-3; % m -- > The Z-axis is perpendicular to the plane XY.
-%z = (lambda:lambda:68+lambda)*1e-3; % m -- > The Z-axis is perpendicular to the plane XY.
-
 xmin = -(2*a+kerf)*(M/2+1);
 xmax = (2*a+kerf)*(M/2+1);
 ymin = 0;
 ymax = 0;
 zmin = 0;
-zmax = 338*lambda;
-xpoints = 512;
+zmax = 0.100; % m -- > The Z-axis is perpendicular to the plane XY.
+
+xpoints = 256;
 ypoints = 1;
 zpoints = 1024;
+
 dx = (xmax - xmin)/xpoints;
 dy = (ymax - ymin)/ypoints;
 dz = (zmax - zmin)/zpoints;
+
 x = xmin:dx:xmax;
 y = 0;
 z = zmin:dz:zmax;
-
 
 % Focal distance
 F = 40e-3; % [m]
@@ -103,7 +94,7 @@ for zz = 1:length(z(1, :))
     for yy = 1:length(y(1, :))
         for xx = 1:length(x(1, :))
             %[t_temp, h_temp] = vpirOfRectangularPistonlikeTransducers(a, b, c1, x(xx), y(yy), z(zz), f, sample);
-            [h_temp, t_temp, td, ex, ey, ez, dDtmn, exm, eyn, B2x, B2y] = vpirOfRectangularArrayPistonlikeTransducers(a, b, c1, x(xx), y(yy), z(zz), fs, N, M, percentagex, percentagey, delayLawEnabled, zf, xf, yf, F);
+            [h_temp, t_temp, td, ex, ey, ez, dDtmn, exm, eyn, B2x, B2y] = vpirOfRectangularArrayPistonlikeTransducers(a, b, c1, x(xx), y(yy), z(zz), fs, N, M, kerf, kerf, delayLawEnabled, zf, xf, yf, F);
             h{yy, xx, zz} = h_temp;
             t{yy, xx, zz} = t_temp;
             

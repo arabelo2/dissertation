@@ -1,30 +1,19 @@
-function [Htotal, tnew, td, ex, ey, ez, dDtmn, exm, eyn, B2x, B2y] = vpirOfRectangularArrayPistonlikeTransducers(a, b, c1, x, y, z, fs, N, M, percentagex, percentagey, delayLawEnabled, zf, xf, yf, F) % Main function
+function [Htotal, tnew, td, ex, ey, ez, dDtmn, exm, eyn, B2x, B2y] = vpirOfRectangularArrayPistonlikeTransducers(a, b, c1, x, y, z, fs, N, M, kerf_x, kerf_y, delayLawEnabled, zf, xf, yf, F) % Main function
     a = abs(a); % Output absolute value of input
     b = abs(b); % Output absolute value of input
-%    x = abs(x);
-%    y = abs(y);
     z = abs(z);
     X = x;
     Y = y;
     Z = z;
 	F = abs(F); % Output absolute value of input
-    %percentagex(isnan(percentagex))= 0; %  IEEE conventions state
-    %percentagey(isnan(percentagey))= 0; %  IEEE conventions state
     
-    %percentagex(isinf(percentagex))= 0; %  IEEE conventions state
-    %percentagey(isinf(percentagey))= 0; %  IEEE conventions state
-            
 % X-axis
 m = 1:M; % The mth element in the array
-% kerf_x = percentagex/100 * a; % The constant spacing distance [m]
-kerf_x = percentagex; % The constant spacing distance [m]
 sx = 2*a + kerf_x; % The distance between centroids (Pitch)
 B2x = M*2*a + (M - 1)*kerf_x; % The total length of the array [m]
 
 % Y-axis
 n = 1:N; % The mth element in the array
-% kerf_y = percentagey/100 * b; % The constant spacing distance [m]
-kerf_y = percentagey; % The constant spacing distance [m]
 sy = 2*b + kerf_y; % The distance between centroids (Pitch)
 B2y = N*2*b + (N - 1)*kerf_y; % The total length of the array [m]
 
