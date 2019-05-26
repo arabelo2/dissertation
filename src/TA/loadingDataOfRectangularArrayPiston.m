@@ -61,10 +61,10 @@ xmax = (2*a+kerf)*(M/2+1);
 ymin = 0;
 ymax = 0;
 zmin = 0;
-zmax = 150*lambda;
-xpoints = 400;
+zmax = 338*lambda;
+xpoints = 512;
 ypoints = 1;
-zpoints = 400;
+zpoints = 1024;
 dx = (xmax - xmin)/xpoints;
 dy = (ymax - ymin)/ypoints;
 dz = (zmax - zmin)/zpoints;
@@ -80,7 +80,7 @@ F = 40e-3; % [m]
 PHII = 0; % Degree angle
 
 % az - Rotate around the y-axis (Pitch) / Azimuth is the counterclockwise angle in the z-x plane measured in radians from the positive z-axis.
-THETA = 20; % Degree angle
+THETA = 0; % Degree angle
 
 % el - Rotate around the x-axis (Yaw) / Elevation is the elevation angle in radians from the z-x plane 
 PSI = 0; % Degree angle
