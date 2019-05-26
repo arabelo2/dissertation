@@ -345,18 +345,18 @@ set(gca,'Ydir','reverse');
 
 % Three-dimensional plot of the relative peak amplitude of the pressure waveforms in the near field of a rectangular piston.
 % figure(8)
-% mesh(z*1e3, x*1e3, Pp*(t{1}(2) - t{1}(1))/c1/rho)
-% shading interp
-% colormap(jet)
-% colorbar
-% axis normal
-% xlabel('z(mm)', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-% ylabel('x(mm)', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-% zlabel('$$\frac{Pp(\overline{x}, y, z, t)\partial{t}}{\rho c}$$', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-% title('Type I excitation and t = 0 plane.',  'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-% grid on
-% grid minor
-% set(gca,'FontSize',20);
+mesh(z*1e3, x*1e3, Pp*(t{1}(2) - t{1}(1))/c1/rho)
+shading interp
+colormap(jet)
+colorbar
+axis normal
+xlabel('z(mm)', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+ylabel('x(mm)', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+zlabel('$$\frac{Pp(\overline{x}, y, z, t)\partial{t}}{\rho c}$$', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+title('Type I excitation and t = 0 plane.',  'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+grid on
+grid minor
+set(gca,'FontSize',20);
 
 % saveas(gcf, 'C:\Temp\PPGEM\Dissertação\Qualificação\Figuras\Original pictures\Three-dimensional plot of the relative peak amplitute of the pressure waveforms in the near field of a rectangular piston - Type I and y = 0 plane - Errata', 'jpg')
 % saveas(gcf, 'C:\Temp\PPGEM\Dissertação\Qualificação\Figuras\Original pictures\Three-dimensional plot of the relative peak amplitute of the pressure waveforms in the near field of a rectangular piston - Type I and y = 0 plane - Errata', 'bmp')
