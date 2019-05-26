@@ -52,9 +52,9 @@ ymax = 0;
 zmin = +0.002;
 zmax = +0.102; % m -- > The Z-axis is perpendicular to the plane XY.
 
-xpoints = 512;
+xpoints = 406;
 ypoints = 1;
-zpoints = 1024;
+zpoints = 676;
 
 dx = (xmax - xmin)/xpoints;
 dy = (ymax - ymin)/ypoints;
