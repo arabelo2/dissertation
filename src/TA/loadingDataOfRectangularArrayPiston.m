@@ -25,29 +25,31 @@ format longG;
 % Data
 rho = 1000; % [kg/m^3]
 c1 = 1480; % [m/s]
-f0 = 2.25e6; % [Hz]
-fs=128e6; % Sampling frequency [Hz]
+f0 = 5e6; % [Hz]
+fs=100e6; % Sampling frequency [Hz]
 lambda = c1 / f0;
-kerf = 5e-4;
+kerf = 1e-4;
 STEP = lambda/3;
 
 % X-axis
 M = 32; % Number of elements (Columns)
-a = .6e-3/2; % Half of width of element [m]
+a = .5e-3/2; % Half of width of element [m]
 
 NF = a^2/lambda;% Near Field Length or Transition from Near Field to Far Field
 
 % Y-axis
 N = 1; % Number of elements (Rows)
-b = 12e-3/2; % m
+b = 10e-3/2; % m
 
 % Delay law 
 delayLawEnabled = 1; % 0 --> OFF and 1 --> ON
 
 % Percentage of "a" and "b" regarding the X- and Y- axes respectively over
 % the constant spacing distance.
-percentagex = 100*(19e-3 - M*2*a)/(M - 1)/a; % [%]
-percentagey = 100*(12e-3 - N*2*b)/(N - 1)/b; % [%]
+% percentagex = 100*(19e-3 - M*2*a)/(M - 1)/a; % [%]
+percentagex = kerf;
+% percentagey = 100*(12e-3 - N*2*b)/(N - 1)/b; % [%]
+percentagey = kerf;
 
 %y = (0)*1e-3; % m
 %x = (-25:lambda:25+lambda)*1e-3; % m
