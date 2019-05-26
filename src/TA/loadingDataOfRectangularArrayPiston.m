@@ -45,14 +45,14 @@ b = 10e-3/2; % m
 % Delay law 
 delayLawEnabled = 1; % 0 --> OFF and 1 --> ON
 
-xmin = -(2*a+kerf)*(M/2+1);
-xmax = (2*a+kerf)*(M/2+1);
+xmin = -0.030; % xmin = -(2*a+kerf)*(M/2+1);
+xmax = +0.030; % xmax = (2*a+kerf)*(M/2+1);
 ymin = 0;
 ymax = 0;
-zmin = 0;
-zmax = 0.100; % m -- > The Z-axis is perpendicular to the plane XY.
+zmin = +0.002;
+zmax = +0.102; % m -- > The Z-axis is perpendicular to the plane XY.
 
-xpoints = 256;
+xpoints = 512;
 ypoints = 1;
 zpoints = 1024;
 
