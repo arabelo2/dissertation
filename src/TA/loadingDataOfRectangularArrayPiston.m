@@ -71,7 +71,7 @@ F = 40e-3; % [m]
 PHII = 0; % Degree angle
 
 % az - Rotate around the y-axis (Pitch) / Azimuth is the counterclockwise angle in the z-x plane measured in radians from the positive z-axis.
-THETA = 0; % Degree angle
+THETA = 20; % Degree angle
 
 % el - Rotate around the x-axis (Yaw) / Elevation is the elevation angle in radians from the z-x plane 
 PSI = 0; % Degree angle
@@ -293,18 +293,20 @@ end
 % % set(gca,'FontSize',20);
 % set(gca,'Ydir','reverse', 'FontSize',20);
 
-% figure(37)
-pcolor(x*1e3, z*1e3, abs(Pp')*(t{1}(2) - t{1}(1))/c1/rho)
+figure()
+imagesc(x*1e3, z*1e3, abs(Ppp')/max(max(Ppp)))
 shading interp
 colormap(jet)
 colorbar
-axis equal
-ylabel('z(mm)', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-xlabel('x(mm)', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-title('Pressure field - Relative peak amplitude - Experimental pulse',  'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+axis normal
+ylabel('z(mm)', 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+xlabel('x(mm)', 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+title('Analytical pressure field - peak-to-peak amplitude', 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
 grid on
 grid minor
 set(gca,'Ydir','reverse');
+set(gca,'FontSize',20);
+daspect([1 1 1])
 
 % figure(47)
 % pz=length(z);
@@ -338,7 +340,7 @@ set(gca,'Ydir','reverse');
 
 % Three-dimensional plot of the relative peak amplitude of the pressure waveforms in the near field of a rectangular piston.
 % figure(8)
-mesh(z*1e3, x*1e3, Pp*(t{1}(2) - t{1}(1))/c1/rho)
+mesh(z*1e3, x*1e3, Ppp/max(max(Ppp)))
 shading interp
 colormap(jet)
 colorbar
