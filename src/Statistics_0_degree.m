@@ -1,3 +1,4 @@
+format longG;
 xe = length(x_axis(x_axis <= 0));
 xa = length(x(x <= 0));
 [xds, yds] = datastats(picoapico(:,xe)/max(max(picoapico)), Ppp(xa, :)'/max(max(Ppp)))
@@ -47,3 +48,26 @@ za = length(z(z <= 40/1000));
 %     median: 0.0274730398582235
 %      range: 0.987633633114888
 %        std: 0.0912640655599844
+
+[xds, yds] = datastats(mag2db(picoapico(ze,:)'/max(max(picoapico))), mag2db(Ppp(:, za)/max(max(Ppp))))
+
+% xds = 
+% 
+%        num: 120
+%        max: 0
+%        min: -35.8827871153555
+%       mean: -27.1998157462497
+%     median: -27.0961332387502
+%      range: 35.8827871153555
+%        std: 6.10335079035158
+% 
+% 
+% yds = 
+% 
+%        num: 407
+%        max: -0.0108062025590891
+%        min: -39.0755374984829
+%       mean: -30.9972138651506
+%     median: -31.2218656753597
+%      range: 39.0647312959238
+%        std: 5.64258348072904
