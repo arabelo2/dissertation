@@ -30,9 +30,9 @@ daspect([1 1 1])
 
 figure()
 hold on
-% pe_l = plot(z_axis, picoapico(:,xe)/max(max(picoapico)), 'k');
-pe_o = plot(z_axis, picoapico(:,xe)/max(max(picoapico)), 'b--o');
-pa_l = plot(linspace(z_axis(1),z_axis(end), size(Ppp', 1)), Ppp(xa, :)'/max(max(Ppp)), 'r');
+pe_i = plot(linspace(z_axis(1),z_axis(end), size(picoapicointerpolado_z, 1)), picoapicointerpolado_z(:,xe)/max(max(picoapicointerpolado_z)), 'b');
+pe_o = plot(z_axis, picoapico(:,xe)/max(max(picoapico)), 'r--o');
+pa_l = plot(linspace(z_axis(1),z_axis(end), size(Ppp', 1)), Ppp(xa, :)'/max(max(Ppp)), 'k');
 xlabel('z(mm)', 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
 ylabel('Pressão normalizada', 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
 title({'Amplitude da pressão acústica ao longo do eixo'}, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
@@ -40,13 +40,13 @@ grid on
 grid minor
 set(gca,'FontSize',20);
 hold off
-legend([pe_o pa_l], 'Experimental', 'Simulada')
+legend([pe_i pe_o pa_l], 'Interpolado', 'Experimental', 'Simulada')
 
 figure()
 hold on
-%pe_l = plot(x_axis, picoapico(ze,:)/max(max(picoapico)), 'k--o');
-pe_o = plot(x_axis, picoapico(ze,:)/max(max(picoapico)), 'b--o');
-pa_l = plot(linspace(x_axis(1),x_axis(end), size(Ppp', 2)), Ppp(:, za)'/max(max(Ppp)), 'r');
+pe_i = plot(linspace(x_axis(1),x_axis(end), size(picoapicointerpolado_x, 2)), picoapicointerpolado_x(ze,:)/max(max(picoapicointerpolado_x)), 'b');
+pe_o = plot(x_axis, picoapico(ze,:)/max(max(picoapico)), 'r--o');
+pa_l = plot(linspace(x_axis(1),x_axis(end), size(Ppp', 2)), Ppp(:, za)'/max(max(Ppp)), 'k');
 xlabel('x(mm)', 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
 ylabel('Pressão normalizada', 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
 title({'Perfil da pressão acústica' , 'na posição do foco'}, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
@@ -54,14 +54,14 @@ grid on
 grid minor
 set(gca,'FontSize',20);
 hold off
-legend([pe_o pa_l], 'Experimental', 'Simulado')
+legend([pe_i pe_o pa_l], 'Interpolado', 'Experimental', 'Simulada')
 
 
 figure()
 hold on
-%pe_l = plot(x_axis, picoapico(ze,:)/max(max(picoapico)), 'k--o');
-pe_o = plot(rad2deg(tan(x_axis/x_axis(end))), mag2db(picoapico(ze,:)/max(max(picoapico))), 'b--o');
-pa_l = plot(rad2deg(tan(linspace(x_axis(1), x_axis(end), size(Ppp', 2))/x_axis(end))), mag2db(Ppp(:, za)'/max(max(Ppp))), 'r');
+pe_i = plot(rad2deg(tan(linspace(x_axis(1), x_axis(end), size(picoapicointerpolado_x, 2))/x_axis(end))), mag2db(picoapicointerpolado_x(ze,:)/max(max(picoapicointerpolado_x))), 'b.');
+pe_o = plot(rad2deg(tan(x_axis/x_axis(end))), mag2db(picoapico(ze,:)/max(max(picoapico))), 'r--o');
+pa_l = plot(rad2deg(tan(linspace(x_axis(1), x_axis(end), size(Ppp', 2))/x_axis(end))), mag2db(Ppp(:, za)'/max(max(Ppp))), 'k');
 xlabel('${\theta ^{\circ}}$', 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
 ylabel('Magnitude (dB)', 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
 title({'Perfil da pressão acústica' , 'na posição do foco'}, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
@@ -69,7 +69,7 @@ grid on
 grid minor
 set(gca,'FontSize',20);
 hold off
-legend([pe_o pa_l], 'Experimental', 'Simulado')
+legend([pe_i pe_o pa_l], 'Interpolado', 'Experimental', 'Simulada')
 
 
 p1 = plot(mean(B));
