@@ -64,14 +64,10 @@ end
 figure(2)
 for index = 1:Nscanned
 plot(t{index}, h{index})
-grid on
-grid minor
 pause(10/Nscanned)
 hold on
 end
 
 figure(3)
 plot(tnew, Htotal)
-grid on
-grid minor
 hold off
