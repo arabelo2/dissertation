@@ -1,12 +1,12 @@
-a = 4e-3;
-b = 9.5e-3;
-c1 = 1500;
-fs = 16e6;
-xc = 0e-3;
-yc= 0e-3;
-zc = 40e-3;
-D = 6e-4;
-discretization = 5;
+a = 8e-3/2;           % a -- > Half length in [m].
+b = 19e-3/2;          % b -- > Half width/height in [m].
+c1 = 1500;            % c1 -- > The velocity of sound in the propagating medium [m/s].
+fs = 16e6;            % Sampling frequency [Hz]
+xc = 0e-3;            % xc --> x-coordinate of the center of the hydrophone
+yc= 0e-3;             % yc --> y-coordinate of the center of the hydrophone
+zc = 40e-3;           % zc --> z-coordinate for translation to the coordinate xy-plane
+D = 6e-4;             % D --> Diameter of the hydrophone
+discretization = 5;   % discretization --> Value to divide the geometry into finite elements to prepare for analysis
 
 [xscanned, yscanned, zscanned, Nscanned] = scanner(xc, yc, zc, D, discretization);
 
@@ -75,4 +75,3 @@ plot(tnew, Htotal)
 grid on
 grid minor
 hold off
-
