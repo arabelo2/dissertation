@@ -95,17 +95,17 @@ end
 %The sum total of velocity potential impulse response 
 tmin = min(min(cellfun(@min,td)));
 tmax = max(max(cellfun(@max,td)));
-STEP = t{1,1}(2) - t{1,1}(1);
+STEP = t{1, 1}(2) - t{1, 1}(1);
 tnew= tmin:STEP:tmax;
 fidx = zeros(size(td, 1), size(td, 2));  %// Initialize matrix
 lidx = zeros(size(td, 1), size(td, 2));  %// Initialize matrix
 for yy = 1:size(td, 1)
     for xx = 1:size(td, 2)
 		% First position
-		[fp fq] = min(abs(tnew - td{yy, xx}(1)));
+		[~, fq] = min(abs(tnew - td{yy, xx}(1)));
 		fidx(yy, xx) = fq;
 		% Last position
-		[lp lq] = min(abs(tnew - td{yy, xx}(end)));
+		[~, lq] = min(abs(tnew - td{yy, xx}(end)));
 		lidx(yy, xx) = lq;
     end
 end
