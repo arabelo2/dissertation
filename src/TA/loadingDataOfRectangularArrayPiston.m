@@ -12,31 +12,37 @@
 % f0 -- > The operating frequency of US-transducer [Hz]
 % fs -- > The sample frequency [Hz]
 
+% Adds the specified folders to the top of the search path for the current MATLAB® session.
+addpath('E:\FileHistory\arabelo@hpe.com\RABELOAL11\Data\C\Users\rabeloal\Documents\PPGEM\PMR5234\Program\code\src\Array')
+addpath('E:\FileHistory\arabelo@hpe.com\RABELOAL11\Data\C\Users\rabeloal\Documents\PPGEM\PMR5234\Program\code\src\Rectangular')
+addpath('E:\FileHistory\arabelo@hpe.com\RABELOAL11\Data\C\Temp\PPGEM\Dissertação\Programa\Matuda')
+
 % Start stopwatch timer
-tic;
+tic
 
 % Remove items from workspace
 % clear all;
 % Delete all figures
-% close all;
+close all;
 
 format longG;
 %format compact;
 
 % Data
 rho = 1000; % [kg/m^3]
-c1 = 1480; % [m/s]
+c1 = 1500; % [m/s]
 f0 = 5e6; % [Hz]
-fs=100e6; % Sampling frequency [Hz]
-lambda = c1 / f0;
-kerf = 1e-4;
-STEP = lambda/3;
+f = f0;
+fs=16*40e6; % Sampling frequency [Hz]
+lambda = c1 / f0; % [m]
+kerf = 6e-4; % [m]
+STEP = lambda/4;  % [m]
 
 % X-axis
 M = 32; % Number of elements (Columns)
-a = .5e-3/2; % Half of width of element [m]
+a = 0.009375e-3/2; % Half of width of element [m]
 
-NF = a^2/lambda;% Near Field Length or Transition from Near Field to Far Field
+% NF = a^2/lambda;% Near Field Length or Transition from Near Field to Far Field
 
 % Y-axis
 N = 1; % Number of elements (Rows)
@@ -48,21 +54,20 @@ delayLawEnabled = 1; % 0 --> OFF and 1 --> ON
 xmin = -0.030; % xmin = -(2*a+kerf)*(M/2+1);
 xmax = +0.030; % xmax = (2*a+kerf)*(M/2+1);
 ymin = 0;
-ymax = 0;
-zmin = +0.002;
-zmax = +0.102; % m -- > The Z-axis is perpendicular to the plane XY.
+ymax = +0;
+zmin = 0.000;
+zmax = +0.061; % m -- > The Z-axis is perpendicular to the plane XY.
 
-xpoints = 406;
+xpoints = 121;
 ypoints = 1;
-zpoints = 676;
+zpoints = 121;
 
-dx = (xmax - xmin)/xpoints;
-dy = (ymax - ymin)/ypoints;
-dz = (zmax - zmin)/zpoints;
+x = linspace(xmin, xmax, xpoints);
+y = linspace(ymin, ymax, ypoints);
+z = linspace(zmin, zmax, zpoints);
 
-x = xmin:dx:xmax;
-y = 0;
-z = zmin:dz:zmax;
+z_idx = (z >= .0 & z <= .061 );
+x_idx = (x >= -.030 & x <= .030 );
 
 % Focal distance
 F = 40e-3; % [m]
@@ -71,7 +76,7 @@ F = 40e-3; % [m]
 PHII = 0; % Degree angle
 
 % az - Rotate around the y-axis (Pitch) / Azimuth is the counterclockwise angle in the z-x plane measured in radians from the positive z-axis.
-THETA = 20; % Degree angle
+THETA = 0; % Degree angle
 
 % el - Rotate around the x-axis (Yaw) / Elevation is the elevation angle in radians from the z-x plane 
 PSI = 0; % Degree angle
@@ -96,16 +101,48 @@ for zz = 1:length(z(1, :))
             %[t_temp, h_temp] = vpirOfRectangularPistonlikeTransducers(a, b, c1, x(xx), y(yy), z(zz), f, sample);
             [h_temp, t_temp, td, ex, ey, ez, dDtmn, exm, eyn, B2x, B2y] = vpirOfRectangularArrayPistonlikeTransducers(a, b, c1, x(xx), y(yy), z(zz), fs, N, M, kerf, kerf, delayLawEnabled, zf, xf, yf, F);
             h{yy, xx, zz} = h_temp;
-            t{yy, xx, zz} = t_temp;
+            t{yy, xx, zz} = t_temp;                
+            
+            Fresample = 40e6;
+            Tresample = 1/Fresample;
             
             % Piston velocity excitation pulses
-            % Excitation - Sitau + array of 5MHz - Format: HDF5
-            v_temp = resample(hdf5read('ref_pulse-40MHz.h5', 'ascan'), fs*1e-6, 40);
+            % Excitation - Sitau + array of 5MHz - Format: HDF5            
+            v_temp = hdf5read('ref_pulse-40MHz.h5', 'ascan'); % Signal
+            v_temp = resample(v_temp, Fresample*1e-6, 40);
+            % L = length(v_temp);
+            % xaxis = Tresample*(0:L-1);
+            % index1 = find(xaxis >= 3.74e-7 & xaxis <= 3.76e-7);
+            % index2 = find(xaxis == 1.6e-6);
+            % v_temp = v_temp(index1:index2);
+
+            % Sinal ajustado com resample, mas sem zero padding.
+            % v_temp = v_temp(114:520);
 
             % FILTER
-            v_temp = v_temp.*hanning(max(size(v_temp)));
-            C = 1/max(v_temp);
-            v_temp = C*v_temp; 
+            % v_temp = v_temp.*hanning(max(size(v_temp)));
+            
+            % The time domain creates a new signal of 2*L samples
+            % The minimum number of zeros that can be added to the signal is the same size of the vector;
+            % Adding zero padding (but no windows yet)
+
+            %L = length(v_temp); % Length of signal
+
+            % Option #1
+            %V_TEMP = fft(v_temp, 2*L)/L;
+            %v_temp = ifft(V_TEMP)*L;
+
+            % Option #3
+            % V_TEMP = fftshift(v_temp);
+            % v_temp = ifftshift(V_TEMP);
+
+            % Normalization
+            % C = 1/max(abs(v_temp));
+            % v_temp = C*v_temp; 
+
+            % A partir do ponto máximo (Simulando Delta de Dirac)
+            % v_temp = v_temp(find(v_temp == max(v_temp))-100:end);
+
           
             %%%% texcitation{xx, yy, zz} = texcitation_temp;
             v{yy, xx, zz} = v_temp;
@@ -115,20 +152,20 @@ for zz = 1:length(z(1, :))
             Pi{yy, xx, zz} = Pi_temp;
             
             % Transient pressure
-            p_temp = rho*conv(h_temp, diff(v_temp)/(t_temp(2) - t_temp(1)));
+            p_temp = rho*conv(h_temp, diff(v_temp)/(t_temp(2) - t_temp(1)), 'full');
             % p_temp = conv(v_temp, Pi_temp);
             P{yy, xx, zz} = p_temp;
             t_conv_temp = t_temp(1) + (t_temp(2) - t_temp(1))*(0:1:length(p_temp)-1);
             t_conv{yy, xx, zz} = t_conv_temp;
             
             % Peak amplitude
-            Pp(xx, zz) = max(p_temp);
+            Pp(xx, zz) = max(abs(p_temp));
             
             % Peak-to-peak amplitude
             Ppp(xx, zz) = max(p_temp) - min(p_temp); 
             
             % Root mean square amplitude
-            Prms(xx, zz) = (max(p_temp) - min(p_temp))/(2*sqrt(2));            
+            Prms(xx, zz) = (max(abs(p_temp)) - min(abs(p_temp)))/(2*sqrt(2));            
         end
     end
 end
@@ -293,20 +330,26 @@ end
 % % set(gca,'FontSize',20);
 % set(gca,'Ydir','reverse', 'FontSize',20);
 
-figure()
-imagesc(x*1e3, z*1e3, abs(Ppp')/max(max(Ppp)))
+figure(20)
+imagesc(x(x_idx)*1e3, z(z_idx)*1e3, abs(Ppp(x_idx, z_idx)')/max(max(abs(Ppp))))
+% figure(200)
+% imagesc(x*1e3, z*1e3, abs(Pp')/max(max(abs(Pp))))
+az = -90; % az = -90/90 -- > Horizontal ; % az = 0/180 -- > Vertical;
+el = 90;
+view(az, el);
 shading interp
 colormap(jet)
 colorbar
-axis normal
-ylabel('z(mm)', 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-xlabel('x(mm)', 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-title('Analytical pressure field - peak-to-peak amplitude', 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+axis padded
+ylabel('z(mm)', 'Color', 'k', 'interpreter', 'latex')
+xlabel('x(mm)', 'Color', 'k', 'interpreter', 'latex')
+title('Pressão Normalizada (Método Analítico - 2D)', 'Color', 'k', 'interpreter', 'latex')
 grid on
 grid minor
 set(gca,'Ydir','reverse');
-set(gca,'FontSize',20);
-daspect([1 1 1])
+set(gca, 'FontName', 'Times New Roman', 'FontSize', 20)
+daspect('auto') % daspect([1 1 1])
+
 
 % figure(47)
 % pz=length(z);
@@ -339,19 +382,24 @@ daspect([1 1 1])
 % saveas(gcf, 'C:\Temp\PPGEM\Dissertação\Qualificação\Figuras\Original pictures\Pressure field - Relative peak amplitude - Type I excitation and y = 0 plane - Errata', 'fig')
 
 % Three-dimensional plot of the relative peak amplitude of the pressure waveforms in the near field of a rectangular piston.
-% figure(8)
-mesh(z*1e3, x*1e3, Ppp/max(max(Ppp)))
+figure(8)
+mesh(z(z_idx)*1e3, x(x_idx)*1e3, abs(Ppp(x_idx, z_idx))/max(max(abs(Ppp))))
+% figure(80)
+% mesh(z*1e3, x*1e3, abs(Pp)/max(max(abs(Pp))))
 shading interp
 colormap(jet)
-colorbar
-axis normal
-xlabel('z(mm)', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-ylabel('x(mm)', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-zlabel('$$\frac{Pp(\overline{x}, y, z, t)\partial{t}}{\rho c}$$', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-title('Type I excitation and t = 0 plane.',  'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+colorbar('eastoutside')
+axis padded
+xlabel('z(mm)', 'Color', 'k', 'interpreter', 'latex')
+ylabel('x(mm)', 'Color', 'k', 'interpreter', 'latex')
+% zlabel('$$\frac{Pp(\overline{x}, y, z, t)\partial{t}}{\rho c}$$', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+zlabel('Pressão Normalizada', 'Color', 'k', 'interpreter', 'latex')
+title('Método Analítico - 3D', 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
 grid on
 grid minor
-set(gca,'FontSize',20);
+set(gca,'Ydir','reverse');
+set(gca, 'FontName', 'Times New Roman', 'FontSize', 20)
+daspect ('auto') % daspect([1 1 1])
 
 % saveas(gcf, 'C:\Temp\PPGEM\Dissertação\Qualificação\Figuras\Original pictures\Three-dimensional plot of the relative peak amplitute of the pressure waveforms in the near field of a rectangular piston - Type I and y = 0 plane - Errata', 'jpg')
 % saveas(gcf, 'C:\Temp\PPGEM\Dissertação\Qualificação\Figuras\Original pictures\Three-dimensional plot of the relative peak amplitute of the pressure waveforms in the near field of a rectangular piston - Type I and y = 0 plane - Errata', 'bmp')
@@ -442,4 +490,22 @@ set(gca,'FontSize',20);
 % end
 
 % Read elapsed time from stopwatch
-toc;
+
+% Save workspace variables to file
+% tic
+% filename = sprintf('campoacustico_%s.mat', datestr(now,'yyyymmddTHHMMSS'))
+% save(filename,'-v7.3')
+% toc
+
+% Read elapsed time from stopwatch
+toc
+
+% ALARM
+
+load handel
+
+for alarm=(1:1)
+    sound(y,Fs)
+    disp(alarm)
+    pause (15)
+end

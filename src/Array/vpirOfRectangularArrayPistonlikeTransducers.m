@@ -91,7 +91,7 @@ for zz = 1:length(ez(1, 1))
         for xx = 1:length(ex(1, :))                    
             td{yy, xx, zz} = t{yy, xx, zz} + delayLawEnabled * dDtmn(yy, xx);
             %td{yy, xx, zz} = t{yy, xx, zz} - delayLawEnabled * dDtmn(yy, xx);
-            % td{yy, xx, zz} = t{yy, xx, zz} - delayLawEnabled * dtmax(yy, xx);
+            %td{yy, xx, zz} = t{yy, xx, zz} - delayLawEnabled * dtmax(yy, xx);
         end
     end
 end 
@@ -135,7 +135,7 @@ for yy = 1:size(td, 1)
 		Htotal = Htotal + Htemp{yy, xx};
     end
 end
-% if tmin < 0
-%     tnew = tnew + (-1)*tmin;
-% end
+%  if tmin < 0
+%      tnew = tnew + (-1)*tmin;
+%  end
 end

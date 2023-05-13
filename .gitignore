@@ -2,9 +2,12 @@
 *.asv
 *.fig
 *.jpg
+*.xml
 Figuras
 *.mat
 *old*.m
 *Copia*.m
 *2018_03_19*.m
 *2018_03_17*.m
+*.bak
+*resources*

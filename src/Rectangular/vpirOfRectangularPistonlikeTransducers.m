@@ -119,27 +119,51 @@ end
 %
 % From an analytical and a computational point of views, each \alphai is the principal value of the inverse circular functions in the inverse sine [asin(')].
 %
+
+%function [alpha1, alpha2, alpha3, alpha4, alpha1_, alpha2_, alpha3_, alpha4_] = inverseCircular(sigma, d1, d2, d3, d4, Tau0, TauS1, TauS2, TauS3, TauS4, t)
+%	alpha1(t >= TauS1) = asin(min(d1./sigma(t >= TauS1), 1));
+%	alpha2(t >= TauS2) = asin(min(d2./sigma(t >= TauS2), 1));
+%	alpha3(t >= TauS3) = asin(min(d3./sigma(t >= TauS3), 1));
+%	alpha4(t >= TauS4) = asin(min(d4./sigma(t >= TauS4), 1));
+%
+%    % Alpha bar
+%	alpha1_(t >= Tau0) = sign(d1)*asin(min(abs(d1)./sigma(t >= Tau0), 1));
+%	alpha2_(t >= Tau0) = sign(d2)*asin(min(abs(d2)./sigma(t >= Tau0), 1));
+%	alpha3_(t >= Tau0) = sign(d3)*asin(min(abs(d3)./sigma(t >= Tau0), 1));
+%	alpha4_(t >= Tau0) = sign(d4)*asin(min(abs(d4)./sigma(t >= Tau0), 1));
+%
+%	alpha1_(t < TauS1) = sign(d1)*pi/2;
+%	alpha2_(t < TauS2) = sign(d2)*pi/2;
+%	alpha3_(t < TauS3) = sign(d3)*pi/2;
+%	alpha4_(t < TauS4) = sign(d4)*pi/2;
+%
+%	alpha1_(t >= TauS1) = alpha1(t >= TauS1);
+%	alpha2_(t >= TauS2) = alpha2(t >= TauS2);
+%	alpha3_(t >= TauS3) = alpha3(t >= TauS3);
+%	alpha4_(t >= TauS4) = alpha4(t >= TauS4);
+%end
+
 function [alpha1, alpha2, alpha3, alpha4, alpha1_, alpha2_, alpha3_, alpha4_] = inverseCircular(sigma, d1, d2, d3, d4, Tau0, TauS1, TauS2, TauS3, TauS4, t)
 	alpha1(t >= TauS1) = asin(min(d1./sigma(t >= TauS1), 1));
 	alpha2(t >= TauS2) = asin(min(d2./sigma(t >= TauS2), 1));
 	alpha3(t >= TauS3) = asin(min(d3./sigma(t >= TauS3), 1));
 	alpha4(t >= TauS4) = asin(min(d4./sigma(t >= TauS4), 1));
 
-    % Alpha bar
-	alpha1_(t >= Tau0) = sign(d1)*asin(min(abs(d1)./sigma(t >= Tau0), 1));
-	alpha2_(t >= Tau0) = sign(d2)*asin(min(abs(d2)./sigma(t >= Tau0), 1));
-	alpha3_(t >= Tau0) = sign(d3)*asin(min(abs(d3)./sigma(t >= Tau0), 1));
-	alpha4_(t >= Tau0) = sign(d4)*asin(min(abs(d4)./sigma(t >= Tau0), 1));
+     % Alpha bar
+     alpha1_(t > Tau0) = sign(d1)*asin(min(abs(d1)./sigma(t > Tau0), 1));
+     alpha2_(t > Tau0) = sign(d2)*asin(min(abs(d2)./sigma(t > Tau0), 1));
+     alpha3_(t > Tau0) = sign(d3)*asin(min(abs(d3)./sigma(t > Tau0), 1));
+     alpha4_(t > Tau0) = sign(d4)*asin(min(abs(d4)./sigma(t > Tau0), 1));
 
-	alpha1_(t < TauS1) = sign(d1)*pi/2;
-	alpha2_(t < TauS2) = sign(d2)*pi/2;
-	alpha3_(t < TauS3) = sign(d3)*pi/2;
-	alpha4_(t < TauS4) = sign(d4)*pi/2;
+     alpha1_(t < TauS1) = sign(d1)*pi/2;
+     alpha2_(t < TauS2) = sign(d2)*pi/2;
+     alpha3_(t < TauS3) = sign(d3)*pi/2;
+     alpha4_(t < TauS4) = sign(d4)*pi/2;
 
-	alpha1_(t >= TauS1) = alpha1(t >= TauS1);
-	alpha2_(t >= TauS2) = alpha2(t >= TauS2);
-	alpha3_(t >= TauS3) = alpha3(t >= TauS3);
-	alpha4_(t >= TauS4) = alpha4(t >= TauS4);
+      alpha1_(t > TauS1) = alpha1(t > TauS1);
+      alpha2_(t > TauS2) = alpha2(t > TauS2);
+      alpha3_(t > TauS3) = alpha3(t > TauS3);
+      alpha4_(t > TauS4) = alpha4(t > TauS4);
 end
 
 %
