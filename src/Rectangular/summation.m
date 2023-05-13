@@ -6,7 +6,7 @@ xc = 0e-3;
 yc= 0e-3;
 zc = 1e-3;
 D = 1e-3;
-discretization = 21;
+discretization = 9;
 
 [xscanned, yscanned, zscanned, Nscanned] = scanner(xc, yc, zc, D, discretization);
 
@@ -64,16 +64,17 @@ end
 figure(2)
 for index = 1:Nscanned
 plot(t{index}, h{index})
-grid minor
 grid on
+grid minor
 hold on
 pause(60/Nscanned)
 grid off
 end
 
+
 figure(2)
 plot(tnew, Htotal)
-grid minor
 grid on
+grid minor
 hold off
-grid off
+
