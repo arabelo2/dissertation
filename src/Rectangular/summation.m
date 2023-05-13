@@ -1,12 +1,12 @@
-a = 6e-3;
+a = 4e-3;
 b = 9.5e-3;
 c1 = 1500;
-fs = 64e6;
+fs = 16e6;
 xc = 0e-3;
 yc= 0e-3;
-zc = 1e-3;
-D = 1e-3;
-discretization = 9;
+zc = 40e-3;
+D = 6e-4;
+discretization = 5;
 
 [xscanned, yscanned, zscanned, Nscanned] = scanner(xc, yc, zc, D, discretization);
 
@@ -66,13 +66,11 @@ for index = 1:Nscanned
 plot(t{index}, h{index})
 grid on
 grid minor
+pause(10/Nscanned)
 hold on
-pause(60/Nscanned)
-grid off
 end
 
-
-figure(2)
+figure(3)
 plot(tnew, Htotal)
 grid on
 grid minor
