@@ -21,7 +21,7 @@ addpath('E:\FileHistory\arabelo@hpe.com\RABELOAL11\Data\C\Temp\PPGEM\Dissertação
 tic
 
 % Remove items from workspace
-% clear all;
+clear all;
 % Delete all figures
 close all;
 
@@ -37,8 +37,8 @@ fs=16*40e6; % Sampling frequency [Hz]
 lambda = c1 / f0; % [m]
 kerf = 6e-4; % [m]
 STEP = lambda/4;  % [m]
-Dhydrophone = 1e-3;
-discretization = 9;
+Dhydrophone = 6e-4;
+discretization = 5;
 
 % X-axis
 M = 32; % Number of elements (Columns)
@@ -53,23 +53,23 @@ b = 10e-3/2; % m
 % Delay law 
 delayLawEnabled = 1; % 0 --> OFF and 1 --> ON
 
-xmin = -0.030; % xmin = -(2*a+kerf)*(M/2+1);
-xmax = +0.030; % xmax = (2*a+kerf)*(M/2+1);
+xmin = -0.002; % xmin = -(2*a+kerf)*(M/2+1);
+xmax = 0.002; % xmax = (2*a+kerf)*(M/2+1);
 ymin = 0;
 ymax = +0;
 zmin = 0.001;
-zmax = +0.062; % m -- > The Z-axis is perpendicular to the plane XY.
+zmax = +0.100; % m -- > The Z-axis is perpendicular to the plane XY.
 
-xpoints = 61;
+xpoints = 25;
 ypoints = 1;
-zpoints = 61;
+zpoints = 203;
 
 x = linspace(xmin, xmax, xpoints);
 y = linspace(ymin, ymax, ypoints);
 z = linspace(zmin, zmax, zpoints);
 
-z_idx = (z >= .001 & z <= .062 );
-x_idx = (x >= -.030 & x <= .030 );
+z_idx = (z >= 0 & z <= 0.100 );
+x_idx = (x >= -0.002 & x <= 0.002 );
 
 % Focal distance
 F = 40e-3; % [m]
@@ -99,17 +99,10 @@ Ppp = zeros(length(y), length(x));
 Prms = zeros(length(y), length(x));
 for zz = 1:length(z(1, :))
     for yy = 1:length(y(1, :))
-        for xx = 1:length(x(1, :))
-            [xscanned, yscanned, zscanned, Nscanned] = scanner(x(xx), y(yy), z(zz), Dhydrophone, discretization);
-            hs = cell(N);
-            ts = cell(N);
-            for index = 1:Nscanned
-                [h_temp, t_temp, td, ex, ey, ez, dDtmn, exm, eyn, B2x, B2y] = vpirOfRectangularArrayPistonlikeTransducersWScanner(a, b, c1, xscanned(index:1), yscanned(index:1), zscanned(index:1), fs, N, M, kerf, kerf, delayLawEnabled, zf, xf, yf, F);
-                hs{index} = h_temp;
-                ts{index} = t_temp;
-            end            
-            h{yy, xx, zz} = hs;
-            t{yy, xx, zz} = ts;                
+        for xx = 1:length(x(1, :))            
+            [h_temp, t_temp, td, ex, ey, ez, dDtmn, exm, eyn, B2x, B2y] = vpirOfRectangularArrayPistonlikeTransducersWScanner(a, b, c1, x(xx), y(yy), z(zz), fs, N, M, kerf, kerf, delayLawEnabled, zf, xf, yf, F, Dhydrophone, discretization);
+            h{yy, xx, zz} = h_temp;
+            t{yy, xx, zz} = t_temp;                
             
             Fresample = 40e6;
             Tresample = 1/Fresample;

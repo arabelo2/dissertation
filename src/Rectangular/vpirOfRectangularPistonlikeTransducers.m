@@ -1,4 +1,4 @@
-        % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Velocity Potential Impulse Response Of Rectangular Pistonlike Transducers
 %
 % Name: vpirOfRectangularPistonlikeTransducers.m

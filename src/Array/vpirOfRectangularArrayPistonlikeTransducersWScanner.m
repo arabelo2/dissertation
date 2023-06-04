@@ -1,4 +1,4 @@
-function [Htotal, tnew, td, ex, ey, ez, dDtmn, exm, eyn, B2x, B2y] = vpirOfRectangularArrayPistonlikeTransducersWScanner(a, b, c1, x, y, z, fs, N, M, kerf_x, kerf_y, delayLawEnabled, zf, xf, yf, F) % Main function
+function [Htotal, tnew, td, ex, ey, ez, dDtmn, exm, eyn, B2x, B2y] = vpirOfRectangularArrayPistonlikeTransducersWScanner(a, b, c1, x, y, z, fs, N, M, kerf_x, kerf_y, delayLawEnabled, zf, xf, yf, F, D, discretization) % Main function
     a = abs(a); % Output absolute value of input
     b = abs(b); % Output absolute value of input
     z = abs(z);
@@ -75,8 +75,8 @@ t = cell(length(ey(:, 1)), length(ex(1, :)), length(ez(1, 1)));
 
 for zz = 1:length(ez(1, 1))
     for yy = 1:length(ey(:, 1))
-        for xx = 1:length(ex(1, :))            
-            [t_temp, h_temp] = vpirOfRectangularPistonlikeTransducers(a, b, c1, ex(1, xx), ey(yy, 1), ez(zz, 1), fs);
+        for xx = 1:length(ex(1, :))
+            [t_temp, h_temp] = summation(a, b, c1, ex(1, xx), ey(yy, 1), ez(zz, 1), fs, D, discretization);                           
             h{yy, xx, zz} = h_temp;
             t{yy, xx, zz} = t_temp;
         end
@@ -119,17 +119,23 @@ Htemp = cell(size(td, 1), size(td, 2)); %// Initialize matrix
 Htotal = zeros(length(tnew), 1);  %// Initialize matrix
 for yy = 1:size(td, 1)
     for xx = 1:size(td, 2)
-        if abs(length(tnew) - fidx(yy, xx) - length(h{yy, xx}') - abs(length(tnew) - lidx(yy, xx))) > 1
-            s = abs(length(tnew) - fidx(yy, xx) - length(h{yy, xx}') - abs(length(tnew) - lidx(yy, xx)));
+        % s = length(tnew) - abs(length(tnew) - fidx(yy, xx) - length(h{yy, xx}') - abs(length(tnew) - lidx(yy, xx)));
+        s = length(tnew) - fidx(yy, xx) - length(h{yy, xx}') + 1;
+        if s >= 1
+            Htemp{yy, xx}  = [zeros(abs(fidx(yy, xx) - 1), 1)' h{yy, xx}' zeros(s, 1)'];
+        elseif s == 0
+            Htemp{yy, xx}  = [zeros(abs(fidx(yy, xx) - 1), 1)' h{yy, xx}'];
+        elseif s < 0
+            s = abs(length(tnew) - fidx(yy, xx) - length(h{yy, xx}'));
+            Htemp{yy, xx}  = [zeros(abs(fidx(yy, xx) - s), 1)' h{yy, xx}'];
+        else            
             if length(h{yy, xx}) == length(tnew)
                 Htemp{yy, xx}  = h{yy, xx}';
             else
-                Htemp{yy, xx}  = [zeros(fidx(yy, xx)-s, 1); h{yy, xx}'; zeros(abs(length(tnew) - lidx(yy, xx)), 1)];
-            end
-        else
-            Htemp{yy, xx}  = [zeros(fidx(yy, xx)-1, 1); h{yy, xx}'; zeros(abs(length(tnew) - lidx(yy, xx)), 1)];
+                Htemp{yy, xx}  = [zeros(abs(fidx(yy, xx) - 1), 1)' h{yy, xx}' zeros(lidx(yy, xx), 1)'];
+            end 
         end
-		Htotal = Htotal + Htemp{yy, xx};
+        Htotal = Htotal + Htemp{yy, xx}';        
     end
 end
 end

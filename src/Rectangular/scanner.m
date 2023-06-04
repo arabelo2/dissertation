@@ -18,7 +18,7 @@ yscan = reshape(Yscan, [prod(size(Yscan))  1]); % Transforma em vetor as coorden
 zscan = reshape(Zscan, [prod(size(Zscan))  1]); % Transforma em vetor as coordenadas z.
 
 % Plota os pontos da área quadrada
-plot3(zscan, xscan, yscan, 'b.'); grid on; hold on;
+% plot3(zscan, xscan, yscan, 'b.'); grid on; hold on;
 
 f = (xscan - xc).^2 + (yscan - yc).^2 - R^2;
 index = (f <= 0); % Pontos no interior com valor lógico '1'. Pontos fora = '0'.
@@ -28,4 +28,4 @@ zscanned = zscan(index);
 Nscanned = length(xscanned); % Número de pontos dentro da região circular de raio R.
 
 % Plota os pontos da área circular
-plot3(zscanned, xscanned, yscanned, 'ro'); hold off;
+% plot3(zscanned, xscanned, yscanned, 'ro'); hold off;

@@ -132,7 +132,7 @@ for yy = 1:size(td, 1)
         else
             Htemp{yy, xx}  = [zeros(fidx(yy, xx)-1, 1); h{yy, xx}'; zeros(abs(length(tnew) - lidx(yy, xx)), 1)];
         end
-		Htotal = Htotal + Htemp{yy, xx};
+		Htotal = Htotal + Htemp{yy, xx};        
     end
 end
 %  if tmin < 0

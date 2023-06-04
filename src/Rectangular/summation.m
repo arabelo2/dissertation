@@ -1,12 +1,14 @@
-a = 8e-3/2;           % a -- > Half length in [m].
-b = 1.6*a;          % b -- > Half width/height in [m].
-c1 = 1500;            % c1 -- > The velocity of sound in the propagating medium [m/s].
-fs = 100e6;            % Sampling frequency [Hz]
-xc = 0.4*a;            % xc --> x-coordinate of the center of the hydrophone
-zc = 5*a;           % zc --> z-coordinate for translation to the coordinate xy-plane
-yc= 0.4*a;             % yc --> y-coordinate of the center of the hydrophone
-D = 6e-4;             % D --> Diameter of the hydrophone
-discretization = 5;   % discretization --> Value to divide the geometry into finite elements to prepare for analysis
+function [tnew, Htotal] = summation(a, b, c1, xc, yc, zc, fs, D, discretization) % Main function
+
+% a --> Half length in [m].                                                                    % a = 8e-3/2;           
+% b --> Half width/height in [m].                                                              % b = 1.6*a;            
+% c1 --> The velocity of sound in the propagating medium [m/s].                                % c1 = 1500;            
+% fs --> Sampling frequency [Hz]                                                               % fs = 100e6;           
+% xc --> x-coordinate of the center of the hydrophone                                          % xc = 0.4*a;           
+% zc --> z-coordinate for translation to the coordinate xy-plane                               % zc = 5*a;             
+% yc --> y-coordinate of the center of the hydrophone                                          % yc= 0.4*a;            
+% D --> Diameter of the hydrophone                                                             % D = 6e-4;             
+% discretization --> Value to divide the geometry into finite elements to prepare for analysis % discretization = 9;   
 
 [xscanned, yscanned, zscanned, Nscanned] = scanner(xc, yc, zc, D, discretization);
 
@@ -61,13 +63,13 @@ for yy = 1:size(t, 1)
     end
 end
 
-figure(2)
-for index = 1:Nscanned
-plot(t{index}, h{index})
-pause(10/Nscanned)
-hold on
-end
+% figure(2)
+% for index = 1:Nscanned
+% plot(t{index}, h{index})
+% pause(10/Nscanned)
+% hold on
+% end
 
-figure(3)
-plot(tnew, Htotal)
-hold off
+% figure(3)
+% plot(tnew, Htotal)
+% hold off
