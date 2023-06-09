@@ -31,50 +31,50 @@ format longG;
 % Data
 rho = 1000; % [kg/m^3]
 c1 = 1500; % [m/s]
-f0 = 5e6; % [Hz]
+f0 = 1e6; % [Hz]
 f = f0;
 fs=16*40e6; % Sampling frequency [Hz]
 lambda = c1 / f0; % [m]
-kerf = 6e-4; % [m]
+kerf = 0e-4; % [m]
 STEP = lambda/4;  % [m]
-Dhydrophone = 6e-4;
-discretization = 5;
+Dhydrophone = 3e-4;
+discretization = 9;
 
 % X-axis
-M = 1; % Number of elements (Columns)
+M = 32; % Number of elements (Columns)
 % a = 0.009375e-3/2; % Half of width of element [m]
-a = 8e-3/2; % Half of width of element [m]
+a = .5625e-3/2; % Half of width of element [m]
 
 % NF = a^2/lambda;% Near Field Length or Transition from Near Field to Far Field
 
 % Y-axis
 N = 1; % Number of elements (Rows)
-% b = 10e-3/2; % m
-b = 1.6*a;
+b = 10e-3/2; % m
+%b = 1.6*a;
 
 % Delay law 
-delayLawEnabled = 1; % 0 --> OFF and 1 --> ON
+delayLawEnabled = 0; % 0 --> OFF and 1 --> ON
 
-xmin = -0.030; % xmin = -(2*a+kerf)*(M/2+1);
-xmax = 0.030; % xmax = (2*a+kerf)*(M/2+1);
+xmin = -0.015; % xmin = -(2*a+kerf)*(M/2+1);
+xmax = 0.015; % xmax = (2*a+kerf)*(M/2+1);
 ymin = 0;
 ymax = +0;
-zmin = 0.001;
-zmax = +0.100; % m -- > The Z-axis is perpendicular to the plane XY.
+zmin = 0.054;
+zmax = +0.054; % m -- > The Z-axis is perpendicular to the plane XY.
 
-xpoints = 815;
+xpoints = 63;
 ypoints = 1;
-zpoints = 1335;
+zpoints = 1;
 
 x = linspace(xmin, xmax, xpoints);
 y = linspace(ymin, ymax, ypoints);
 z = linspace(zmin, zmax, zpoints);
 
-z_idx = (z >= 0.001 & z <= 0.100 );
-x_idx = (x >= -0.030 & x <= 0.030 );
+z_idx = (z >= 0.054 & z <= 0.054 );
+x_idx = (x >= -0.015 & x <= 0.015);
 
 % Focal distance
-F = 40e-3; % [m]
+F = 54e-3; % [m]
 
 % Rotate around the z-axis (Roll)
 PHII = 0; % Degree angle
