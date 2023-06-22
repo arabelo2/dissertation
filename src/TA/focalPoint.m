@@ -7,4 +7,6 @@
 
 function [zf, xf, yf] = focalPoint (theta, psi, F)
     [zf, xf, yf] = sph2cart(deg2rad(theta), deg2rad(psi), F);
+    xf(isnan(xf))= 0; %  IEEE conventions state - https://www.mathworks.com/matlabcentral/answers/4426-how-to-handle-nan-values
+    yf(isnan(yf))= 0; %  IEEE conventions state - https://www.mathworks.com/matlabcentral/answers/4426-how-to-handle-nan-values
 end

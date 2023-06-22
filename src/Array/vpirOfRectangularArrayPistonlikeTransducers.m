@@ -53,7 +53,7 @@ ey = rmn.*uy;
 ez = rmn.*uz;
 
 switch(F)
-    case (inf)
+    case (Inf)
         % Dtmn = (exm*sin(theta)*cos(phii) + eyn*sin(theta)*sin(phii))/c1;
         Dtmn = (exm*Ux + eyn*Uy)/c1;
         dDtmn = abs(min(min(Dtmn))) + Dtmn;

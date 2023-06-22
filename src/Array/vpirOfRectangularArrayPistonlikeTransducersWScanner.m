@@ -44,16 +44,27 @@ Ux = X(:)./F;
 Uy = Y(:)./F;
 Uz = Z(:)./F;
 rmn = sqrt((xf - exm).^2 + (yf - eyn).^2 + (zf).^2);
-rmn(isnan(rmn))= 0; %  IEEE conventions state - https://www.mathworks.com/matlabcentral/answers/4426-how-to-handle-nan-values
+
+% NAN is not zero. Using isnan to check the NAN value and convert it to zero.
+
+% https://mathworld.wolfram.com/Indeterminate.html
+% https://www.mathworks.com/matlabcentral/answers/115782-multiplication-of-infinity-by-zero-in-matlab-calculation
+% https://en.wikipedia.org/wiki/IEEE_754
+% https://stackoverflow.com/questions/36016266/how-to-get-a-floating-point-infinity-that-when-multiplied-by-zero-gives-zero
+
+% IEEE conventions state
+% https://www.mathworks.com/matlabcentral/answers/4426-how-to-handle-nan-values
+
+rmn(isnan(rmn))= 0; 
 ux = (x - exm)./rmn;
 uy = (y - eyn)./rmn;
 uz = z./rmn;
-ex = rmn.*ux;
-ey = rmn.*uy;
-ez = rmn.*uz;
+ex = rmn.*ux; ex(isnan(ex))= 0;
+ey = rmn.*uy; ey(isnan(ey))= 0;
+ez = rmn.*uz; ez(isnan(ez))= 0;
 
 switch(F)
-    case (inf)
+    case (Inf)
         % Dtmn = (exm*sin(theta)*cos(phii) + eyn*sin(theta)*sin(phii))/c1;
         Dtmn = (exm*Ux + eyn*Uy)/c1;
         dDtmn = abs(min(min(Dtmn))) + Dtmn;
