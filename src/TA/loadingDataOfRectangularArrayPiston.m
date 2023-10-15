@@ -51,23 +51,23 @@ b = 10e-3/2; % m
 % Delay law 
 delayLawEnabled = 1; % 0 --> OFF and 1 --> ON
 
-xmin = -0.000; % xmin = -(2*a+kerf)*(M/2+1);
-xmax = +0.000; % xmax = (2*a+kerf)*(M/2+1);
+xmin = -0.010; % xmin = -(2*a+kerf)*(M/2+1);
+xmax = +0.010; % xmax = (2*a+kerf)*(M/2+1);
 ymin = 0;
 ymax = +0;
-zmin = 0.040;
-zmax = +0.040; % m -- > The Z-axis is perpendicular to the plane XY.
+zmin = 0.005;
+zmax = +0.100; % m -- > The Z-axis is perpendicular to the plane XY.
 
-xpoints = 1;
+xpoints = 21;
 ypoints = 1;
-zpoints = 1;
+zpoints = 96;
 
 x = linspace(xmin, xmax, xpoints);
 y = linspace(ymin, ymax, ypoints);
 z = linspace(zmin, zmax, zpoints);
 
-z_idx = (z >= .040 & z <= .040 );
-x_idx = (x >= 0 & x <= 0 );
+z_idx = (z >= zmin & z <= zmax );
+x_idx = (x >= xmin & x <= xmax );
 
 % Focal distance
 F = 40e-3; % [m]

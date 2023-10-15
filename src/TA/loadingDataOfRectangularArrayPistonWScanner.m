@@ -38,43 +38,43 @@ lambda = c1 / f0; % [m]
 kerf = 5e-4; % [m]
 STEP = lambda/4;  % [m]
 Dhydrophone = 6e-4;
-discretization = 5;
+discretization = 9;
 
 % X-axis
 M = 32; % Number of elements (Columns)
-% a = 0.009375e-3/2; % Half of width of element [m]
-a = .3e-3/2; % Half of width of element [m]
+a = 0.1109375e-3/2; % Half of width of element [m]
+% a = 10e-3/2; % Half of width of element [m]
 
 % NF = a^2/lambda;% Near Field Length or Transition from Near Field to Far Field
 
 % Y-axis
 N = 1; % Number of elements (Rows)
-b = 10e-3/2; % m
+b = 30.48e-3/2; % m
 %b = 1.6*a;
 
 % Delay law 
 delayLawEnabled = 1; % 0 --> OFF and 1 --> ON
 
-xmin = -0.010; % xmin = -(2*a+kerf)*(M/2+1);
-xmax = 0.010; % xmax = (2*a+kerf)*(M/2+1);
+xmin = -0.030; % xmin = -(2*a+kerf)*(M/2+1);
+xmax = +0.030; % xmax = (2*a+kerf)*(M/2+1);
 ymin = 0;
-ymax = +0;
-zmin = 0.001;
-zmax = +0.100; % m -- > The Z-axis is perpendicular to the plane XY.
+ymax = 0;
+zmin = 0.002;
+zmax = +0.102; % m -- > The Z-axis is perpendicular to the plane XY.
 
-xpoints = 43;
+xpoints = 121;
 ypoints = 1;
-zpoints = 203;
+zpoints = 201;
 
 x = linspace(xmin, xmax, xpoints);
 y = linspace(ymin, ymax, ypoints);
 z = linspace(zmin, zmax, zpoints);
 
-z_idx = (z >= 0.001 & z <= 0.100 );
-x_idx = (x >= -0.010 & x <= 0.010);
+z_idx = (z >= 0.010 & z <= zmax );
+x_idx = (x >= xmin & x <= xmax);
 
 % Focal distance
-F = Inf; % [m]
+F = 0.040; % [m]
 
 % Rotate around the z-axis (Roll)
 PHII = 0; % Degree angle
@@ -104,7 +104,11 @@ for zz = 1:length(z(1, :))
         for xx = 1:length(x(1, :))            
             [h_temp, t_temp, td, ex, ey, ez, dDtmn, exm, eyn, B2x, B2y] = vpirOfRectangularArrayPistonlikeTransducersWScanner(a, b, c1, x(xx), y(yy), z(zz), fs, N, M, kerf, kerf, delayLawEnabled, zf, xf, yf, F, Dhydrophone, discretization);
             h{yy, xx, zz} = h_temp;
-            t{yy, xx, zz} = t_temp;                
+            t{yy, xx, zz} = t_temp;
+%             figure(5)
+%             hold on
+%             plot(t{yy, xx, zz}, h{yy, xx, zz})
+%             pause(.005)
             
             Fresample = 40e6;
             Tresample = 1/Fresample;
