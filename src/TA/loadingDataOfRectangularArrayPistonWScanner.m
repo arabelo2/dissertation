@@ -35,20 +35,23 @@ f0 = 5e6; % [Hz]
 f = f0;
 fs=16*40e6; % Sampling frequency [Hz]
 lambda = c1 / f0; % [m]
-kerf = 5e-4; % [m]
+kerf = 1e-4; % [m]
 STEP = lambda/4;  % [m]
 Dhydrophone = 6e-4;
 discretization = 9;
 
 % X-axis
 M = 32; % Number of elements (Columns)
-a = 0.1109375e-3/2; % Half of width of element [m]
+%a = 0.5e-3/2; % Half of width of element [m]
+a = 0.4984375e-3/2;% Half of width of element [m]
+%a = 0.1109375e-3/2; % Half of width of element [m]
 % a = 10e-3/2; % Half of width of element [m]
 
 % NF = a^2/lambda;% Near Field Length or Transition from Near Field to Far Field
 
 % Y-axis
 N = 1; % Number of elements (Rows)
+%b = 12e-3/2; % m
 b = 30.48e-3/2; % m
 %b = 1.6*a;
 
@@ -62,7 +65,7 @@ ymax = 0;
 zmin = 0.002;
 zmax = +0.102; % m -- > The Z-axis is perpendicular to the plane XY.
 
-xpoints = 121;
+xpoints = 120;
 ypoints = 1;
 zpoints = 201;
 
@@ -70,7 +73,7 @@ x = linspace(xmin, xmax, xpoints);
 y = linspace(ymin, ymax, ypoints);
 z = linspace(zmin, zmax, zpoints);
 
-z_idx = (z >= 0.010 & z <= zmax );
+z_idx = (z >= zmin & z <= zmax );
 x_idx = (x >= xmin & x <= xmax);
 
 % Focal distance

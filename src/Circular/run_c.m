@@ -1,15 +1,18 @@
 tic;
+clear all
+close all
 D = 19/1000;
-c = 1480;
+c = 1500;
 c1= c;
 rho = 1000;
-f0 = 2.25e6; % Transducer center frequency [Hz]
-fs = 100e6; % Sampling frequency [Hz]
+f0 = 5e6; % Transducer center frequency [Hz]
+fs = 160e6; % Sampling frequency [Hz]
 lambda = c / f0;
-STEP = lambda/3;
+%STEP = lambda/3;
+STEP = 5e-4;
 NF = D^2/4/lambda;% Near Field Length or Transition from Near Field to Far Field
-x = [0:STEP:3*NF];
-y = [-.015:STEP:.015];
+x = [0:STEP:1000e-3];
+y = [-.050:STEP:.050];
 
 % Velocity potential impulse response of rectangular pistonlike transducers
 h_c = cell(length(y), length(x));
@@ -24,6 +27,8 @@ for xx = 1:length(x)
         % Piston velocity excitation pulses
         % Excitation - Sitau + array of 5MHz - Format: HDF5
         v_temp = resample(hdf5read('ref_pulse-40MHz.h5', 'ascan'), fs*1e-6, 40);
+        %%t_temp_1 = 0:1/fs:1/f0;
+        %%v_temp = sin(2*pi*f0*t_temp_1);
         
         % FILTER
         v_temp = v_temp.*hanning(max(size(v_temp)));
@@ -55,7 +60,8 @@ for xx = 1:length(x)
         Prms_c(yy, xx) = (max(p_temp) - min(p_temp))/(2*sqrt(2));
     end
 end
-
+z = x;
+x = y;
 figure()
 pcolor(z, x, Ppp_c/max(max(Ppp_c)))
 shading interp
