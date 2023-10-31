@@ -276,7 +276,7 @@ OnAxialPressure = AxialPressure(k, xvector, R);
  pcolor(xvector*1000, yvector*1000, Pp)
  xlabel('z(mm)', 'Color', 'k', 'interpreter', 'latex')
  ylabel('x(mm)', 'Color', 'k', 'interpreter', 'latex')
- title(['Pressure fields - Maximum peak pressure (', num2str(ncycle),' cycle(s))'], 'Color', 'k', 'interpreter', 'latex')
+ title(['Pressure field of a circular plane rigid baffled piston with ', num2str(ncycle),' cycle(s)'], 'Color', 'k', 'interpreter', 'latex')
  az = 0; % az = -90/90 -- > Horizontal ; % az = 0/180 -- > Vertical;
  el = 90;
  view(az, el);
@@ -295,7 +295,7 @@ OnAxialPressure = AxialPressure(k, xvector, R);
  xlabel('z(mm)', 'Color', 'k', 'interpreter', 'latex')
  ylabel('x(mm)', 'Color', 'k', 'interpreter', 'latex')
  zlabel('Max(|P(r,t)|)')
- title(['Pressure fields - Maximum peak pressure (', num2str(ncycle),' cycle(s))'], 'Color', 'k', 'interpreter', 'latex')
+ title(['Pressure field of a circular plane rigid baffled piston with ', num2str(ncycle),' cycle(s)'], 'Color', 'k', 'interpreter', 'latex')
  shading interp
  colormap(jet)
  colorbar
