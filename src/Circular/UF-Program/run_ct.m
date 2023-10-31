@@ -19,7 +19,7 @@ delta_t = 1/fs; %[s]
 k = 2*pi*lambda^-1; %Número de ondas
 K = 1; % Constant of the output voltage
 
-ncycle = 17; %Number of cycles
+ncycle = 1; %Number of cycles
 
 %---% Exercise A %---%
 % [xvector] = (0.001:0.001:0.200);
@@ -147,14 +147,14 @@ OnAxialPressure = AxialPressure(k, xvector, R);
 
 %---% Exercise A %---%
 % A.1 -- %%%%%%%%%%%%%%%%%%%%%%%%
-% figure(3)
-% plot(xvector*1000, OnAxialPressure)
-% title('Axial pressure amplitude for a baffled circular plane piston')
-% xlabel('z (mm)')
-% ylabel('P/(2*rho*c*Uo)')
-% grid on
-% grid minor
-% set(gca,'FontSize', 16);
+figure(3)
+plot(xvector*1000, OnAxialPressure)
+title(['Axial pressure amplitude for a baffled circular plane piston with ', num2str(ncycle),' cycle(s)'], 'Color', 'k', 'interpreter', 'latex')
+xlabel('z (mm)')
+ylabel('$\frac{P(r, t)}{2 \rho c U_o}$','interpreter','latex')
+grid on
+grid minor
+set(gca, 'FontName', 'Times New Roman', 'FontSize', 20)
 
 % figure(4)
 % plot(xvector*1000, Prms)
@@ -272,7 +272,7 @@ OnAxialPressure = AxialPressure(k, xvector, R);
 
 %---% Exercise D %---%
 %D.1 -- %%%%%%%%%%%%%%%%%%%%%%%%
-%  figure(2)
+figure(2)
  pcolor(xvector*1000, yvector*1000, Pp)
  xlabel('z(mm)', 'Color', 'k', 'interpreter', 'latex')
  ylabel('x(mm)', 'Color', 'k', 'interpreter', 'latex')
