@@ -5,21 +5,21 @@
 % Adds the specified folders to the top of the search path for the current MATLAB® session.
 addpath('E:\FileHistory\arabelo@hpe.com\RABELOAL11\Data\C\Users\rabeloal\Documents\PPGEM\PMR5234\Program\code\src\Circular\UF-Program')
 
-rho = 1000; %Density of liquid water [m3/kg]
-c = 1500; %[m/s]
-fs=32e6; %Frequencia Central [Hz]
-f0=1e6; %Frequencia na face do transdutor [Hz]
-T=f0^-1; %[s]
-lambda=c*T; %[m]
+rho = 1000; % Density of liquid water [m3/kg]
+c = 1500; % [m/s]
+fs=32e6; % Sample frequency [Hz]
+f0=1e6; % Operating frequency of the circular transducer [Hz]
+T=f0^-1; % [s]
+lambda=c*T; % [m]
 STEP = lambda / 4;
-Uo = 1; %[V]
-D = 0.01905; %Diameter [m]
+Uo = 1; % [V]
+D = 0.01905; % Diameter [m]
 R = D/2; % Radius [m]
 delta_t = 1/fs; %[s]
-k = 2*pi*lambda^-1; %Número de ondas
+k = 2*pi*lambda^-1; % wave number
 K = 1; % Constant of the output voltage
 
-ncycle = 1; %Number of cycles
+ncycle = 17; % Number of cycles
 
 %---% Exercise A %---%
 % [xvector] = (0.001:0.001:0.200);
