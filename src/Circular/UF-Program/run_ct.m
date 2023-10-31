@@ -132,7 +132,7 @@ for N=1:length(yvector)
         y = yvector(N);
         [E, P,  Pi, phii, omega, vn, ka, S, t, to, t1, t2, t_vn, t_pconv, t_econv] = CalculatedBeamPressure(x, c, R, y , delta_t, Uo, f0, rho, T, lambda, ncycle, K);
         [E_n, P_n, Pi_n, phii_n] = Normalization(E, P, Pi, phii, c, delta_t, rho, Uo, K);
-        Pp(N, M) = max(abs(P_n)); % Max peak amplitude
+        Pp(N, M) = max(abs(P_n)); % Maximum absolute peak amplitude
         Ppp(N, M) = abs(max(P_n) - min(P_n)); % Peak-to-peak amplitude
         Prms(N, M) = (max(P_n) - min(P_n))/(2*sqrt(2)); % Root mean square amplitude
     end  
