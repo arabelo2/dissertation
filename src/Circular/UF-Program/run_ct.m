@@ -19,7 +19,7 @@ delta_t = 1/fs; %[s]
 k = 2*pi*lambda^-1; %Número de ondas
 K = 1; % Constant of the output voltage
 
-ncycle = 100; %Number of cycles
+ncycle = 17; %Number of cycles
 
 %---% Exercise A %---%
 % [xvector] = (0.001:0.001:0.200);
@@ -132,6 +132,7 @@ for N=1:length(yvector)
         y = yvector(N);
         [E, P,  Pi, phii, omega, vn, ka, S, t, to, t1, t2, t_vn, t_pconv, t_econv] = CalculatedBeamPressure(x, c, R, y , delta_t, Uo, f0, rho, T, lambda, ncycle, K);
         [E_n, P_n, Pi_n, phii_n] = Normalization(E, P, Pi, phii, c, delta_t, rho, Uo, K);
+        Pp(N, M) = max(abs(P_n)); % Max peak amplitude
         Ppp(N, M) = abs(max(P_n) - min(P_n)); % Peak-to-peak amplitude
         Prms(N, M) = (max(P_n) - min(P_n))/(2*sqrt(2)); % Root mean square amplitude
     end  
@@ -272,27 +273,38 @@ OnAxialPressure = AxialPressure(k, xvector, R);
 %---% Exercise D %---%
 %D.1 -- %%%%%%%%%%%%%%%%%%%%%%%%
 %  figure(2)
- pcolor(xvector*1000, yvector*1000, Ppp)
- xlabel('z(mm)')
- ylabel('x(mm)')
- title(['Pressure fields - Maximum peak-to-peak pressure (', num2str(ncycle),' cycle(s))'])
- colorbar
+ pcolor(xvector*1000, yvector*1000, Pp)
+ xlabel('z(mm)', 'Color', 'k', 'interpreter', 'latex')
+ ylabel('x(mm)', 'Color', 'k', 'interpreter', 'latex')
+ title(['Pressure fields - Maximum peak pressure (', num2str(ncycle),' cycle(s))'], 'Color', 'k', 'interpreter', 'latex')
+ az = 0; % az = -90/90 -- > Horizontal ; % az = 0/180 -- > Vertical;
+ el = 90;
+ view(az, el);
  shading interp
+ colormap(jet)
+ colorbar
+ axis padded
  grid on
  grid minor
- set(gca,'FontSize', 14);
+ set(gca,'Ydir','reverse');
+ set(gca, 'FontName', 'Times New Roman', 'FontSize', 20)
+ daspect('auto') % daspect([1 1 1])
 
  figure(9)
- mesh(xvector*1000, yvector*1000, Ppp)
- xlabel('z(mm)')
- ylabel('x(mm)')
- zlabel('|P(r,t)|')
- title(['Pressure fields - Maximum peak-to-peak pressure (', num2str(ncycle),' cycle(s))'])
- colorbar
+ mesh(xvector*1000, yvector*1000, Pp)
+ xlabel('z(mm)', 'Color', 'k', 'interpreter', 'latex')
+ ylabel('x(mm)', 'Color', 'k', 'interpreter', 'latex')
+ zlabel('Max(|P(r,t)|)')
+ title(['Pressure fields - Maximum peak pressure (', num2str(ncycle),' cycle(s))'], 'Color', 'k', 'interpreter', 'latex')
  shading interp
+ colormap(jet)
+ colorbar
+ axis padded
  grid on
  grid minor
- set(gca,'FontSize', 14);
+ set(gca,'Ydir','reverse');
+ set(gca, 'FontName', 'Times New Roman', 'FontSize', 20)
+ daspect('auto') % daspect([1 1 1])
 
 %---% Exercise E %---%
 % E.1 -- %%%%%%%%%%%%%%%%%%%%%%%%
