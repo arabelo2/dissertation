@@ -60,11 +60,18 @@ function [r, R, t0, t1, t2, t] = calculating(x, y, D, c, fs)
     % Nyquist rate -- The sampling frequency should be at least twice the
     % highest frequency contained in the signal (fs >= 2*fc).
     
-    STEP = 1/fs;
+    delta_t = 1/fs;
  
 	Nn = min([t0 t1 t2]);
 	Nx = max([t0 t1 t2]);
-	t = Nn - 10*STEP : STEP : Nx + 10*STEP; % [s]	
+    t = Nn : delta_t : Nx; % [s]
+    
+%     if (Nn - delta_t < 0)
+%         t = Nn : delta_t : Nx + delta_t; % [s]
+%     else
+%         t = Nn - delta_t : delta_t : Nx + delta_t; % [s]
+%     end
+
 	r = c*t; % [m]  
 end
 

@@ -5,13 +5,24 @@
 % Adds the specified folders to the top of the search path for the current MATLAB® session.
 addpath('E:\FileHistory\arabelo@hpe.com\RABELOAL11\Data\C\Users\rabeloal\Documents\PPGEM\PMR5234\Program\code\src\Circular\UF-Program')
 
+% Start stopwatch timer
+tic
+
+% Remove items from workspace
+% clear all;
+% Delete all figures
+close all;
+
+format longG;
+%format compact;
+
 rho = 1000; % Density of liquid water [m3/kg]
 c = 1500; % [m/s]
-fs=32e6; % Sample frequency [Hz]
+fs=64e6; % Sample frequency [Hz]
 f0=1e6; % Operating frequency of the circular transducer [Hz]
 T=f0^-1; % [s]
 lambda=c*T; % [m]
-STEP = lambda / 4;
+STEP = lambda / 5;
 Uo = 1; % [V]
 D = 0.01905; % Diameter [m]
 R = D/2; % Radius [m]
@@ -320,3 +331,6 @@ figure(2)
 % grid on
 % grid minor
 % set(gca,'FontSize', 14);
+
+% Read elapsed time from stopwatch
+toc
