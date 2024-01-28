@@ -1,12 +1,13 @@
 tic;
-clear all
+% clear all
 close all
 
 % Adds the specified folders to the top of the search path for the current MATLAB® session.
-addpath('E:\FileHistory\arabelo@hpe.com\RABELOAL11\Data\C\Users\rabeloal\Documents\PPGEM\PMR5234\Program\code\src\Array')
-addpath('E:\FileHistory\arabelo@hpe.com\RABELOAL11\Data\C\Users\rabeloal\Documents\PPGEM\PMR5234\Program\code\src\Rectangular')
+addpath('E:\FileHistory\arabelo@hpe.com\RABELOAL11\Data\C\Users\rabeloal\Documents\PPGEM\PMR5234\Program\code\src\Array\')
+addpath('E:\FileHistory\arabelo@hpe.com\RABELOAL11\Data\C\Users\rabeloal\Documents\PPGEM\PMR5234\Program\code\src\Rectangular\')
 addpath('E:\FileHistory\arabelo@hpe.com\RABELOAL11\Data\C\Users\rabeloal\Documents\PPGEM\PMR5234\Program\code\src\Circular\UF-Program\')
-addpath('E:\FileHistory\arabelo@hpe.com\RABELOAL11\Data\C\Temp\PPGEM\Dissertação\Programa\Matuda')
+addpath('E:\FileHistory\arabelo@hpe.com\RABELOAL11\Data\C\Users\rabeloal\Documents\PPGEM\PMR5234\Program\code\src\Circular\')
+addpath('E:\FileHistory\arabelo@hpe.com\RABELOAL11\Data\C\Temp\PPGEM\Dissertação\Programa\Matuda\')
 
 D = 0.01905; % Diameter [m]
 R = D/2; % Radius [m]
@@ -20,18 +21,18 @@ NF = D^2/4/lambda;% Near Field Length or Transition from Near Field to Far Field
 k = 2*pi*lambda^-1; % wave number
 Uo = 1; % [V]
 K = 1; % Constant of the output voltage
-nc = 17; % Number of cycles
+nc = 21; % Number of cycles
 Dhydrophone = 0.6e-3;
-discretization = 9;
+discretization = 5;
 
 xmin = 0.002;  % z-axis
 xmax = +0.102; % z-axis
 
-ymin = -0.000; % x-axis
-ymax = +0.000; % x-axis
+ymin = -0.030; % x-axis
+ymax = +0.030; % x-axis
 
-xpoints = 201; 
-ypoints = 1;
+xpoints = 335; 
+ypoints = 205;
 
 x = linspace(xmin, xmax, xpoints);
 y = linspace(ymin, ymax, ypoints);
@@ -70,6 +71,13 @@ for xx = 1:length(x)
         P_c{yy, xx} = p_temp;
         t_conv_temp = t_temp(1) + (t_temp(2) - t_temp(1))*(0:1:length(p_temp)-1);
         t_conv_c{yy, xx} = t_conv_temp;
+               
+        [TF, S1, S2] = ischange(p_temp, "linear");
+        mid = floor(length(S1)/2);
+        findex = findchangepts(diff(S1(1:mid)),'Statistic','rms');
+        lindex = mid + findchangepts(diff(S1(mid+1:end)),'Statistic','rms');
+        p_temp(1:findex) = 0;
+        p_temp(lindex:end) = 0;
             
         % Peak amplitude
         Pp_c(yy, xx) = max(abs(p_temp));
@@ -98,39 +106,39 @@ x = y;
 % grid minor
 % set(gca, 'FontName', 'Times New Roman', 'FontSize', 20)
 
-% figure()
-% pcolor(z, x, Pp_c/max(max(Pp_c)))
-% xlabel('z(mm)', 'Color', 'k', 'interpreter', 'latex')
-% ylabel('x(mm)', 'Color', 'k', 'interpreter', 'latex')
-% title(['Pressure field of a circular plane rigid baffled piston with ', num2str(nc),' cycle(s)'], 'Color', 'k', 'interpreter', 'latex')
-% az = 0; % az = -90/90 -- > Horizontal ; % az = 0/180 -- > Vertical;
-% el = 90;
-% view(az, el);
-% shading interp
-% colormap(jet)
-% colorbar
-% axis padded
-% grid on
-% grid minor
-% set(gca,'Ydir','reverse');
-% set(gca, 'FontName', 'Times New Roman', 'FontSize', 20)
-% daspect('auto') % daspect([1 1 1])
+figure()
+pcolor(z, x, Pp_c/max(max(Pp_c)))
+xlabel('z(mm)', 'Color', 'k', 'interpreter', 'latex')
+ylabel('x(mm)', 'Color', 'k', 'interpreter', 'latex')
+title(['Pressure field of a circular plane rigid baffled piston with ', num2str(nc),' cycle(s)'], 'Color', 'k', 'interpreter', 'latex')
+az = 0; % az = -90/90 -- > Horizontal ; % az = 0/180 -- > Vertical;
+el = 90;
+view(az, el);
+shading interp
+colormap(jet)
+colorbar
+axis padded
+grid on
+grid minor
+set(gca,'Ydir','reverse');
+set(gca, 'FontName', 'Times New Roman', 'FontSize', 20)
+daspect('auto') % daspect([1 1 1])
 % 
-% figure()
-% mesh(z, x, Pp_c/max(max(Pp_c)))
-% xlabel('z(mm)', 'Color', 'k', 'interpreter', 'latex')
-% ylabel('x(mm)', 'Color', 'k', 'interpreter', 'latex')
-% % zlabel('Max(|P(r,t)|)')
-% zlabel('Normalized pressure', 'Color', 'k', 'interpreter', 'latex')
-% title(['Pressure field of a circular plane rigid baffled piston with ', num2str(nc),' cycle(s)'], 'Color', 'k', 'interpreter', 'latex')
-% shading interp
-% colormap(jet)
-% colorbar
-% axis padded
-% grid on
-% grid minor
-% set(gca,'Ydir','reverse');
-% set(gca, 'FontName', 'Times New Roman', 'FontSize', 20)
-% daspect('auto') % daspect([1 1 1])
+figure()
+mesh(z, x, Pp_c/max(max(Pp_c)))
+xlabel('z(mm)', 'Color', 'k', 'interpreter', 'latex')
+ylabel('x(mm)', 'Color', 'k', 'interpreter', 'latex')
+% zlabel('Max(|P(r,t)|)')
+zlabel('Normalized pressure', 'Color', 'k', 'interpreter', 'latex')
+title(['Pressure field of a circular plane rigid baffled piston with ', num2str(nc),' cycle(s)'], 'Color', 'k', 'interpreter', 'latex')
+shading interp
+colormap(jet)
+colorbar
+axis padded
+grid on
+grid minor
+set(gca,'Ydir','reverse');
+set(gca, 'FontName', 'Times New Roman', 'FontSize', 20)
+daspect('auto') % daspect([1 1 1])
 
 toc;

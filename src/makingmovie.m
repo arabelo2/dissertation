@@ -1,6 +1,13 @@
 
 %% Video of a moving pressure
 
+% Adds the specified folders to the top of the search path for the current MATLAB® session.
+addpath('E:\FileHistory\arabelo@hpe.com\RABELOAL11\Data\C\Users\rabeloal\Documents\PPGEM\PMR5234\Program\code\src\Array\')
+addpath('E:\FileHistory\arabelo@hpe.com\RABELOAL11\Data\C\Users\rabeloal\Documents\PPGEM\PMR5234\Program\code\src\Rectangular\')
+addpath('E:\FileHistory\arabelo@hpe.com\RABELOAL11\Data\C\Users\rabeloal\Documents\PPGEM\PMR5234\Program\code\src\Circular\UF-Program\')
+addpath('E:\FileHistory\arabelo@hpe.com\RABELOAL11\Data\C\Users\rabeloal\Documents\PPGEM\PMR5234\Program\code\src\Circular\')
+addpath('E:\FileHistory\arabelo@hpe.com\RABELOAL11\Data\C\Temp\PPGEM\Dissertação\Programa\Matuda\')
+
 % Parameters
 close all;
 run_c;
@@ -52,13 +59,14 @@ for indx = 1:length(x)
           findex = findchangepts(diff(S1(1:mid)),'Statistic','rms');
           lindex = mid + findchangepts(diff(S1(mid+1:end)),'Statistic','rms');
 
-          subplot(2,1,1);          
-          plot(t_conv_c{indx, indz}*c1*1e3, wgt)
-          %hold on          
-          %plot(t_conv_c{indx, indz}*c1*1e3, wgt,'+')          
+          subplot(2,1,1); 
+          %figure(1)
+          plot(t_conv_c{indx, indz}*c1*1e3, wgt, '-')
+%           hold on          
+%           plot(t_conv_c{indx, indz}*c1*1e3, wgt,'o')          
           xlabel('c.t(mm)')
           % ylim([-12e13, 12e13])
-          axis([0 150 -12e13 12e13])
+          axis([0 150 -1e14 1e14])
           title({['Axial Pressure amplitude for a baffled circular plane piston with ', num2str(nc),' cycle(s)'], ['Transient and harmonic waveforms']}, 'Color', 'k', 'interpreter', 'latex')
           ylabel('Pressure')
           legend(legendInfo)
@@ -66,15 +74,16 @@ for indx = 1:length(x)
           grid minor
           hold off
  
-          subplot(2,1,2); 
+          subplot(2,1,2);
+          %figure(2)
           wgt(1:findex) = 0;
           wgt(lindex:end) = 0;          
-          plot(t_conv_c{indx, indz}*c1*1e3, wgt, 'r')
-          %hold on
-          %plot(t_conv_c{indx, indz}*c1*1e3, wgt,'+')
+          plot(t_conv_c{indx, indz}*c1*1e3, wgt, 'r-')
+%           hold on
+%           plot(t_conv_c{indx, indz}*c1*1e3, wgt,'o')
           xlabel('c.t(mm)')
           % ylim([-12e13, 12e13])
-          axis([0 150 -12e13 12e13])
+          axis([0 150 -1e14 1e14])
           title({['Axial Pressure amplitude for a baffled circular plane piston with ', num2str(nc),' cycle(s)'], ['Only harmonic waveforms']}, 'Color', 'k', 'interpreter', 'latex')
           ylabel('Pressure')
           legend(legendInfo) 
@@ -82,8 +91,8 @@ for indx = 1:length(x)
           grid minor
           hold off  
 
-          pause(1)
-          
+          pause(0.1)
+
         % Retrieve the current frame of the figure
         F = getframe(fig1);
         
