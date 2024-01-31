@@ -107,6 +107,22 @@ axis padded
 grid on
 grid minor
 
+
+pcolor(z*1e3, x*1e3, Pp_c/max(max(Pp_c)))
+shading interp
+colormap(jet)
+colorbar('eastoutside')
+axis padded
+xlabel('z(mm)', 'Color', 'k', 'interpreter', 'latex')
+ylabel('x(mm)', 'Color', 'k', 'interpreter', 'latex')
+zlabel('Pressão Normalizada', 'Color', 'k', 'interpreter', 'latex')
+title('Pressao gerada através da Integral de Rayleigh', 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+grid on
+grid minor
+set(gca,'Ydir','reverse');
+set(gca, 'FontName', 'Times New Roman', 'FontSize', 20)
+daspect ('auto') % daspect([1 1 1])
+
 % figure()
 % pcolor(z, x, Pp_c/max(Pp_c))
 % xlabel('z(mm)', 'Color', 'k', 'interpreter', 'latex')
