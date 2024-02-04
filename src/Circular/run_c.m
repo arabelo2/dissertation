@@ -1,6 +1,6 @@
 tic;
-% clear all
-close all
+%clear all
+%close all
 
 % Adds the specified folders to the top of the search path for the current MATLAB® session.
 addpath('E:\FileHistory\arabelo@hpe.com\RABELOAL11\Data\C\Users\rabeloal\Documents\PPGEM\PMR5234\Program\code\src\Array\')
@@ -14,16 +14,16 @@ R = D/2; % Radius [m]
 c1 = 1500; % [m/s]
 rho = 1000; % Density of liquid water [m3/kg]
 f0 = 1e6; % Operating frequency of the circular transducer [Hz]
-fs = 32e6; % Sample frequency [Hz]
-lambda = c1 / f0; % [m]
-STEP = lambda / 5;
-NF = D^2/4/lambda;% Near Field Length or Transition from Near Field to Far Field
-k = 2*pi*lambda^-1; % wave number
+fs = 64e6; % Sample frequency [Hz]
+lambda = c1/f0; % [m]
+STEP = lambda/10;
+NF = R^2/lambda;% Near Field Length or Transition from Near Field to Far Field
+k = 2*pi/lambda; % wave number
 Uo = 1; % [V]
 K = 1; % Constant of the output voltage
 nc = 21; % Number of cycles
-Dhydrophone = 0.6e-3;
-discretization = 5;
+%Dhydrophone = 0.6e-3;
+%discretization = 7;
 
 xmin = 0.002;  % z-axis
 xmax = +0.102; % z-axis
@@ -31,8 +31,8 @@ xmax = +0.102; % z-axis
 ymin = -0.030; % x-axis
 ymax = +0.030; % x-axis
 
-xpoints = 335; 
-ypoints = 205;
+xpoints = 667;
+ypoints = 407;
 
 x = linspace(xmin, xmax, xpoints);
 y = linspace(ymin, ymax, ypoints);
@@ -50,12 +50,7 @@ for xx = 1:length(x)
         % Piston velocity excitation pulses        
         % The input velocity of disc surface
         t_vn = 0 : 1/fs : nc*1/f0;
-        vn = InputVelocityOfDiscSurface (Uo, f0, t_vn);
-
-        % FILTER
-        % vn = vn.*hanning(max(size(vn)));
-        % C = 1/max(vn);
-        % vn = C*vn;   
+        vn = InputVelocityOfDiscSurface (Uo, f0, t_vn); 
         
         %%%% texcitation{xx, yy, zz} = texcitation_temp;
         v_c{yy, xx} = vn;
@@ -97,7 +92,7 @@ z = x;
 x = y;
 
 % figure()
-% plot(z, OnAxialPressure)
+% plot(z*lambda/(R^2), OnAxialPressure)
 % title(['Axial pressure amplitude for a baffled circular plane piston with ', num2str(nc),' cycle(s)'], 'Color', 'k', 'interpreter', 'latex')
 % xlabel('z (mm)')
 % ylabel('Normalized pressure','interpreter','latex')
@@ -108,8 +103,8 @@ x = y;
 
 figure()
 pcolor(z, x, Pp_c/max(max(Pp_c)))
-xlabel('z(mm)', 'Color', 'k', 'interpreter', 'latex')
-ylabel('x(mm)', 'Color', 'k', 'interpreter', 'latex')
+xlabel('z(m)', 'Color', 'k', 'interpreter', 'latex')
+ylabel('x(m)', 'Color', 'k', 'interpreter', 'latex')
 title(['Pressure field of a circular plane rigid baffled piston with ', num2str(nc),' cycle(s)'], 'Color', 'k', 'interpreter', 'latex')
 az = 0; % az = -90/90 -- > Horizontal ; % az = 0/180 -- > Vertical;
 el = 90;
@@ -126,8 +121,8 @@ daspect('auto') % daspect([1 1 1])
 % 
 figure()
 mesh(z, x, Pp_c/max(max(Pp_c)))
-xlabel('z(mm)', 'Color', 'k', 'interpreter', 'latex')
-ylabel('x(mm)', 'Color', 'k', 'interpreter', 'latex')
+xlabel('z(m)', 'Color', 'k', 'interpreter', 'latex')
+ylabel('x(m)', 'Color', 'k', 'interpreter', 'latex')
 % zlabel('Max(|P(r,t)|)')
 zlabel('Normalized pressure', 'Color', 'k', 'interpreter', 'latex')
 title(['Pressure field of a circular plane rigid baffled piston with ', num2str(nc),' cycle(s)'], 'Color', 'k', 'interpreter', 'latex')
@@ -140,5 +135,15 @@ grid minor
 set(gca,'Ydir','reverse');
 set(gca, 'FontName', 'Times New Roman', 'FontSize', 20)
 daspect('auto') % daspect([1 1 1])
+
+Pp_c_prg = Pp_c;
+
+figure()
+plot(z*lambda/(R^2), Pp_c_prg(floor(length(x)/2) + 1, :)/max(max(Pp_c_prg)))
+ylabel('Pressão normalizada', 'FontSize', 14, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+xlabel('$$z \frac{\lambda}{a^2}$$', 'FontSize', 14, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+title('Pressão ao longo do eixo acústico (eixo z)', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+grid on
+grid minor
 
 toc;

@@ -7,12 +7,12 @@
 % D --> Diameter of the hydrophone
 % discretization --> Value to divide the geometry into finite elements to prepare for analysis
 
-clear all;
-close all;
+% clear all;
+% close all;
 
 D = 0.01905; % Diameter [m]
 
-discretization = 250;
+discretization = 100;
 
 % Tx na origem
 xc = 0;
@@ -23,9 +23,9 @@ R = D/2; % Radius [m]
 c1 = 1500; % [m/s]
 rho = 1000; % Density of liquid water [m3/kg]
 f0 = 1e6; % Operating frequency of the circular transducer [Hz]
-fs = 32e6; % Sample frequency [Hz]
+fs = 64e6; % Sample frequency [Hz]
 lambda = c1 / f0; % [m]
-STEP = lambda / 5;
+STEP = lambda / 10;
 NF = D^2/4/lambda;% Near Field Length or Transition from Near Field to Far Field
 k = 2*pi/lambda; % wave number
 
@@ -60,8 +60,8 @@ zmax = 0.102; % z-axis
 xmin = -0.030; % x-axis
 xmax = +0.030; % x-axis
 
-zpoints = 201; 
-xpoints = 121;
+zpoints = 667;
+xpoints = 407;
 
 z = linspace(zmin, zmax, zpoints);
 x = linspace(xmin, xmax, xpoints);
@@ -84,8 +84,12 @@ for zz = 1:length(z)
     end
 end
 
+Pp_c_analytics = Pp_c;
+
 figure()
-plot(z*lambda/(R^2), Pp_c(61,:)/max(Pp_c(61,:)),'r')
+% plot(z*lambda/(R^2), Pp_c_analytics(61,:)/max(Pp_c_analytics(61,:)),'r')
+plot(z*lambda/(R^2), Pp_c_analytics(floor(length(x)/2) + 1, :)/max(max(Pp_c_analytics)))
+
 ylabel('Pressão normalizada', 'FontSize', 14, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
 xlabel('$$z \frac{\lambda}{a^2}$$', 'FontSize', 14, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
 title('Pressão ao longo do eixo acústico (eixo z)', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
@@ -99,7 +103,7 @@ plot(z*lambda/(R^2), Pp_opb/max(Pp_opb),'ko')
 legend('Pp__c(61,:) (Integral de Rayleigh)','Pp__opb (Ondas Planas + Bordas')
 
 figure
-surface(Pp_c)
+surface(Pp_c_analytics)
 shading interp
 colormap(jet)
 colorbar
@@ -108,13 +112,13 @@ grid on
 grid minor
 
 
-pcolor(z*1e3, x*1e3, Pp_c/max(max(Pp_c)))
+pcolor(z, x, Pp_c_analytics/max(max(Pp_c_analytics)))
 shading interp
 colormap(jet)
 colorbar('eastoutside')
 axis padded
-xlabel('z(mm)', 'Color', 'k', 'interpreter', 'latex')
-ylabel('x(mm)', 'Color', 'k', 'interpreter', 'latex')
+xlabel('z(m)', 'Color', 'k', 'interpreter', 'latex')
+ylabel('x(m)', 'Color', 'k', 'interpreter', 'latex')
 zlabel('Pressão Normalizada', 'Color', 'k', 'interpreter', 'latex')
 title('Pressao gerada através da Integral de Rayleigh', 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
 grid on
@@ -141,19 +145,45 @@ daspect ('auto') % daspect([1 1 1])
 % set(gca, 'FontName', 'Times New Roman', 'FontSize', 20)
 % daspect('auto') % daspect([1 1 1])
 % 
-% figure()
-% mesh(z, x, Pp_c/max(Pp_c))
-% xlabel('z(mm)', 'Color', 'k', 'interpreter', 'latex')
-% ylabel('x(mm)', 'Color', 'k', 'interpreter', 'latex')
-% % zlabel('Max(|P(r,t)|)')
-% zlabel('Normalized pressure', 'Color', 'k', 'interpreter', 'latex')
-% title(['Pressure field of a circular plane rigid baffled piston '], 'Color', 'k', 'interpreter', 'latex')
-% shading interp
-% colormap(jet)
-% colorbar
-% axis padded
-% grid on
-% grid minor
-% set(gca,'Ydir','reverse');
-% set(gca, 'FontName', 'Times New Roman', 'FontSize', 20)
-% daspect('auto') % daspect([1 1 1])
+figure()
+mesh(z, x, Pp_c/max(max(Pp_c)))
+xlabel('z(m)', 'Color', 'k', 'interpreter', 'latex')
+ylabel('x(m)', 'Color', 'k', 'interpreter', 'latex')
+zlabel('Normalized pressure', 'Color', 'k', 'interpreter', 'latex')
+title(['Pressure field of a circular plane rigid baffled piston through Rayleigh integral'], 'Color', 'k', 'interpreter', 'latex')
+shading interp
+colormap(jet)
+colorbar
+axis padded
+grid on
+grid minor
+set(gca,'Ydir','reverse');
+set(gca, 'FontName', 'Times New Roman', 'FontSize', 20)
+daspect('auto') % daspect([1 1 1])
+
+figure()
+plot(z*lambda/(R^2), Pp_c_prg.Pp_c_prg(floor(length(x)/2) + 1, :)/max(max(Pp_c_prg.Pp_c_prg)), 'k', z*lambda/(R^2), Pp_c_analytics(floor(length(x)/2) + 1, :)/max(max(Pp_c_analytics)), 'r')
+ylabel('Pressão normalizada', 'FontSize', 14, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+xlabel('$$z \frac{\lambda}{a^2}$$', 'FontSize', 14, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+title('Pressão ao longo do eixo acústico (eixo z)', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+grid on
+grid minor
+legend('Pressão gerada através do programa','Pressão gerada através da Integral de Rayleigh')
+
+figure ()
+plot(x/R, Pp_c_prg.Pp_c_prg(:, floor(length(z)/2) + 58)/max(max(Pp_c_prg.Pp_c_prg)), 'k', x/R, Pp_c_analytics(:, floor(length(z)/2) + 58)/max(max(Pp_c_analytics)), 'r')
+ylabel('Pressão normalizada', 'FontSize', 14, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+xlabel('Raio normalizado = $$\frac{x}{R}$$', 'FontSize', 14, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+title('Perfil de pressão acústica (eixo x) (z ~= NF) (NF = 0.06048375 m)', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+grid on
+grid minor
+legend('Pressão gerada através do programa','Pressão gerada através da Integral de Rayleigh')
+
+figure ()
+plot(x/R, Pp_c_prg.Pp_c_prg(:, 52)/max(max(Pp_c_prg.Pp_c_prg)), 'k', x/R, Pp_c_analytics(:, 52)/max(max(Pp_c_analytics)), 'r')
+ylabel('Pressão normalizada', 'FontSize', 14, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+xlabel('Raio normalizado = $$\frac{x}{R}$$', 'FontSize', 14, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+title('Perfil de pressão acústica (eixo x) (z ~= R) (D/2 = R = 0.009525 m)', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+grid on
+grid minor
+legend('Pressão gerada através do programa','Pressão gerada através da Integral de Rayleigh')
