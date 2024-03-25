@@ -1,7 +1,7 @@
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Velocity Potential Impulse Response Of Circular Pistonlike Transducers
 %
-% Name: vpirOfCircularPistonlikeTransducers.m
+% Name: vpirOfCircularPistonlikeTransducersWScanner.m
 %
 % Function: Based on the article "Ultrasonic Beam Structures in Fluid
 % Media" from J.P. Weight on 1984, it calculates the pressure impulse
@@ -46,8 +46,8 @@ function [t, h] = vpirOfCircularPistonlikeTransducersWScanner(x, y, D, c, fs) % 
     % Velocity Potential Impulse Response 
     h = c*OMEGA/(2*pi);
         
-    % Normalizing data to 0-1 range.
-    % h = real(h/c);    
+    % Returns the real part of each element in vector h
+    h = real(h);    
 end
 
 function [r, R, t0, t1, t2, t] = calculating(x, y, D, c, fs)
@@ -64,12 +64,13 @@ function [r, R, t0, t1, t2, t] = calculating(x, y, D, c, fs)
  
 	Nn = min([t0 t1 t2]);
 	Nx = max([t0 t1 t2]);
-
-    if (Nn - delta_t < 0)
-        t = Nn : delta_t : Nx + delta_t; % [s]
-    else
-        t = Nn - delta_t : delta_t : Nx + delta_t; % [s]
-    end
+    t = Nn : delta_t : Nx; % [s]
+    
+%     if (Nn - delta_t < 0)
+%         t = Nn : delta_t : Nx + delta_t; % [s]
+%     else
+%         t = Nn - delta_t : delta_t : Nx + delta_t; % [s]
+%     end
 
 	r = c*t; % [m]  
 end
@@ -93,11 +94,16 @@ end
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function arc = InsideGeometrical(r, x, y, R, t0, t1, t2, t)
-    arc = zeros(size(t));
-    arc(t < t0) = 0;
-    arc((t0 <= t) & (t <= t1)) = 2*pi;
-    arc((t1 < t) & (t <= t2)) = 2*acos((r((t1 < t) & (t <= t2)).^2 - x^2 + y^2 - R^2)./(2*y*sqrt(r((t1 < t) & (t <= t2)).^2 - x^2)));
-    arc(t > t2) = 0;
+    % Version 2.0
+    arc = zeros(1, length(t));
+    index1 = find(t0 <= t &  t <= t1);
+    index2 = find(t1 < t  &  t <= t2);
+    
+    % if t0 <= t <= t1
+    arc(index1) = 2*pi*ones(1, length(index1)); 
+
+    % if t1 < t <= t2
+    arc(index2) = 2*acos((r(index2).^2 - x^2 + y^2 - R^2)./(2*y*sqrt(r(index2).^2 - x^2))); 
 end
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -105,11 +111,16 @@ end
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function arc = OnEdge(r, x, R, t0, t1, t2, t)
-    arc = zeros(size(t));
-    arc(t < t0) = 0;
-    arc((t0 == t) & (t == t1)) = pi;
-    arc((t1 < t) & (t <= t2)) = 2*acos(sqrt(r((t1 < t) & (t <= t2)).^2 - x^2)/(2*R));
-    arc(t > t2) = 0;
+    % Version 2.0
+    arc = zeros(1, length(t));
+    index3 = find(t0 == t & t == t1);
+    index4 = find(t1 < t & t <= t2);
+
+    % if t = t0 = t1
+    arc(index3) = pi*ones(1, length(index3)); 
+
+    % if t1 < t <= t2
+    arc(index4) = 2*acos(sqrt(r(index4).^2 - x^2)/(2*R));    
 end
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -117,10 +128,12 @@ end
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function arc = OutsideGeometrical(r, x, y, R, t1, t2, t)
-    arc = zeros(size(t));
-    arc(t <= t1) = 0;
-    arc((t1 < t) & (t <= t2)) = 2*acos((r((t1 < t) & (t <= t2)).^2 - x^2 + y^2 - R^2)./(2*y*sqrt(r((t1 < t) & (t <= t2)).^2 - x^2)));
-    arc(t > t2) = 0;
+    % Version 2.0
+    arc = zeros(1, length(t));
+
+    % if t1 <= t <= t2
+    index5 = find(t1 <= t  &  t <= t2);
+    arc(index5) = 2*acos((r(index5).^2 - x^2 + y^2 - R^2)./(2*y*sqrt(r(index5).^2 - x^2)));
 end
 
 %
