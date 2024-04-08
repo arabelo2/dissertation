@@ -15,7 +15,7 @@ R = D/2; % Radius [m]
 c1 = 1500; % [m/s]
 rho = 1000; % Density of liquid water [m3/kg]
 f0 = 1e6; % Operating frequency of the circular transducer [Hz]
-fs = 32e6; % Sample frequency [Hz]
+fs = 1024e6; % Sample frequency [Hz]
 lambda = c1 / f0; % [m]
 STEP = lambda / 10;
 NF = R^2/lambda;% Near Field Length or Transition from Near Field to Far Field
@@ -23,18 +23,18 @@ k = 2*pi/lambda; % wave number
 Uo = 1; % [V]
 K = 1; % Constant of the output voltage
 nc = 27; % Number of cycles
-Dhydrophone = 0.6e-3;
-discretization = 41;
+Dhydrophone = 0.1e-3;
+discretization = 21;
 yc = 0;
 
 Dh = Dhydrophone;
 Dt = D;
 
-xmin = +0.002;  % z-axis
-xmax = +0.102; % z-axis
+xmin = 0.002;  % z-axis
+xmax = 0.102; % z-axis
 
-ymin = 0; % x-axis
-ymax = 0; % x-axis
+ymin = 0.015; % x-axis
+ymax = 0.015; % x-axis
 
 xpoints = 667;
 ypoints = 1;
@@ -152,19 +152,30 @@ x = y;
 
 Pp_c_prg = Pp_c;
 
-figure()
+% figure(10)
+% hold on
+% plot(z*lambda/(R^2), Pp_c_prg(floor(length(x)/2) + 1, :)/max(max(Pp_c_prg)))
+% ylabel('Pressão normalizada', 'FontSize', 14, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+% xlabel('$$z \frac{\lambda}{a^2}$$', 'FontSize', 14, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+% title('Pressão ao longo do eixo acústico (eixo z)', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+% grid on
+% grid minor
+
+figure(19)
+hold on
 plot(z*lambda/(R^2), Pp_c_prg(floor(length(x)/2) + 1, :)/max(max(Pp_c_prg)))
 ylabel('Pressão normalizada', 'FontSize', 14, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
 xlabel('$$z \frac{\lambda}{a^2}$$', 'FontSize', 14, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-title('Pressão ao longo do eixo acústico (eixo z)', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+% title('Pressão p/ x=9,5250mm (Raio do transdutor - Dt = 3/4")', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+title('Pressão p/ x=15mm', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
 grid on
 grid minor
 
-% figure()
-% plot(x*1000, Pp_c_prg(:, 121)/max(max(Pp_c_prg)))
+% figure(14)
+% plot(x*1000, Pp_c_prg(:, 1)/max(max(Pp_c_prg)))
 % ylabel('Pressão normalizada', 'FontSize', 14, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
 % xlabel('x (mm)', 'FontSize', 14, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-% title('Excitação Harmônica - perfil de pressão p/ z=~20 mm (pos. 121)')
+% title('Excitação Harmônica - perfil de pressão p/ z=90mm (pos. 1)')
 % grid on
 % grid minor
 

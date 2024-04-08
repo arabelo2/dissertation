@@ -10,14 +10,14 @@ function [tnew, Htotal] = summationc(xc, yc, zc, fs, c1, Dh, Dt, discretization)
 % Dt --> Diameter of the transducer                                                            % D = 19.05e-3;             
 % discretization --> Value to divide the geometry into finite elements to prepare for analysis % discretization = 51;   
 
-[xscanned, yscanned, zscanned, Nscanned, xu] = scanner(xc, yc, zc, Dh, discretization);
+[xscanned, yscanned, zscanned, ru] = scanner(xc, yc, zc, Dh, discretization);
 
 % Velocity potential impulse response of rectangular pistonlike transducers
-h = cell(1, length(xu)); %// Initialize matrix
-t = cell(1, length(xu)); %// Initialize matrix
+h = cell(1, length(ru)); %// Initialize matrix
+t = cell(1, length(ru)); %// Initialize matrix
 
-for index = 1:length(xu)
-  [t_temp, h_temp] = vpirOfCircularPistonlikeTransducers(zc, xu(index), Dt, c1, fs);
+for index = 1:length(ru)
+  [t_temp, h_temp] = vpirOfCircularPistonlikeTransducers(zc, ru(index), Dt, c1, fs);
   h{index} = h_temp;
   t{index} = t_temp;
 end
