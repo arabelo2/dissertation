@@ -18,8 +18,8 @@ R = D/2; % Radius [m]
 c1 = 1500; % [m/s]
 rho = 1000; % Density of liquid water [m3/kg]
 f0 = 1e6; % Operating frequency of the circular transducer [Hz]
-% fs = 1.920030720491530e+07; % Sample frequency [Hz] | r 1249
-fs = 9.600038400153603e+06; % Sample frequency [Hz] | az 1500
+fs = 1.920030720491530e+07; % Sample frequency [Hz] | r 1249
+% fs = 9.600038400153603e+06; % Sample frequency [Hz] | az 1500
 lambda = c1 / f0; % [m]
 STEP = lambda / 10;
 NF = R^2/lambda;% Near Field Length or Transition from Near Field to Far Field
@@ -27,9 +27,9 @@ k = 2*pi/lambda; % wave number
 Uo = 1; % [V]
 K = 1; % Constant of the output voltage
 nc = 1; % Number of cycles
-% Dhydrophone = 1e-3; % | r 1249;
-Dhydrophone = 1.5e-3; % | az 1500
-discretization = 21;
+Dhydrophone = 1e-3; % | r 1249;
+% Dhydrophone = 1.5e-3; % | az 1500
+discretization = 1;
 yc = 0;
 
 Dh = Dhydrophone;
@@ -37,18 +37,18 @@ Dt = D;
 
 xmin = 0;  % z-axis
 % xmax = 0.210; % z-axis % | r 1249
-xmax = 0.180; % z-axis % | az 1500
+% xmax = 0.180; % z-axis % | az 1500
 
-ymin = 0; % x-axis
-ymax = 0; % x-axis
+ymin = -0.030; % x-axis
+ymax = +0.030; % x-axis
 
-% xpoints = 71; % | r 1249
-xpoints = 61;  % | az 1500
+xpoints = 71; % | r 1249
+% xpoints = 61;  % | az 1500
 
-ypoints = 1;
+ypoints = 13;
 
-x = linspace(xmin, xmax, xpoints); x = x + 4.8375e-04;
-% x = [0 10 20 30 50 60 80 100 120]*1e-3; x = x + 4.8375e-04;
+% x = linspace(xmin, xmax, xpoints); x = x + 4.8375e-04;
+x = [0 10 20 30 50 60 80 100 120]*1e-3; x = x + 4.8375e-04;
 y = linspace(ymin, ymax, ypoints);
 
 % Velocity potential impulse response of rectangular pistonlike transducers
@@ -69,11 +69,21 @@ t_c = cell(length(y), length(x));
 % N = length(d);
 % [~, V, ~] = r_sequence(N);
 
+% cd 'E:\FileHistory\arabelo@hpe.com\RABELOAL11\Data\C\Users\rabeloal\Documents\PPGEM\PMR5234\Program\Experimento\202405\Dados_Ensaio_1MHz_20_05_2024\Dados_Ensaio_1MHz_20_05_2024\1MHz_pt_1249\Directividade'
+N = 13;
+[~, V, ~] = d_sequence(N);
+% Vvmax = max(max(Vv));
+
 % % 1500
-cd 'E:\FileHistory\arabelo@hpe.com\RABELOAL11\Data\C\Users\rabeloal\Documents\PPGEM\PMR5234\Program\Experimento\202405\Dados_Ensaio_1MHz_20_05_2024\Dados_Ensaio_1MHz_20_05_2024\1MHz_pt_1500\Perfil_Acustico_x0_z2_120mm_Passo3mm'
-d=dir(fullfile((pwd),'*.csv'));
-N = length(d);
-[~, V, ~] = az_sequence(N);
+% cd 'E:\FileHistory\arabelo@hpe.com\RABELOAL11\Data\C\Users\rabeloal\Documents\PPGEM\PMR5234\Program\Experimento\202405\Dados_Ensaio_1MHz_20_05_2024\Dados_Ensaio_1MHz_20_05_2024\1MHz_pt_1500\Perfil_Acustico_x0_z2_120mm_Passo3mm'
+% d=dir(fullfile((pwd),'*.csv'));
+% N = length(d);
+% [t, V, Vv] = az_sequence(N);
+
+% cd 'E:\FileHistory\arabelo@hpe.com\RABELOAL11\Data\C\Users\rabeloal\Documents\PPGEM\PMR5234\Program\Experimento\202405\Dados_Ensaio_1MHz_20_05_2024\Dados_Ensaio_1MHz_20_05_2024\1MHz_pt_1500\Diretividade'
+% N = 13;
+% [~, V, ~] = q_sequence(N);
+% Vvmax = max(max(Vv));
 
 for xx = 1:length(x)
     for yy = 1:length(y)
@@ -85,7 +95,7 @@ for xx = 1:length(x)
         
         %%%% texcitation{xx, yy, zz} = texcitation_temp;
      
-         y_output = V{1, xx};
+         y_output = V{yy, xx};
          Y_output = fft(y_output);
          H = fft([h_temp; zeros(length(y_output) - length(h_temp), 1)]);
          X_estimated = ifft(Y_output ./ H);
@@ -104,25 +114,27 @@ for xx = 1:length(x)
 
          % Apply the filter to the noisy signal
          filtered_signal = filter(lp_filter, X_estimated);
+         v_c{yy, xx} = filtered_signal;
 
 %          % Plot the original and filtered signals
 %          figure(70);
-%          t_orig = 1/fs*(0:length(noisy_signal) - 1);
-%          plot(t_orig, noisy_signal/max(noisy_signal), 'b', 'LineWidth', 1.5);
+%          t_orig = 1/fs*(0:length(X_estimated) - 1);
+%          plot(t_orig, X_estimated/max(X_estimated), 'b', 'LineWidth', 1.5);
+%          ylim([-1 1])
 %          hold on;
 %          plot(t_orig, filtered_signal/max(filtered_signal), 'r', 'LineWidth', 2);
 %          xlabel('Time');
 %          ylabel('Signal');
-%          title('Noisy Signal vs. Filtered Signal');
-%          legend('Noisy Signal', 'Filtered Signal');
+%          title('Estimated Signal vs. Filtered Signal');
+%          legend('Estimated Signal', 'Filtered Signal');
 %          grid on;
 %          grid minor;
-%          hold off;
-
-         v_c{yy, xx} = filtered_signal;
+%          hold off;         
 
 %          figure(80)
-%          plot(y_output)
+%          t_e = 1/fs*(0:length(y_output) - 1);
+%          plot(t_e, y_output/max(y_output))
+%          ylim([-1 1])
 %          grid on;
 %          grid minor;
 %          hold off;
@@ -236,30 +248,40 @@ Pp_c_prg = Pp_c;
 % grid on
 % grid minor
 
-figure(2)
-hold on
-plot(z*lambda/(R^2), Pp_c_prg(floor(length(x)/2) + 1, :)/max(max(Pp_c_prg)), 'r')
-plot(z*lambda/(R^2), Pp_c_prg(floor(length(x)/2) + 1, :)/max(max(Pp_c_prg)), 'k*')
-ylabel('Pressão normalizada', 'FontSize', 14, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-xlabel('$$z \frac{\lambda}{a^2}$$', 'FontSize', 14, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-% title('Pressão p/ x=9,5250mm (Raio do transdutor - Dt = 3/4")', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-% title('Pressão ao longo do eixo acústico (eixo z)', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-title({
-['Pressão ao longo do eixo acústico (eixo z) para fo = ' num2str(f0/1e6) ' MHz, fs = ' num2str(fs/1e6) ' MHz, x = 0 mm e diâmetro do hidrofone = ' num2str(Dhydrophone*1000) ' mm' ]
-['com discretização através de uma malha ' num2str(discretization) 'x' num2str(discretization) ' elementos para o levantamento analítico']
-});
-set(gca, 'FontName', 'Times New Roman', 'FontSize', 20)
-grid on
-grid minor
-hold off
-
-% figure(14)
-% plot(x*1000, Pp_c_prg(:, 1)/max(max(Pp_c_prg)))
+% figure(2)
+% hold on
+% plot(z*lambda/(R^2), Pp_c_prg(floor(length(x)/2) + 1, :)/max(max(Pp_c_prg)), 'r')
+% plot(z*lambda/(R^2), Pp_c_prg(floor(length(x)/2) + 1, :)/max(max(Pp_c_prg)), 'k*')
 % ylabel('Pressão normalizada', 'FontSize', 14, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-% xlabel('x (mm)', 'FontSize', 14, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
-% title('Excitação Harmônica - perfil de pressão p/ z=90mm (pos. 1)')
+% xlabel('$$z \frac{\lambda}{a^2}$$', 'FontSize', 14, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+% % title('Pressão p/ x=9,5250mm (Raio do transdutor - Dt = 3/4")', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+% % title('Pressão ao longo do eixo acústico (eixo z)', 'FontSize', 20, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+% title({
+% ['Pressão ao longo do eixo acústico (eixo z) para fo = ' num2str(f0/1e6) ' MHz, fs = ' num2str(fs/1e6) ' MHz, x = 0 mm e diâmetro do hidrofone = ' num2str(Dhydrophone*1000) ' mm' ]
+% ['com discretização através de uma malha ' num2str(discretization) 'x' num2str(discretization) ' elementos para o levantamento analítico']
+% });
+% set(gca, 'FontName', 'Times New Roman', 'FontSize', 20)
 % grid on
 % grid minor
+% hold off
+
+for index = 1:size(z,2)
+figure(index)
+hold on
+plot(x, Pp_c_prg(:, index)/max(max(Pp_c_prg)), "r")
+plot(x, Pp_c_prg(:, index)/max(max(Pp_c_prg)), 'k*')
+ylabel('Pressão normalizada', 'FontSize', 14, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+xlabel('x (mm)', 'FontSize', 14, 'FontWeight', 'bold', 'Color', 'k', 'interpreter', 'latex')
+% title('Excitação Harmônica - perfil de pressão p/ z=90mm (pos. 1)')
+title({
+['Perfil de pressão acústica (eixo x) para z = ' num2str(z(index)*1000) ' mm, fs = ' num2str(fs/1e6) ' MHz e diâmetro do hidrofone = ' num2str(Dhydrophone*1000) ' mm' ]
+['com discretização através de uma malha ' num2str(discretization) 'x' num2str(discretization) ' elementos para o levantamento analítico']
+});
+legend('Experimental: r 1249', '','Analítico: r 1249','')
+set(gca, 'FontName', 'Times New Roman', 'FontSize', 20)
+grid minor
+grid on
+end
 
 % figure()
 % plot(x*1000, Pp_c_prg(:, 387)/max(max(Pp_c_prg)))

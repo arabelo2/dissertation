@@ -8,8 +8,17 @@ function [xscanned, yscanned, zscanned, ru] = scanner(xc, yc, zc, D, discretizat
 % discretization --> Value to divide the geometry into finite elements to prepare for analysis
 
 R = D/2; % Radius of the hydrophone
-xscan = linspace(xc - R, xc + R, discretization);
-yscan = linspace(yc - R, yc + R, discretization);
+
+if discretization > 2
+    xscan = linspace(xc - R, xc + R, discretization);
+    yscan = linspace(yc - R, yc + R, discretization);
+elseif (discretization <= 2) && (discretization > 0)
+    xscan = xc;
+    yscan = yc;
+else
+    disp("Error message: discretization must be greater than 0.")
+    return
+end
 
 [Xscan, Yscan] = meshgrid(xscan, yscan);  % Define um conjunto de pontos numa malha retangular.
 Zscan = zc*ones(size(Yscan));
@@ -18,7 +27,7 @@ yscan = reshape(Yscan, [prod(size(Yscan))  1]); % Transforma em vetor as coorden
 zscan = reshape(Zscan, [prod(size(Zscan))  1]); % Transforma em vetor as coordenadas z.
 
 % Plota os pontos da área quadrada
-plot3(zscan, xscan, yscan, 'k.'); grid on; hold on;
+%plot3(zscan*1e3, xscan*1e3, yscan*1e3, 'k.'); grid on; hold on;
 
 f = (xscan - xc).^2 + (yscan - yc).^2 - R^2;
 index = (f <= 0); % Pontos no interior com valor lógico '1'. Pontos fora = '0'.
@@ -36,9 +45,9 @@ zscanned = zscan(index);
 ru = sqrt(xscanned.^2 + yscanned.^2);
 
 % Plota os pontos da área circular
-plot3(zscanned, xscanned, yscanned, 'ro'); 
+%plot3(zscanned*1e3, xscanned*1e3, yscanned*1e3, 'ro'); 
 
 % Plota os pontos do eixo x no primeiro quadrante do hidrofone
-plot3(zscanned, xscanned, yscanned, 'b*');
+%plot3(zscanned*1e3, xscanned*1e3, yscanned*1e3, 'b*');
 % plot3(zu, xu, yu, 'k*'); 
-hold off;
+%hold off;

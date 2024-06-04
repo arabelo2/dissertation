@@ -1,5 +1,5 @@
 % Main function
-function [tnew, Htotal] = summationc(xc, yc, zc, fs, c1, Dh, Dt, discretization)
+function [tnew, Htotal] = summationc(xc, yc, zc, f0, fs, c1, Dh, Dt, discretization)
 
 % xc --> x-coordinate of the center of the hydrophone                                          % xc = 0.4*a;           
 % yc --> y-coordinate of the center of the hydrophone                                          % yc= 0.4*a;            
@@ -10,14 +10,14 @@ function [tnew, Htotal] = summationc(xc, yc, zc, fs, c1, Dh, Dt, discretization)
 % Dt --> Diameter of the transducer                                                            % D = 19.05e-3;             
 % discretization --> Value to divide the geometry into finite elements to prepare for analysis % discretization = 51;   
 
-[xscanned, yscanned, zscanned, ru] = scanner(xc, yc, zc, Dh, discretization);
+[~, ~, ~, ru] = scanner(xc, yc, zc, Dh, discretization);
 
 % Velocity potential impulse response of rectangular pistonlike transducers
 h = cell(1, length(ru)); %// Initialize matrix
 t = cell(1, length(ru)); %// Initialize matrix
 
 for index = 1:length(ru)
-  [t_temp, h_temp] = vpirOfCircularPistonlikeTransducers(zc, ru(index), Dt, c1, fs);
+  [t_temp, h_temp] = vpirOfCircularPistonlikeTransducers(zc, ru(index), Dt, c1, f0, fs);
   h{index} = h_temp;
   t{index} = t_temp;
 end

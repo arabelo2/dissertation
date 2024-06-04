@@ -32,13 +32,13 @@
 %
 % The velocity potential impulse response at a point Q in the field of an idealized piston source undergoing uniform motion and radiating into a lossless fluid medium.
 %
-function [t, h] = vpirOfCircularPistonlikeTransducers(x, y, D, c, fs) % Main function
+function [t, h] = vpirOfCircularPistonlikeTransducers(x, y, D, c, f0, fs) % Main function
     
     x = abs(x); % Output absolute value of input
     y = abs(y); % Output absolute value of input
     D = abs(D); % Output absolute value of input
     
-    [r, R, t0, t1, t2, t] = calculating(x, y, D, c, fs);
+    [r, R, t0, t1, t2, t] = calculating(x, y, D, c, f0, fs);
     
     % The big omega is the angle of equidistant arc included on the surface.
     OMEGA = angleOfEquidistantArc(r, x, y, R, t0, t1, t2, t);
@@ -50,7 +50,7 @@ function [t, h] = vpirOfCircularPistonlikeTransducers(x, y, D, c, fs) % Main fun
     h = real(h);    
 end
 
-function [r, R, t0, t1, t2, t] = calculating(x, y, D, c, fs)
+function [r, R, t0, t1, t2, t] = calculating(x, y, D, c, f0, fs)
     t0 = x/c; % [s]
     R = D/2; % [m]
     t1 = c^-1 * sqrt((R-y)^2 + x^2); % [s]
@@ -64,13 +64,13 @@ function [r, R, t0, t1, t2, t] = calculating(x, y, D, c, fs)
  
 	Nn = min([t0 t1 t2]);
 	Nx = max([t0 t1 t2]);
-    t = Nn : delta_t : Nx; % [s]
+    % t = Nn : delta_t : Nx; % [s]    
     
-%     if (Nn - delta_t < 0)
-%         t = Nn : delta_t : Nx + delta_t; % [s]
-%     else
-%         t = Nn - delta_t : delta_t : Nx + delta_t; % [s]
-%     end
+    if (Nn - 1/f0 < 0)
+        t = Nn : delta_t : Nx + 1/f0; % [s]
+    else
+        t = Nn - 1/f0 : delta_t : Nx + 1/f0; % [s]
+    end
 
 	r = c*t; % [m]  
 end

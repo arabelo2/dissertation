@@ -39,14 +39,14 @@ kerf = 6e-4; % [m]
 STEP = lambda/4;  % [m]
 
 % X-axis
-M = 32; % Number of elements (Columns)
-a = 0.009375e-3/2; % Half of width of element [m]
+M = 1; % Number of elements (Columns)
+a = 19.05e-3/2; % Half of width of element [m]
 
 % NF = a^2/lambda;% Near Field Length or Transition from Near Field to Far Field
 
 % Y-axis
 N = 1; % Number of elements (Rows)
-b = 10e-3/2; % m
+b = 19.05e-3/2; % m
 
 % Delay law 
 delayLawEnabled = 1; % 0 --> OFF and 1 --> ON
