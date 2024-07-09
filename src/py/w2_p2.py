@@ -13,3 +13,12 @@ x = np.linspace(0, xmax, nx)    # defining space variable
 
 # Initialization of Gaussian function
 f = (1./np.sqrt(2*np.py*a))*np.exp(-(((x - x0)**2)/(2*a)))
+
+# Plotting of Gaussian
+plt.plot(x, f)
+plt.title('Gaussian function')
+plt.xlabel('x, m')
+plt.ylabel('Amplitude')
+plt.xlim(0, xmax)
+plt.grid()
+plt.show()
