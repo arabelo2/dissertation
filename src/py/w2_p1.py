@@ -72,11 +72,11 @@ plt.show()
 nmin = 3
 nmax = 16
 na = np.zeros(nmax - nmin + 1)              # vector with number of points per wavelength
-err =  np.zeros(nmax - nmin + 1)            # vector with error
+err = np.zeros(nmax - nmin + 1)            # vector with error
 j = -1                                      # array index
 
 # Loop through finite-difference derivative calculation
-for n in range (nmin, nmax):
+for n in range(nmin, nmax):
     j = j + 1                               # array index
     na[j] = n
     
