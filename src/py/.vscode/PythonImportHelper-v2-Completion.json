@@ -1,0 +1,181 @@
+[
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "math",
+        "description": "math",
+        "isExtraImport": true,
+        "detail": "math",
+        "documentation": {}
+    },
+    {
+        "label": "matplotlib.pyplot",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "matplotlib.pyplot",
+        "description": "matplotlib.pyplot",
+        "detail": "matplotlib.pyplot",
+        "documentation": {}
+    },
+    {
+        "label": "xmax",
+        "kind": 5,
+        "importPath": "w2_pi",
+        "description": "w2_pi",
+        "peekOfCode": "xmax = 10.0                     # physical domain (m)\nnx = 200                        # number of sample\ndx = xmax/(nx - 1)              # grid increment dx (m)\nx = np.linspace(0, xmax, nx)    # space coordinates\n# Initialization of sin function\nl = 20*dx                       # wavelength\nk = 2*np.pi/l                   # wavenumber\nf = np.sin(k*x)\n# Plot sin function\nplt.plot(x, f)",
+        "detail": "w2_pi",
+        "documentation": {}
+    },
+    {
+        "label": "nx",
+        "kind": 5,
+        "importPath": "w2_pi",
+        "description": "w2_pi",
+        "peekOfCode": "nx = 200                        # number of sample\ndx = xmax/(nx - 1)              # grid increment dx (m)\nx = np.linspace(0, xmax, nx)    # space coordinates\n# Initialization of sin function\nl = 20*dx                       # wavelength\nk = 2*np.pi/l                   # wavenumber\nf = np.sin(k*x)\n# Plot sin function\nplt.plot(x, f)\nplt.title('Sin function')",
+        "detail": "w2_pi",
+        "documentation": {}
+    },
+    {
+        "label": "dx",
+        "kind": 5,
+        "importPath": "w2_pi",
+        "description": "w2_pi",
+        "peekOfCode": "dx = xmax/(nx - 1)              # grid increment dx (m)\nx = np.linspace(0, xmax, nx)    # space coordinates\n# Initialization of sin function\nl = 20*dx                       # wavelength\nk = 2*np.pi/l                   # wavenumber\nf = np.sin(k*x)\n# Plot sin function\nplt.plot(x, f)\nplt.title('Sin function')\nplt.xlabel('x, m')",
+        "detail": "w2_pi",
+        "documentation": {}
+    },
+    {
+        "label": "x",
+        "kind": 5,
+        "importPath": "w2_pi",
+        "description": "w2_pi",
+        "peekOfCode": "x = np.linspace(0, xmax, nx)    # space coordinates\n# Initialization of sin function\nl = 20*dx                       # wavelength\nk = 2*np.pi/l                   # wavenumber\nf = np.sin(k*x)\n# Plot sin function\nplt.plot(x, f)\nplt.title('Sin function')\nplt.xlabel('x, m')\nplt.ylabel('Amplitude')",
+        "detail": "w2_pi",
+        "documentation": {}
+    },
+    {
+        "label": "l",
+        "kind": 5,
+        "importPath": "w2_pi",
+        "description": "w2_pi",
+        "peekOfCode": "l = 20*dx                       # wavelength\nk = 2*np.pi/l                   # wavenumber\nf = np.sin(k*x)\n# Plot sin function\nplt.plot(x, f)\nplt.title('Sin function')\nplt.xlabel('x, m')\nplt.ylabel('Amplitude')\nplt.xlim(0, xmax)\nplt.grid()",
+        "detail": "w2_pi",
+        "documentation": {}
+    },
+    {
+        "label": "k",
+        "kind": 5,
+        "importPath": "w2_pi",
+        "description": "w2_pi",
+        "peekOfCode": "k = 2*np.pi/l                   # wavenumber\nf = np.sin(k*x)\n# Plot sin function\nplt.plot(x, f)\nplt.title('Sin function')\nplt.xlabel('x, m')\nplt.ylabel('Amplitude')\nplt.xlim(0, xmax)\nplt.grid()\nplt.show()",
+        "detail": "w2_pi",
+        "documentation": {}
+    },
+    {
+        "label": "f",
+        "kind": 5,
+        "importPath": "w2_pi",
+        "description": "w2_pi",
+        "peekOfCode": "f = np.sin(k*x)\n# Plot sin function\nplt.plot(x, f)\nplt.title('Sin function')\nplt.xlabel('x, m')\nplt.ylabel('Amplitude')\nplt.xlim(0, xmax)\nplt.grid()\nplt.show()\n# First derivative with two points",
+        "detail": "w2_pi",
+        "documentation": {}
+    },
+    {
+        "label": "nder",
+        "kind": 5,
+        "importPath": "w2_pi",
+        "description": "w2_pi",
+        "peekOfCode": "nder = np.zeros(nx)             # numerical derivative\nader = np.zeros(nx)             # analytical derivative\n# Numerical derivative of the given function\nfor i in range(1, nx - 1):\n    nder[i] = (f[i + 1] - f[i - 1])/(2*dx)\n# Analytical derivative of the given function\nader = k*np.cos(k*x)\n# Exclude boundries\nader[0] = 0\nader[nx -1] = 0",
+        "detail": "w2_pi",
+        "documentation": {}
+    },
+    {
+        "label": "ader",
+        "kind": 5,
+        "importPath": "w2_pi",
+        "description": "w2_pi",
+        "peekOfCode": "ader = np.zeros(nx)             # analytical derivative\n# Numerical derivative of the given function\nfor i in range(1, nx - 1):\n    nder[i] = (f[i + 1] - f[i - 1])/(2*dx)\n# Analytical derivative of the given function\nader = k*np.cos(k*x)\n# Exclude boundries\nader[0] = 0\nader[nx -1] = 0\n# Error (rms)",
+        "detail": "w2_pi",
+        "documentation": {}
+    },
+    {
+        "label": "ader",
+        "kind": 5,
+        "importPath": "w2_pi",
+        "description": "w2_pi",
+        "peekOfCode": "ader = k*np.cos(k*x)\n# Exclude boundries\nader[0] = 0\nader[nx -1] = 0\n# Error (rms)\nrms = np.sqrt(np.mean(nder - ader)**2)\n# Plotting\nplt.plot(x, nder, label=\"Numerical derivative, 2 points\", marker='+', color=\"blue\")\nplt.plot(x, ader, label=\"Analytical derivative\", lw=2, ls=\"-\", color=\"black\")\nplt.plot(x, nder-ader, label=\"Difference\", lw=2, ls=\":\")",
+        "detail": "w2_pi",
+        "documentation": {}
+    },
+    {
+        "label": "ader[0]",
+        "kind": 5,
+        "importPath": "w2_pi",
+        "description": "w2_pi",
+        "peekOfCode": "ader[0] = 0\nader[nx -1] = 0\n# Error (rms)\nrms = np.sqrt(np.mean(nder - ader)**2)\n# Plotting\nplt.plot(x, nder, label=\"Numerical derivative, 2 points\", marker='+', color=\"blue\")\nplt.plot(x, ader, label=\"Analytical derivative\", lw=2, ls=\"-\", color=\"black\")\nplt.plot(x, nder-ader, label=\"Difference\", lw=2, ls=\":\")\nplt.title(\"First derivative, Err (rms) = %.6f \" % (rms))\nplt.xlabel('x, m')",
+        "detail": "w2_pi",
+        "documentation": {}
+    },
+    {
+        "label": "rms",
+        "kind": 5,
+        "importPath": "w2_pi",
+        "description": "w2_pi",
+        "peekOfCode": "rms = np.sqrt(np.mean(nder - ader)**2)\n# Plotting\nplt.plot(x, nder, label=\"Numerical derivative, 2 points\", marker='+', color=\"blue\")\nplt.plot(x, ader, label=\"Analytical derivative\", lw=2, ls=\"-\", color=\"black\")\nplt.plot(x, nder-ader, label=\"Difference\", lw=2, ls=\":\")\nplt.title(\"First derivative, Err (rms) = %.6f \" % (rms))\nplt.xlabel('x, m')\nplt.ylabel('Amplitude')\nplt.legend(loc='lower left')\nplt.grid()",
+        "detail": "w2_pi",
+        "documentation": {}
+    },
+    {
+        "label": "nmin",
+        "kind": 5,
+        "importPath": "w2_pi",
+        "description": "w2_pi",
+        "peekOfCode": "nmin = 3\nnmax = 16\nna = np.zeros(nmax - nmin + 1)              # vector with number of points per wavelength\nerr =  np.zeros(nmax - nmin + 1)            # vector with error\nj = -1                                      # array index\n# Loop through finite-difference derivative calculation\nfor n in range (nmin, nmax):\n    j = j + 1                               # array index\n    na[j] = n\n    # Initialize sin function",
+        "detail": "w2_pi",
+        "documentation": {}
+    },
+    {
+        "label": "nmax",
+        "kind": 5,
+        "importPath": "w2_pi",
+        "description": "w2_pi",
+        "peekOfCode": "nmax = 16\nna = np.zeros(nmax - nmin + 1)              # vector with number of points per wavelength\nerr =  np.zeros(nmax - nmin + 1)            # vector with error\nj = -1                                      # array index\n# Loop through finite-difference derivative calculation\nfor n in range (nmin, nmax):\n    j = j + 1                               # array index\n    na[j] = n\n    # Initialize sin function\n    l = na[j]*dx                            # wavelength",
+        "detail": "w2_pi",
+        "documentation": {}
+    },
+    {
+        "label": "na",
+        "kind": 5,
+        "importPath": "w2_pi",
+        "description": "w2_pi",
+        "peekOfCode": "na = np.zeros(nmax - nmin + 1)              # vector with number of points per wavelength\nerr =  np.zeros(nmax - nmin + 1)            # vector with error\nj = -1                                      # array index\n# Loop through finite-difference derivative calculation\nfor n in range (nmin, nmax):\n    j = j + 1                               # array index\n    na[j] = n\n    # Initialize sin function\n    l = na[j]*dx                            # wavelength\n    k = 2*np.pi/l                           # wavenumber",
+        "detail": "w2_pi",
+        "documentation": {}
+    },
+    {
+        "label": "err",
+        "kind": 5,
+        "importPath": "w2_pi",
+        "description": "w2_pi",
+        "peekOfCode": "err =  np.zeros(nmax - nmin + 1)            # vector with error\nj = -1                                      # array index\n# Loop through finite-difference derivative calculation\nfor n in range (nmin, nmax):\n    j = j + 1                               # array index\n    na[j] = n\n    # Initialize sin function\n    l = na[j]*dx                            # wavelength\n    k = 2*np.pi/l                           # wavenumber\n    f = np.sin(k*x)",
+        "detail": "w2_pi",
+        "documentation": {}
+    },
+    {
+        "label": "j",
+        "kind": 5,
+        "importPath": "w2_pi",
+        "description": "w2_pi",
+        "peekOfCode": "j = -1                                      # array index\n# Loop through finite-difference derivative calculation\nfor n in range (nmin, nmax):\n    j = j + 1                               # array index\n    na[j] = n\n    # Initialize sin function\n    l = na[j]*dx                            # wavelength\n    k = 2*np.pi/l                           # wavenumber\n    f = np.sin(k*x)\n    # Numerical derivative of the sin function",
+        "detail": "w2_pi",
+        "documentation": {}
+    }
+]
