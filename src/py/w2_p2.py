@@ -12,4 +12,4 @@ x0 = xmax/2                     # center of Gaussian function x0 (m)
 x = np.linspace(0, xmax, nx)    # defining space variable
 
 # Initialization of Gaussian function
-f = (1./sqrt(2*np.py*a))*np.exp(-(((x - x0)**2)/(2*a)))
+f = (1./np.sqrt(2*np.py*a))*np.exp(-(((x - x0)**2)/(2*a)))
