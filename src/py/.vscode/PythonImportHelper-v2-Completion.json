@@ -9,6 +9,23 @@
         "documentation": {}
     },
     {
+        "label": "math",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "math",
+        "description": "math",
+        "detail": "math",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "math",
+        "description": "math",
+        "isExtraImport": true,
+        "detail": "math",
+        "documentation": {}
+    },
+    {
         "label": "*",
         "importPath": "math",
         "description": "math",
@@ -26,156 +43,551 @@
         "documentation": {}
     },
     {
+        "label": "gridspec",
+        "importPath": "matplotlib",
+        "description": "matplotlib",
+        "isExtraImport": true,
+        "detail": "matplotlib",
+        "documentation": {}
+    },
+    {
+        "label": "warnings",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "warnings",
+        "description": "warnings",
+        "detail": "warnings",
+        "documentation": {}
+    },
+    {
         "label": "xmax",
         "kind": 5,
-        "importPath": "w2_pi",
-        "description": "w2_pi",
-        "peekOfCode": "xmax = 10.0                     # physical domain (m)\nnx = 200                        # number of sample\ndx = xmax/(nx - 1)              # grid increment dx (m)\nx = np.linspace(0, xmax, nx)    # space coordinates\n# Initialization of sin function\nl = 20*dx                       # wavelength\nk = 2*np.pi/l                   # wavenumber\nf = np.sin(k*x)\n# Plot sin function\nplt.plot(x, f)",
-        "detail": "w2_pi",
+        "importPath": "w2_p1",
+        "description": "w2_p1",
+        "peekOfCode": "xmax = 10.0                     # physical domain (m)\nnx = 200                        # number of space sample\ndx = xmax/(nx - 1)              # grid spacing dx (m)\nx = np.linspace(0, xmax, nx)    # defining space variable\n# Initialization of sin function\nl = 20*dx                       # wavelength\nk = 2*np.pi/l                   # wavenumber\nf = np.sin(k*x)\n# Plot sin function\nplt.plot(x, f)",
+        "detail": "w2_p1",
         "documentation": {}
     },
     {
         "label": "nx",
         "kind": 5,
-        "importPath": "w2_pi",
-        "description": "w2_pi",
-        "peekOfCode": "nx = 200                        # number of sample\ndx = xmax/(nx - 1)              # grid increment dx (m)\nx = np.linspace(0, xmax, nx)    # space coordinates\n# Initialization of sin function\nl = 20*dx                       # wavelength\nk = 2*np.pi/l                   # wavenumber\nf = np.sin(k*x)\n# Plot sin function\nplt.plot(x, f)\nplt.title('Sin function')",
-        "detail": "w2_pi",
+        "importPath": "w2_p1",
+        "description": "w2_p1",
+        "peekOfCode": "nx = 200                        # number of space sample\ndx = xmax/(nx - 1)              # grid spacing dx (m)\nx = np.linspace(0, xmax, nx)    # defining space variable\n# Initialization of sin function\nl = 20*dx                       # wavelength\nk = 2*np.pi/l                   # wavenumber\nf = np.sin(k*x)\n# Plot sin function\nplt.plot(x, f)\nplt.title('Sin function')",
+        "detail": "w2_p1",
         "documentation": {}
     },
     {
         "label": "dx",
         "kind": 5,
-        "importPath": "w2_pi",
-        "description": "w2_pi",
-        "peekOfCode": "dx = xmax/(nx - 1)              # grid increment dx (m)\nx = np.linspace(0, xmax, nx)    # space coordinates\n# Initialization of sin function\nl = 20*dx                       # wavelength\nk = 2*np.pi/l                   # wavenumber\nf = np.sin(k*x)\n# Plot sin function\nplt.plot(x, f)\nplt.title('Sin function')\nplt.xlabel('x, m')",
-        "detail": "w2_pi",
+        "importPath": "w2_p1",
+        "description": "w2_p1",
+        "peekOfCode": "dx = xmax/(nx - 1)              # grid spacing dx (m)\nx = np.linspace(0, xmax, nx)    # defining space variable\n# Initialization of sin function\nl = 20*dx                       # wavelength\nk = 2*np.pi/l                   # wavenumber\nf = np.sin(k*x)\n# Plot sin function\nplt.plot(x, f)\nplt.title('Sin function')\nplt.xlabel('x, m')",
+        "detail": "w2_p1",
         "documentation": {}
     },
     {
         "label": "x",
         "kind": 5,
-        "importPath": "w2_pi",
-        "description": "w2_pi",
-        "peekOfCode": "x = np.linspace(0, xmax, nx)    # space coordinates\n# Initialization of sin function\nl = 20*dx                       # wavelength\nk = 2*np.pi/l                   # wavenumber\nf = np.sin(k*x)\n# Plot sin function\nplt.plot(x, f)\nplt.title('Sin function')\nplt.xlabel('x, m')\nplt.ylabel('Amplitude')",
-        "detail": "w2_pi",
+        "importPath": "w2_p1",
+        "description": "w2_p1",
+        "peekOfCode": "x = np.linspace(0, xmax, nx)    # defining space variable\n# Initialization of sin function\nl = 20*dx                       # wavelength\nk = 2*np.pi/l                   # wavenumber\nf = np.sin(k*x)\n# Plot sin function\nplt.plot(x, f)\nplt.title('Sin function')\nplt.xlabel('x, m')\nplt.ylabel('Amplitude')",
+        "detail": "w2_p1",
         "documentation": {}
     },
     {
         "label": "l",
         "kind": 5,
-        "importPath": "w2_pi",
-        "description": "w2_pi",
+        "importPath": "w2_p1",
+        "description": "w2_p1",
         "peekOfCode": "l = 20*dx                       # wavelength\nk = 2*np.pi/l                   # wavenumber\nf = np.sin(k*x)\n# Plot sin function\nplt.plot(x, f)\nplt.title('Sin function')\nplt.xlabel('x, m')\nplt.ylabel('Amplitude')\nplt.xlim(0, xmax)\nplt.grid()",
-        "detail": "w2_pi",
+        "detail": "w2_p1",
         "documentation": {}
     },
     {
         "label": "k",
         "kind": 5,
-        "importPath": "w2_pi",
-        "description": "w2_pi",
+        "importPath": "w2_p1",
+        "description": "w2_p1",
         "peekOfCode": "k = 2*np.pi/l                   # wavenumber\nf = np.sin(k*x)\n# Plot sin function\nplt.plot(x, f)\nplt.title('Sin function')\nplt.xlabel('x, m')\nplt.ylabel('Amplitude')\nplt.xlim(0, xmax)\nplt.grid()\nplt.show()",
-        "detail": "w2_pi",
+        "detail": "w2_p1",
         "documentation": {}
     },
     {
         "label": "f",
         "kind": 5,
-        "importPath": "w2_pi",
-        "description": "w2_pi",
+        "importPath": "w2_p1",
+        "description": "w2_p1",
         "peekOfCode": "f = np.sin(k*x)\n# Plot sin function\nplt.plot(x, f)\nplt.title('Sin function')\nplt.xlabel('x, m')\nplt.ylabel('Amplitude')\nplt.xlim(0, xmax)\nplt.grid()\nplt.show()\n# First derivative with two points",
-        "detail": "w2_pi",
+        "detail": "w2_p1",
         "documentation": {}
     },
     {
         "label": "nder",
         "kind": 5,
-        "importPath": "w2_pi",
-        "description": "w2_pi",
-        "peekOfCode": "nder = np.zeros(nx)             # numerical derivative\nader = np.zeros(nx)             # analytical derivative\n# Numerical derivative of the given function\nfor i in range(1, nx - 1):\n    nder[i] = (f[i + 1] - f[i - 1])/(2*dx)\n# Analytical derivative of the given function\nader = k*np.cos(k*x)\n# Exclude boundries\nader[0] = 0\nader[nx -1] = 0",
-        "detail": "w2_pi",
+        "importPath": "w2_p1",
+        "description": "w2_p1",
+        "peekOfCode": "nder = np.zeros(nx)             # numerical derivative\nader = np.zeros(nx)             # analytical derivative\n# Numerical derivative of the given function\nfor i in range(1, nx - 1):\n    nder[i] = (f[i + 1] - f[i - 1])/(2*dx)\n# Analytical derivative of the given function\nader = k*np.cos(k*x)\n# Exclude boundries\nader[0] = 0.\nader[nx -1] = 0.",
+        "detail": "w2_p1",
         "documentation": {}
     },
     {
         "label": "ader",
         "kind": 5,
-        "importPath": "w2_pi",
-        "description": "w2_pi",
-        "peekOfCode": "ader = np.zeros(nx)             # analytical derivative\n# Numerical derivative of the given function\nfor i in range(1, nx - 1):\n    nder[i] = (f[i + 1] - f[i - 1])/(2*dx)\n# Analytical derivative of the given function\nader = k*np.cos(k*x)\n# Exclude boundries\nader[0] = 0\nader[nx -1] = 0\n# Error (rms)",
-        "detail": "w2_pi",
+        "importPath": "w2_p1",
+        "description": "w2_p1",
+        "peekOfCode": "ader = np.zeros(nx)             # analytical derivative\n# Numerical derivative of the given function\nfor i in range(1, nx - 1):\n    nder[i] = (f[i + 1] - f[i - 1])/(2*dx)\n# Analytical derivative of the given function\nader = k*np.cos(k*x)\n# Exclude boundries\nader[0] = 0.\nader[nx -1] = 0.\n# Error (rms)",
+        "detail": "w2_p1",
         "documentation": {}
     },
     {
         "label": "ader",
         "kind": 5,
-        "importPath": "w2_pi",
-        "description": "w2_pi",
-        "peekOfCode": "ader = k*np.cos(k*x)\n# Exclude boundries\nader[0] = 0\nader[nx -1] = 0\n# Error (rms)\nrms = np.sqrt(np.mean(nder - ader)**2)\n# Plotting\nplt.plot(x, nder, label=\"Numerical derivative, 2 points\", marker='+', color=\"blue\")\nplt.plot(x, ader, label=\"Analytical derivative\", lw=2, ls=\"-\", color=\"black\")\nplt.plot(x, nder-ader, label=\"Difference\", lw=2, ls=\":\")",
-        "detail": "w2_pi",
+        "importPath": "w2_p1",
+        "description": "w2_p1",
+        "peekOfCode": "ader = k*np.cos(k*x)\n# Exclude boundries\nader[0] = 0.\nader[nx -1] = 0.\n# Error (rms)\nrms = np.sqrt(np.mean(nder - ader)**2)\n# Plotting\nplt.plot(x, nder, label=\"Numerical derivative, 2 points\", marker='+', color=\"blue\")\nplt.plot(x, ader, label=\"Analytical derivative\", lw=2, ls=\"-\", color=\"black\")\nplt.plot(x, nder-ader, label=\"Difference\", lw=2, ls=\":\")",
+        "detail": "w2_p1",
         "documentation": {}
     },
     {
         "label": "ader[0]",
         "kind": 5,
-        "importPath": "w2_pi",
-        "description": "w2_pi",
-        "peekOfCode": "ader[0] = 0\nader[nx -1] = 0\n# Error (rms)\nrms = np.sqrt(np.mean(nder - ader)**2)\n# Plotting\nplt.plot(x, nder, label=\"Numerical derivative, 2 points\", marker='+', color=\"blue\")\nplt.plot(x, ader, label=\"Analytical derivative\", lw=2, ls=\"-\", color=\"black\")\nplt.plot(x, nder-ader, label=\"Difference\", lw=2, ls=\":\")\nplt.title(\"First derivative, Err (rms) = %.6f \" % (rms))\nplt.xlabel('x, m')",
-        "detail": "w2_pi",
+        "importPath": "w2_p1",
+        "description": "w2_p1",
+        "peekOfCode": "ader[0] = 0.\nader[nx -1] = 0.\n# Error (rms)\nrms = np.sqrt(np.mean(nder - ader)**2)\n# Plotting\nplt.plot(x, nder, label=\"Numerical derivative, 2 points\", marker='+', color=\"blue\")\nplt.plot(x, ader, label=\"Analytical derivative\", lw=2, ls=\"-\", color=\"black\")\nplt.plot(x, nder-ader, label=\"Difference\", lw=2, ls=\":\")\nplt.title(\"First derivative, Err (rms) = %.6f \" % (rms))\nplt.xlabel('x, m')",
+        "detail": "w2_p1",
         "documentation": {}
     },
     {
         "label": "rms",
         "kind": 5,
-        "importPath": "w2_pi",
-        "description": "w2_pi",
+        "importPath": "w2_p1",
+        "description": "w2_p1",
         "peekOfCode": "rms = np.sqrt(np.mean(nder - ader)**2)\n# Plotting\nplt.plot(x, nder, label=\"Numerical derivative, 2 points\", marker='+', color=\"blue\")\nplt.plot(x, ader, label=\"Analytical derivative\", lw=2, ls=\"-\", color=\"black\")\nplt.plot(x, nder-ader, label=\"Difference\", lw=2, ls=\":\")\nplt.title(\"First derivative, Err (rms) = %.6f \" % (rms))\nplt.xlabel('x, m')\nplt.ylabel('Amplitude')\nplt.legend(loc='lower left')\nplt.grid()",
-        "detail": "w2_pi",
+        "detail": "w2_p1",
         "documentation": {}
     },
     {
         "label": "nmin",
         "kind": 5,
-        "importPath": "w2_pi",
-        "description": "w2_pi",
-        "peekOfCode": "nmin = 3\nnmax = 16\nna = np.zeros(nmax - nmin + 1)              # vector with number of points per wavelength\nerr =  np.zeros(nmax - nmin + 1)            # vector with error\nj = -1                                      # array index\n# Loop through finite-difference derivative calculation\nfor n in range (nmin, nmax):\n    j = j + 1                               # array index\n    na[j] = n\n    # Initialize sin function",
-        "detail": "w2_pi",
+        "importPath": "w2_p1",
+        "description": "w2_p1",
+        "peekOfCode": "nmin = 3\nnmax = 16\nna = np.zeros(nmax - nmin + 1)              # vector with number of points per wavelength\nerr = np.zeros(nmax - nmin + 1)            # vector with error\nj = -1                                      # array index\n# Loop through finite-difference derivative calculation\nfor n in range(nmin, nmax):\n    j = j + 1                               # array index\n    na[j] = n\n    # Initialize sin function",
+        "detail": "w2_p1",
         "documentation": {}
     },
     {
         "label": "nmax",
         "kind": 5,
-        "importPath": "w2_pi",
-        "description": "w2_pi",
-        "peekOfCode": "nmax = 16\nna = np.zeros(nmax - nmin + 1)              # vector with number of points per wavelength\nerr =  np.zeros(nmax - nmin + 1)            # vector with error\nj = -1                                      # array index\n# Loop through finite-difference derivative calculation\nfor n in range (nmin, nmax):\n    j = j + 1                               # array index\n    na[j] = n\n    # Initialize sin function\n    l = na[j]*dx                            # wavelength",
-        "detail": "w2_pi",
+        "importPath": "w2_p1",
+        "description": "w2_p1",
+        "peekOfCode": "nmax = 16\nna = np.zeros(nmax - nmin + 1)              # vector with number of points per wavelength\nerr = np.zeros(nmax - nmin + 1)            # vector with error\nj = -1                                      # array index\n# Loop through finite-difference derivative calculation\nfor n in range(nmin, nmax):\n    j = j + 1                               # array index\n    na[j] = n\n    # Initialize sin function\n    l = na[j]*dx                            # wavelength",
+        "detail": "w2_p1",
         "documentation": {}
     },
     {
         "label": "na",
         "kind": 5,
-        "importPath": "w2_pi",
-        "description": "w2_pi",
-        "peekOfCode": "na = np.zeros(nmax - nmin + 1)              # vector with number of points per wavelength\nerr =  np.zeros(nmax - nmin + 1)            # vector with error\nj = -1                                      # array index\n# Loop through finite-difference derivative calculation\nfor n in range (nmin, nmax):\n    j = j + 1                               # array index\n    na[j] = n\n    # Initialize sin function\n    l = na[j]*dx                            # wavelength\n    k = 2*np.pi/l                           # wavenumber",
-        "detail": "w2_pi",
+        "importPath": "w2_p1",
+        "description": "w2_p1",
+        "peekOfCode": "na = np.zeros(nmax - nmin + 1)              # vector with number of points per wavelength\nerr = np.zeros(nmax - nmin + 1)            # vector with error\nj = -1                                      # array index\n# Loop through finite-difference derivative calculation\nfor n in range(nmin, nmax):\n    j = j + 1                               # array index\n    na[j] = n\n    # Initialize sin function\n    l = na[j]*dx                            # wavelength\n    k = 2*np.pi/l                           # wavenumber",
+        "detail": "w2_p1",
         "documentation": {}
     },
     {
         "label": "err",
         "kind": 5,
-        "importPath": "w2_pi",
-        "description": "w2_pi",
-        "peekOfCode": "err =  np.zeros(nmax - nmin + 1)            # vector with error\nj = -1                                      # array index\n# Loop through finite-difference derivative calculation\nfor n in range (nmin, nmax):\n    j = j + 1                               # array index\n    na[j] = n\n    # Initialize sin function\n    l = na[j]*dx                            # wavelength\n    k = 2*np.pi/l                           # wavenumber\n    f = np.sin(k*x)",
-        "detail": "w2_pi",
+        "importPath": "w2_p1",
+        "description": "w2_p1",
+        "peekOfCode": "err = np.zeros(nmax - nmin + 1)            # vector with error\nj = -1                                      # array index\n# Loop through finite-difference derivative calculation\nfor n in range(nmin, nmax):\n    j = j + 1                               # array index\n    na[j] = n\n    # Initialize sin function\n    l = na[j]*dx                            # wavelength\n    k = 2*np.pi/l                           # wavenumber\n    f = np.sin(k*x)",
+        "detail": "w2_p1",
         "documentation": {}
     },
     {
         "label": "j",
         "kind": 5,
-        "importPath": "w2_pi",
-        "description": "w2_pi",
-        "peekOfCode": "j = -1                                      # array index\n# Loop through finite-difference derivative calculation\nfor n in range (nmin, nmax):\n    j = j + 1                               # array index\n    na[j] = n\n    # Initialize sin function\n    l = na[j]*dx                            # wavelength\n    k = 2*np.pi/l                           # wavenumber\n    f = np.sin(k*x)\n    # Numerical derivative of the sin function",
-        "detail": "w2_pi",
+        "importPath": "w2_p1",
+        "description": "w2_p1",
+        "peekOfCode": "j = -1                                      # array index\n# Loop through finite-difference derivative calculation\nfor n in range(nmin, nmax):\n    j = j + 1                               # array index\n    na[j] = n\n    # Initialize sin function\n    l = na[j]*dx                            # wavelength\n    k = 2*np.pi/l                           # wavenumber\n    f = np.sin(k*x)\n    # Numerical derivative of the sin function",
+        "detail": "w2_p1",
+        "documentation": {}
+    },
+    {
+        "label": "xmax",
+        "kind": 5,
+        "importPath": "w2_p2",
+        "description": "w2_p2",
+        "peekOfCode": "xmax = 10.0                     # physical domain (m)\nnx = 100                        # number of space sample\na = 0.25                        # exponent of Gaussian function\ndx = xmax/(nx - 1)              # grid spacing dx (m)\nx0 = xmax/2                     # center of Gaussian function x0 (m)\nx = np.linspace(0, xmax, nx)    # defining space variable\n# Initialization of Gaussian function\nf = (1./np.sqrt(2*np.pi*a))*np.exp(-(((x - x0)**2)/(2*a)))\n# Plotting of Gaussian\nplt.plot(x, f)",
+        "detail": "w2_p2",
+        "documentation": {}
+    },
+    {
+        "label": "nx",
+        "kind": 5,
+        "importPath": "w2_p2",
+        "description": "w2_p2",
+        "peekOfCode": "nx = 100                        # number of space sample\na = 0.25                        # exponent of Gaussian function\ndx = xmax/(nx - 1)              # grid spacing dx (m)\nx0 = xmax/2                     # center of Gaussian function x0 (m)\nx = np.linspace(0, xmax, nx)    # defining space variable\n# Initialization of Gaussian function\nf = (1./np.sqrt(2*np.pi*a))*np.exp(-(((x - x0)**2)/(2*a)))\n# Plotting of Gaussian\nplt.plot(x, f)\nplt.title('Gaussian function')",
+        "detail": "w2_p2",
+        "documentation": {}
+    },
+    {
+        "label": "a",
+        "kind": 5,
+        "importPath": "w2_p2",
+        "description": "w2_p2",
+        "peekOfCode": "a = 0.25                        # exponent of Gaussian function\ndx = xmax/(nx - 1)              # grid spacing dx (m)\nx0 = xmax/2                     # center of Gaussian function x0 (m)\nx = np.linspace(0, xmax, nx)    # defining space variable\n# Initialization of Gaussian function\nf = (1./np.sqrt(2*np.pi*a))*np.exp(-(((x - x0)**2)/(2*a)))\n# Plotting of Gaussian\nplt.plot(x, f)\nplt.title('Gaussian function')\nplt.xlabel('x, m')",
+        "detail": "w2_p2",
+        "documentation": {}
+    },
+    {
+        "label": "dx",
+        "kind": 5,
+        "importPath": "w2_p2",
+        "description": "w2_p2",
+        "peekOfCode": "dx = xmax/(nx - 1)              # grid spacing dx (m)\nx0 = xmax/2                     # center of Gaussian function x0 (m)\nx = np.linspace(0, xmax, nx)    # defining space variable\n# Initialization of Gaussian function\nf = (1./np.sqrt(2*np.pi*a))*np.exp(-(((x - x0)**2)/(2*a)))\n# Plotting of Gaussian\nplt.plot(x, f)\nplt.title('Gaussian function')\nplt.xlabel('x, m')\nplt.ylabel('Amplitude')",
+        "detail": "w2_p2",
+        "documentation": {}
+    },
+    {
+        "label": "x0",
+        "kind": 5,
+        "importPath": "w2_p2",
+        "description": "w2_p2",
+        "peekOfCode": "x0 = xmax/2                     # center of Gaussian function x0 (m)\nx = np.linspace(0, xmax, nx)    # defining space variable\n# Initialization of Gaussian function\nf = (1./np.sqrt(2*np.pi*a))*np.exp(-(((x - x0)**2)/(2*a)))\n# Plotting of Gaussian\nplt.plot(x, f)\nplt.title('Gaussian function')\nplt.xlabel('x, m')\nplt.ylabel('Amplitude')\nplt.xlim(0, xmax)",
+        "detail": "w2_p2",
+        "documentation": {}
+    },
+    {
+        "label": "x",
+        "kind": 5,
+        "importPath": "w2_p2",
+        "description": "w2_p2",
+        "peekOfCode": "x = np.linspace(0, xmax, nx)    # defining space variable\n# Initialization of Gaussian function\nf = (1./np.sqrt(2*np.pi*a))*np.exp(-(((x - x0)**2)/(2*a)))\n# Plotting of Gaussian\nplt.plot(x, f)\nplt.title('Gaussian function')\nplt.xlabel('x, m')\nplt.ylabel('Amplitude')\nplt.xlim(0, xmax)\nplt.grid()",
+        "detail": "w2_p2",
+        "documentation": {}
+    },
+    {
+        "label": "f",
+        "kind": 5,
+        "importPath": "w2_p2",
+        "description": "w2_p2",
+        "peekOfCode": "f = (1./np.sqrt(2*np.pi*a))*np.exp(-(((x - x0)**2)/(2*a)))\n# Plotting of Gaussian\nplt.plot(x, f)\nplt.title('Gaussian function')\nplt.xlabel('x, m')\nplt.ylabel('Amplitude')\nplt.xlim(0, xmax)\nplt.grid()\nplt.show()\n# Second derivative with 3-point operator",
+        "detail": "w2_p2",
+        "documentation": {}
+    },
+    {
+        "label": "nder3",
+        "kind": 5,
+        "importPath": "w2_p2",
+        "description": "w2_p2",
+        "peekOfCode": "nder3 = np.zeros(nx)            # numerical derivative\nader = np.zeros(nx)             # analytical derivative\n# Numerical second derivative of the given function\nfor i in range(1, nx - 1):\n    nder3[i] = (f[i + 1] - 2*f[i] + f[i - 1])/(dx**2)\n# Analytical second derivative of the Gaussian function\nader = 1./np.sqrt(2*np.pi*a)*((x - x0)**2/a**2 -1/a)*np.exp(-1/(2*a)*(x - x0)**2)\n# Exclude boundaries\nader[0] = 0.\nader[nx - 1] = 0.",
+        "detail": "w2_p2",
+        "documentation": {}
+    },
+    {
+        "label": "ader",
+        "kind": 5,
+        "importPath": "w2_p2",
+        "description": "w2_p2",
+        "peekOfCode": "ader = np.zeros(nx)             # analytical derivative\n# Numerical second derivative of the given function\nfor i in range(1, nx - 1):\n    nder3[i] = (f[i + 1] - 2*f[i] + f[i - 1])/(dx**2)\n# Analytical second derivative of the Gaussian function\nader = 1./np.sqrt(2*np.pi*a)*((x - x0)**2/a**2 -1/a)*np.exp(-1/(2*a)*(x - x0)**2)\n# Exclude boundaries\nader[0] = 0.\nader[nx - 1] = 0.\n# Calculate rms error of numerical derivative",
+        "detail": "w2_p2",
+        "documentation": {}
+    },
+    {
+        "label": "ader",
+        "kind": 5,
+        "importPath": "w2_p2",
+        "description": "w2_p2",
+        "peekOfCode": "ader = 1./np.sqrt(2*np.pi*a)*((x - x0)**2/a**2 -1/a)*np.exp(-1/(2*a)*(x - x0)**2)\n# Exclude boundaries\nader[0] = 0.\nader[nx - 1] = 0.\n# Calculate rms error of numerical derivative\nrms = np.sqrt(np.mean((nder3 - ader)**2))\n# Plotting\nplt.plot(x, nder3, label=\"Numerical derivative, 3 points\", lw=2, color=\"violet\")\nplt.plot(x, ader, label=\"Analytical derivative\", lw=2, ls=\"--\")\nplt.plot(x, nder3 - ader, label=\"Difference\", lw=2, ls=\":\")",
+        "detail": "w2_p2",
+        "documentation": {}
+    },
+    {
+        "label": "ader[0]",
+        "kind": 5,
+        "importPath": "w2_p2",
+        "description": "w2_p2",
+        "peekOfCode": "ader[0] = 0.\nader[nx - 1] = 0.\n# Calculate rms error of numerical derivative\nrms = np.sqrt(np.mean((nder3 - ader)**2))\n# Plotting\nplt.plot(x, nder3, label=\"Numerical derivative, 3 points\", lw=2, color=\"violet\")\nplt.plot(x, ader, label=\"Analytical derivative\", lw=2, ls=\"--\")\nplt.plot(x, nder3 - ader, label=\"Difference\", lw=2, ls=\":\")\nplt.title(\"Second derivative, Err (rms) = %.6f\" % (rms))\nplt.xlabel('x, m')",
+        "detail": "w2_p2",
+        "documentation": {}
+    },
+    {
+        "label": "rms",
+        "kind": 5,
+        "importPath": "w2_p2",
+        "description": "w2_p2",
+        "peekOfCode": "rms = np.sqrt(np.mean((nder3 - ader)**2))\n# Plotting\nplt.plot(x, nder3, label=\"Numerical derivative, 3 points\", lw=2, color=\"violet\")\nplt.plot(x, ader, label=\"Analytical derivative\", lw=2, ls=\"--\")\nplt.plot(x, nder3 - ader, label=\"Difference\", lw=2, ls=\":\")\nplt.title(\"Second derivative, Err (rms) = %.6f\" % (rms))\nplt.xlabel('x, m')\nplt.ylabel('Amplitude')\nplt.legend(loc=\"lower left\")\nplt.grid()",
+        "detail": "w2_p2",
+        "documentation": {}
+    },
+    {
+        "label": "nder5",
+        "kind": 5,
+        "importPath": "w2_p2",
+        "description": "w2_p2",
+        "peekOfCode": "nder5 = np.zeros(nx)            # numerical derivative\n# Calculation of second derivative of the given function\nfor i in range(1, nx - 2):\n    nder5[i] = (-1./12*f[i - 2] + 4./3*f[i - 1] - 5./2*f[i] + 4./3*f[i + 1] - 1./12*f[i + 2])/(dx**2)\n# Exclude boundaries\nader[1] = 0.\nader[nx - 2] = 0.\n# Calculate rms error of numerical derivative\nrms = rms*0\nrms = np.sqrt(np.mean((nder5 - ader)**2))",
+        "detail": "w2_p2",
+        "documentation": {}
+    },
+    {
+        "label": "ader[1]",
+        "kind": 5,
+        "importPath": "w2_p2",
+        "description": "w2_p2",
+        "peekOfCode": "ader[1] = 0.\nader[nx - 2] = 0.\n# Calculate rms error of numerical derivative\nrms = rms*0\nrms = np.sqrt(np.mean((nder5 - ader)**2))\n# Plotting\nplt.plot(x, nder5, label=\"Numerical derivative, 5 points\", lw=2, color=\"violet\")\nplt.plot(x, ader, label=\"Analytical derivative\", lw=2, ls=\"--\")\nplt.plot(x, nder5 - ader, label=\"Difference\", lw=2, ls=\":\")\nplt.title(\"Second derivative, Err (rms) = %.6f\" % (rms))",
+        "detail": "w2_p2",
+        "documentation": {}
+    },
+    {
+        "label": "rms",
+        "kind": 5,
+        "importPath": "w2_p2",
+        "description": "w2_p2",
+        "peekOfCode": "rms = rms*0\nrms = np.sqrt(np.mean((nder5 - ader)**2))\n# Plotting\nplt.plot(x, nder5, label=\"Numerical derivative, 5 points\", lw=2, color=\"violet\")\nplt.plot(x, ader, label=\"Analytical derivative\", lw=2, ls=\"--\")\nplt.plot(x, nder5 - ader, label=\"Difference\", lw=2, ls=\":\")\nplt.title(\"Second derivative, Err (rms) = %.6f\" % (rms))\nplt.xlabel('x, m')\nplt.ylabel('Amplitude')\nplt.legend(loc=\"lower left\")",
+        "detail": "w2_p2",
+        "documentation": {}
+    },
+    {
+        "label": "rms",
+        "kind": 5,
+        "importPath": "w2_p2",
+        "description": "w2_p2",
+        "peekOfCode": "rms = np.sqrt(np.mean((nder5 - ader)**2))\n# Plotting\nplt.plot(x, nder5, label=\"Numerical derivative, 5 points\", lw=2, color=\"violet\")\nplt.plot(x, ader, label=\"Analytical derivative\", lw=2, ls=\"--\")\nplt.plot(x, nder5 - ader, label=\"Difference\", lw=2, ls=\":\")\nplt.title(\"Second derivative, Err (rms) = %.6f\" % (rms))\nplt.xlabel('x, m')\nplt.ylabel('Amplitude')\nplt.legend(loc=\"lower left\")\nplt.grid()",
+        "detail": "w2_p2",
+        "documentation": {}
+    },
+    {
+        "label": "central_difference_coefficients",
+        "kind": 2,
+        "importPath": "w2_p3",
+        "description": "w2_p3",
+        "peekOfCode": "def central_difference_coefficients(nop, n):\n    \"\"\"\n    Calculate the central finite difference stencil for an arbitrary number\n    of points and an arbitrary order derivative.\n    :param nop: The number of points for the stencil. Must be an odd number.\n    :param n: The derivative order. Must be a positive number.\n    \"\"\"\n    m = np.zeros((nop, nop))\n    for i in range(nop):\n        for j in range(nop):",
+        "detail": "w2_p3",
+        "documentation": {}
+    },
+    {
+        "label": "nop",
+        "kind": 5,
+        "importPath": "w2_p3",
+        "description": "w2_p3",
+        "peekOfCode": "nop = 25\n# Give order of derivative (0 - interpolation, 1 - first derivative, 2 - second derivative)\nn = 1\n# Get operator from routine 'central_difference_coefficients'\noper = central_difference_coefficients(nop, n)\n# Plot operator\nx = np.linspace(-(nop - 1)/2, (nop - 1)/2, nop)\n# Simple plot with operator\nplt.figure(figsize=(10, 4))\nplt.plot(x, oper, lw=2, color='blue')",
+        "detail": "w2_p3",
+        "documentation": {}
+    },
+    {
+        "label": "n",
+        "kind": 5,
+        "importPath": "w2_p3",
+        "description": "w2_p3",
+        "peekOfCode": "n = 1\n# Get operator from routine 'central_difference_coefficients'\noper = central_difference_coefficients(nop, n)\n# Plot operator\nx = np.linspace(-(nop - 1)/2, (nop - 1)/2, nop)\n# Simple plot with operator\nplt.figure(figsize=(10, 4))\nplt.plot(x, oper, lw=2, color='blue')\nplt.plot(x, oper, lw=2, marker='o', color='blue')\nplt.plot(0, 0, lw=2, marker='o', color='red')",
+        "detail": "w2_p3",
+        "documentation": {}
+    },
+    {
+        "label": "oper",
+        "kind": 5,
+        "importPath": "w2_p3",
+        "description": "w2_p3",
+        "peekOfCode": "oper = central_difference_coefficients(nop, n)\n# Plot operator\nx = np.linspace(-(nop - 1)/2, (nop - 1)/2, nop)\n# Simple plot with operator\nplt.figure(figsize=(10, 4))\nplt.plot(x, oper, lw=2, color='blue')\nplt.plot(x, oper, lw=2, marker='o', color='blue')\nplt.plot(0, 0, lw=2, marker='o', color='red')\nplt.title(\"Taylor Operator with nop = %i\" % nop)\nplt.xlabel('x')",
+        "detail": "w2_p3",
+        "documentation": {}
+    },
+    {
+        "label": "x",
+        "kind": 5,
+        "importPath": "w2_p3",
+        "description": "w2_p3",
+        "peekOfCode": "x = np.linspace(-(nop - 1)/2, (nop - 1)/2, nop)\n# Simple plot with operator\nplt.figure(figsize=(10, 4))\nplt.plot(x, oper, lw=2, color='blue')\nplt.plot(x, oper, lw=2, marker='o', color='blue')\nplt.plot(0, 0, lw=2, marker='o', color='red')\nplt.title(\"Taylor Operator with nop = %i\" % nop)\nplt.xlabel('x')\nplt.ylabel('Operator')\nplt.grid()",
+        "detail": "w2_p3",
+        "documentation": {}
+    },
+    {
+        "label": "nx",
+        "kind": 5,
+        "importPath": "w3_p1",
+        "description": "w3_p1",
+        "peekOfCode": "nx = 10000                      # number of grid points in x-direction\nxmax = 10000                    # physical domain (m)\ndx = xmax/(nx - 1)              # grid point distance in x-direction\nc0 = 334.                       # wave speed in medium (m/s)\nisrc = int(nx/2)                # source location in grid in x-direction\nnt = 1000                       # maximum number of time steps\ndt = 0.002                     # time step\n# Source time function parameters\nf0 = 25                         # dominant frequency of the source (Hz)\nt0 = 4./f0                      # source time shift",
+        "detail": "w3_p1",
+        "documentation": {}
+    },
+    {
+        "label": "xmax",
+        "kind": 5,
+        "importPath": "w3_p1",
+        "description": "w3_p1",
+        "peekOfCode": "xmax = 10000                    # physical domain (m)\ndx = xmax/(nx - 1)              # grid point distance in x-direction\nc0 = 334.                       # wave speed in medium (m/s)\nisrc = int(nx/2)                # source location in grid in x-direction\nnt = 1000                       # maximum number of time steps\ndt = 0.002                     # time step\n# Source time function parameters\nf0 = 25                         # dominant frequency of the source (Hz)\nt0 = 4./f0                      # source time shift\n# Snapshot",
+        "detail": "w3_p1",
+        "documentation": {}
+    },
+    {
+        "label": "dx",
+        "kind": 5,
+        "importPath": "w3_p1",
+        "description": "w3_p1",
+        "peekOfCode": "dx = xmax/(nx - 1)              # grid point distance in x-direction\nc0 = 334.                       # wave speed in medium (m/s)\nisrc = int(nx/2)                # source location in grid in x-direction\nnt = 1000                       # maximum number of time steps\ndt = 0.002                     # time step\n# Source time function parameters\nf0 = 25                         # dominant frequency of the source (Hz)\nt0 = 4./f0                      # source time shift\n# Snapshot\nidisp = 5                       # display frequency",
+        "detail": "w3_p1",
+        "documentation": {}
+    },
+    {
+        "label": "c0",
+        "kind": 5,
+        "importPath": "w3_p1",
+        "description": "w3_p1",
+        "peekOfCode": "c0 = 334.                       # wave speed in medium (m/s)\nisrc = int(nx/2)                # source location in grid in x-direction\nnt = 1000                       # maximum number of time steps\ndt = 0.002                     # time step\n# Source time function parameters\nf0 = 25                         # dominant frequency of the source (Hz)\nt0 = 4./f0                      # source time shift\n# Snapshot\nidisp = 5                       # display frequency\n# Source time function (Gaussian)",
+        "detail": "w3_p1",
+        "documentation": {}
+    },
+    {
+        "label": "isrc",
+        "kind": 5,
+        "importPath": "w3_p1",
+        "description": "w3_p1",
+        "peekOfCode": "isrc = int(nx/2)                # source location in grid in x-direction\nnt = 1000                       # maximum number of time steps\ndt = 0.002                     # time step\n# Source time function parameters\nf0 = 25                         # dominant frequency of the source (Hz)\nt0 = 4./f0                      # source time shift\n# Snapshot\nidisp = 5                       # display frequency\n# Source time function (Gaussian)\nsrc = np.zeros(nt + 1)",
+        "detail": "w3_p1",
+        "documentation": {}
+    },
+    {
+        "label": "nt",
+        "kind": 5,
+        "importPath": "w3_p1",
+        "description": "w3_p1",
+        "peekOfCode": "nt = 1000                       # maximum number of time steps\ndt = 0.002                     # time step\n# Source time function parameters\nf0 = 25                         # dominant frequency of the source (Hz)\nt0 = 4./f0                      # source time shift\n# Snapshot\nidisp = 5                       # display frequency\n# Source time function (Gaussian)\nsrc = np.zeros(nt + 1)\ntime = np.linspace(0*dt, nt*dt, nt)",
+        "detail": "w3_p1",
+        "documentation": {}
+    },
+    {
+        "label": "dt",
+        "kind": 5,
+        "importPath": "w3_p1",
+        "description": "w3_p1",
+        "peekOfCode": "dt = 0.002                     # time step\n# Source time function parameters\nf0 = 25                         # dominant frequency of the source (Hz)\nt0 = 4./f0                      # source time shift\n# Snapshot\nidisp = 5                       # display frequency\n# Source time function (Gaussian)\nsrc = np.zeros(nt + 1)\ntime = np.linspace(0*dt, nt*dt, nt)\n# First derivative of a Gaussian",
+        "detail": "w3_p1",
+        "documentation": {}
+    },
+    {
+        "label": "f0",
+        "kind": 5,
+        "importPath": "w3_p1",
+        "description": "w3_p1",
+        "peekOfCode": "f0 = 25                         # dominant frequency of the source (Hz)\nt0 = 4./f0                      # source time shift\n# Snapshot\nidisp = 5                       # display frequency\n# Source time function (Gaussian)\nsrc = np.zeros(nt + 1)\ntime = np.linspace(0*dt, nt*dt, nt)\n# First derivative of a Gaussian\n# W3V5 Python: Waves in 1D (Comment or uncomment)\nsrc = -2.*(time - t0)*(f0**2)*(np.exp(-1.*(f0)**2*(time - t0)**2))",
+        "detail": "w3_p1",
+        "documentation": {}
+    },
+    {
+        "label": "t0",
+        "kind": 5,
+        "importPath": "w3_p1",
+        "description": "w3_p1",
+        "peekOfCode": "t0 = 4./f0                      # source time shift\n# Snapshot\nidisp = 5                       # display frequency\n# Source time function (Gaussian)\nsrc = np.zeros(nt + 1)\ntime = np.linspace(0*dt, nt*dt, nt)\n# First derivative of a Gaussian\n# W3V5 Python: Waves in 1D (Comment or uncomment)\nsrc = -2.*(time - t0)*(f0**2)*(np.exp(-1.*(f0)**2*(time - t0)**2))\n# W3P1 Acoustic Waves 1D (Lab) (Comment or uncomment)",
+        "detail": "w3_p1",
+        "documentation": {}
+    },
+    {
+        "label": "idisp",
+        "kind": 5,
+        "importPath": "w3_p1",
+        "description": "w3_p1",
+        "peekOfCode": "idisp = 5                       # display frequency\n# Source time function (Gaussian)\nsrc = np.zeros(nt + 1)\ntime = np.linspace(0*dt, nt*dt, nt)\n# First derivative of a Gaussian\n# W3V5 Python: Waves in 1D (Comment or uncomment)\nsrc = -2.*(time - t0)*(f0**2)*(np.exp(-1.*(f0)**2*(time - t0)**2))\n# W3P1 Acoustic Waves 1D (Lab) (Comment or uncomment)\n# src = -8.*(time - t0)*(f0**2)*(np.exp(-1.*(4*f0)**2*(time - t0)**2))\n# Plot source time function",
+        "detail": "w3_p1",
+        "documentation": {}
+    },
+    {
+        "label": "src",
+        "kind": 5,
+        "importPath": "w3_p1",
+        "description": "w3_p1",
+        "peekOfCode": "src = np.zeros(nt + 1)\ntime = np.linspace(0*dt, nt*dt, nt)\n# First derivative of a Gaussian\n# W3V5 Python: Waves in 1D (Comment or uncomment)\nsrc = -2.*(time - t0)*(f0**2)*(np.exp(-1.*(f0)**2*(time - t0)**2))\n# W3P1 Acoustic Waves 1D (Lab) (Comment or uncomment)\n# src = -8.*(time - t0)*(f0**2)*(np.exp(-1.*(4*f0)**2*(time - t0)**2))\n# Plot source time function\n# Plot position configuration\nwith plt.ion():",
+        "detail": "w3_p1",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "kind": 5,
+        "importPath": "w3_p1",
+        "description": "w3_p1",
+        "peekOfCode": "time = np.linspace(0*dt, nt*dt, nt)\n# First derivative of a Gaussian\n# W3V5 Python: Waves in 1D (Comment or uncomment)\nsrc = -2.*(time - t0)*(f0**2)*(np.exp(-1.*(f0)**2*(time - t0)**2))\n# W3P1 Acoustic Waves 1D (Lab) (Comment or uncomment)\n# src = -8.*(time - t0)*(f0**2)*(np.exp(-1.*(4*f0)**2*(time - t0)**2))\n# Plot source time function\n# Plot position configuration\nwith plt.ion():\n    fig1 = plt.figure(figsize=(10, 6))",
+        "detail": "w3_p1",
+        "documentation": {}
+    },
+    {
+        "label": "src",
+        "kind": 5,
+        "importPath": "w3_p1",
+        "description": "w3_p1",
+        "peekOfCode": "src = -2.*(time - t0)*(f0**2)*(np.exp(-1.*(f0)**2*(time - t0)**2))\n# W3P1 Acoustic Waves 1D (Lab) (Comment or uncomment)\n# src = -8.*(time - t0)*(f0**2)*(np.exp(-1.*(4*f0)**2*(time - t0)**2))\n# Plot source time function\n# Plot position configuration\nwith plt.ion():\n    fig1 = plt.figure(figsize=(10, 6))\n    gs1 = gridspec.GridSpec(1, 2, width_ratios=[1, 1], hspace=0.3, wspace=0.3)\n    # Plot source time function\n    ax1 = plt.subplot(gs1[0])",
+        "detail": "w3_p1",
+        "documentation": {}
+    },
+    {
+        "label": "p",
+        "kind": 5,
+        "importPath": "w3_p1",
+        "description": "w3_p1",
+        "peekOfCode": "p = np.zeros(nx)            # p at time n (now)\npold = np.zeros(nx)         # p at time n - 1 (past)\npnew = np.zeros(nx)         # p at time n + 1 (present)\nd2px = np.zeros(nx)         # 2nd space derivative of p\n# Initialize model (assume homogeneous model)\nc = np.zeros(nx)\nc = c + c0                  # initialize wave velocity in model\n# Initialize coordinate\nx = np.arange(nx)\nx = x*dx                  # coordinate in x-direction",
+        "detail": "w3_p1",
+        "documentation": {}
+    },
+    {
+        "label": "pold",
+        "kind": 5,
+        "importPath": "w3_p1",
+        "description": "w3_p1",
+        "peekOfCode": "pold = np.zeros(nx)         # p at time n - 1 (past)\npnew = np.zeros(nx)         # p at time n + 1 (present)\nd2px = np.zeros(nx)         # 2nd space derivative of p\n# Initialize model (assume homogeneous model)\nc = np.zeros(nx)\nc = c + c0                  # initialize wave velocity in model\n# Initialize coordinate\nx = np.arange(nx)\nx = x*dx                  # coordinate in x-direction\n# plot position configuration",
+        "detail": "w3_p1",
+        "documentation": {}
+    },
+    {
+        "label": "pnew",
+        "kind": 5,
+        "importPath": "w3_p1",
+        "description": "w3_p1",
+        "peekOfCode": "pnew = np.zeros(nx)         # p at time n + 1 (present)\nd2px = np.zeros(nx)         # 2nd space derivative of p\n# Initialize model (assume homogeneous model)\nc = np.zeros(nx)\nc = c + c0                  # initialize wave velocity in model\n# Initialize coordinate\nx = np.arange(nx)\nx = x*dx                  # coordinate in x-direction\n# plot position configuration\nwith plt.ion():",
+        "detail": "w3_p1",
+        "documentation": {}
+    },
+    {
+        "label": "d2px",
+        "kind": 5,
+        "importPath": "w3_p1",
+        "description": "w3_p1",
+        "peekOfCode": "d2px = np.zeros(nx)         # 2nd space derivative of p\n# Initialize model (assume homogeneous model)\nc = np.zeros(nx)\nc = c + c0                  # initialize wave velocity in model\n# Initialize coordinate\nx = np.arange(nx)\nx = x*dx                  # coordinate in x-direction\n# plot position configuration\nwith plt.ion():\n    fig2 = plt.figure(figsize=(10, 6))",
+        "detail": "w3_p1",
+        "documentation": {}
+    },
+    {
+        "label": "c",
+        "kind": 5,
+        "importPath": "w3_p1",
+        "description": "w3_p1",
+        "peekOfCode": "c = np.zeros(nx)\nc = c + c0                  # initialize wave velocity in model\n# Initialize coordinate\nx = np.arange(nx)\nx = x*dx                  # coordinate in x-direction\n# plot position configuration\nwith plt.ion():\n    fig2 = plt.figure(figsize=(10, 6))\n    gs2 = gridspec.GridSpec(1, 1, width_ratios=[1], hspace=0.3, wspace=0.3)\n    # Plot 1D wave propagation",
+        "detail": "w3_p1",
+        "documentation": {}
+    },
+    {
+        "label": "c",
+        "kind": 5,
+        "importPath": "w3_p1",
+        "description": "w3_p1",
+        "peekOfCode": "c = c + c0                  # initialize wave velocity in model\n# Initialize coordinate\nx = np.arange(nx)\nx = x*dx                  # coordinate in x-direction\n# plot position configuration\nwith plt.ion():\n    fig2 = plt.figure(figsize=(10, 6))\n    gs2 = gridspec.GridSpec(1, 1, width_ratios=[1], hspace=0.3, wspace=0.3)\n    # Plot 1D wave propagation\n    # Note: comma is needed to update the variable",
+        "detail": "w3_p1",
+        "documentation": {}
+    },
+    {
+        "label": "x",
+        "kind": 5,
+        "importPath": "w3_p1",
+        "description": "w3_p1",
+        "peekOfCode": "x = np.arange(nx)\nx = x*dx                  # coordinate in x-direction\n# plot position configuration\nwith plt.ion():\n    fig2 = plt.figure(figsize=(10, 6))\n    gs2 = gridspec.GridSpec(1, 1, width_ratios=[1], hspace=0.3, wspace=0.3)\n    # Plot 1D wave propagation\n    # Note: comma is needed to update the variable\n    ax3 = plt.subplot(gs2[0])\n    # Plot position of the source in snapshot",
+        "detail": "w3_p1",
+        "documentation": {}
+    },
+    {
+        "label": "x",
+        "kind": 5,
+        "importPath": "w3_p1",
+        "description": "w3_p1",
+        "peekOfCode": "x = x*dx                  # coordinate in x-direction\n# plot position configuration\nwith plt.ion():\n    fig2 = plt.figure(figsize=(10, 6))\n    gs2 = gridspec.GridSpec(1, 1, width_ratios=[1], hspace=0.3, wspace=0.3)\n    # Plot 1D wave propagation\n    # Note: comma is needed to update the variable\n    ax3 = plt.subplot(gs2[0])\n    # Plot position of the source in snapshot\n    leg1, = ax3.plot(isrc, 0, 'r*', markersize=11)",
+        "detail": "w3_p1",
         "documentation": {}
     }
 ]
